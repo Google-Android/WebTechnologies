@@ -5,6 +5,9 @@ User.find({},function(err,docs){
     if(!err){
         console.log(docs);
     }
+    if（if(!docs){
+        console.log(docs);
+    }）
 });
 
 
