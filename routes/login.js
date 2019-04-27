@@ -1,8 +1,8 @@
-require('../mongoDB/tools/connection');//connect to database;
+require('../mongoose/tools/connection');//connect to database;
 var express = require('express');
 var router = express.Router();
 let md5 = require('blueimp-md5');
-var User = require('../mongoDB/models/user'); 
+var User = require('../mongoose/models/user');
 
 
 /* GET home page after login. */
