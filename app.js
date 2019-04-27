@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -19,13 +22,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret:'secret',
+  resave:false,
+  saveUninitialized:true,
+  cookie:{maxAge:1000*60*30},
+  rollig:true
+}))
+
+
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/users',usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// get the login state from session
+// app.use(function(req,res,next){
+//   if(req.session.user)
+//     next();
+//   else
+//     res.render('index');
+// });
+
 
 // error handler
 app.use(function(err, req, res, next) {
