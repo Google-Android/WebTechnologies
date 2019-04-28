@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
   var loginPassword =req.body.loginPassword;
 
   User.findOne({
-    username: loginEmail,
+    email: loginEmail,
     pwd:loginPassword
   },function(err, user){
     if(err) throw err;
