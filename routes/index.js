@@ -15,6 +15,8 @@ router.get('/', function(req, res) {
   } else{
     res.render('index');
   }
+
 });
 
-module.exports = route;
+
+module.exports = router;
