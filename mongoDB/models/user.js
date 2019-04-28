@@ -2,7 +2,7 @@ var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
 var userSchema=new Schema({
-    username: {
+    email: {
         type: String,
         required: true
     },
@@ -16,8 +16,13 @@ var userSchema=new Schema({
         required:true,
         default:"p"
     },
-        email:String
 
+    name:String,   // If it is a consumer user, this filed refers to company name. If it is a company user, this filed refers to first name.
+
+    lastName:String,
+
+    question:Number,
+    answer:String
 });
 
 
