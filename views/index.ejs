@@ -15,10 +15,36 @@
     <script src="/javascripts/index_js.js"></script>
   </head>
   <body>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
-    Login/Register
-  </button>
+  <!-- Fixed navbar -->
+  <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">THE HUNT</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Find Jobs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Find CVs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Post Jobs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Job Request</a>
+          </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+            Login/Register
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
 
   <!-- Modal -->
   <div class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
