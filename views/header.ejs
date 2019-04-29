@@ -1,0 +1,195 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" >
+
+    <title>The Hunt</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+    <script src="/javascripts/index_js.js"></script>
+</head>
+<!-- Nav-bar -->
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">THE HUNT</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find CVs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Post Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Job Request</a>
+                </li>
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+                    Login/Register
+                </button>
+            </form>
+        </div>
+    </nav>
+</header>
+
+<!--Login Modal -->
+<div class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Nav tabs -->
+            <div class="modal-body">
+                <!-- Nav pills -->
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#loginPane">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#registerPane">Register</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!--            login-->
+                    <div class="tab-pane active container" id="loginPane">
+                        <form id="login">
+                            <br>
+                            <div class="form-group">
+                                <label for="loginEmail1"><strong>Email address:</strong></label>
+                                <input type="email" class="form-control" id="loginEmail1" name="loginEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPassword"><strong>Password:</strong></label>
+                                <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password">
+                            </div>
+                            <div class="col text-center" id="invalidAlert" style="display: none">
+                                <p style="color: red">
+                                    Invalid username or password!
+                                </p>
+                            </div>
+                            <br>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                                <br>
+                                <a href="#" class="text-decoration-none">Forget Password?</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--            register-->
+                    <br>
+                    <div class="tab-pane container" id="registerPane">
+                        <div class="accordion" id="accordionExample">
+                            <!--                Consumer Register-->
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Consumer Register
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <form name="consumerRegister">
+                                            <div class="form-group">
+                                                <label for="consumerFirstName">First Name</label>
+                                                <input type="text" class="form-control" id="consumerFirstName" placeholder="First Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="consumerLastName">Last Name</label>
+                                                <input type="text" class="form-control" id="consumerLastName" placeholder="Last Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="consumerEmail">Email address</label>
+                                                <input type="email" class="form-control" id="consumerEmail" placeholder="Email Address">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="consumerPassword">Password</label>
+                                                <input type="password" class="form-control" id="consumerPassword" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="consumerRepeatPassword">Password</label>
+                                                <input type="password" class="form-control" id="consumerRepeatPassword" placeholder="Repeat Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="consumerSecurityQuestion">Security Question And Answer</label>
+                                                <select class="form-control" name="consumerSecurityQuestion">
+                                                    <option value="1">What primary school did you attend?</option>
+                                                    <option value="2">In what town or city was your first job?</option>
+                                                    <option value="3">What is your mother's maiden name?</option>
+                                                </select>
+                                                <br>
+                                                <input type="text" class="form-control" id="consumerSecurityQuestion" placeholder="Security Answer">
+                                            </div>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--                Company Register-->
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Company Register
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <form name="companyRegister">
+                                            <div class="form-group">
+                                                <label for="companyName">Company Name</label>
+                                                <input type="text" class="form-control" id="companyName" placeholder="Company Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companyEmail">Email address</label>
+                                                <input type="email" class="form-control" id="companyEmail" placeholder="Email Address">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companyPassword">Password</label>
+                                                <input type="password" class="form-control" id="companyPassword" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companyRepeatPassword">Repeat Password</label>
+                                                <input type="password" class="form-control" id="companyRepeatPassword" placeholder="Repeat Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="companySecurityQuestion">Security Question And Answer</label>
+                                                <select class="form-control" name="companySecurityQuestion">
+                                                    <option value="1">What primary school did you attend?</option>
+                                                    <option value="2">In what town or city was your first job?</option>
+                                                    <option value="3">What is your mother's maiden name?</option>
+                                                </select>
+                                                <br>
+                                                <input type="text" class="form-control" id="companySecurityQuestion" placeholder="Security Answer">
+                                            </div>
+                                            <div class="col text-center">
+                                                <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
