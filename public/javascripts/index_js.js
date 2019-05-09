@@ -1,23 +1,14 @@
 $(document).ready(function() {
 
+    /**
+     * get data from login form and validate the username and password. 
+     */
     $('#login').on('submit', function(event) {
-
-        alert('get form data done.');
-
         event.preventDefault();
 
         var loginInfo={};
-
-        // [{name: "loginEmail1"", value: "xxx"},{name: "loginPassword", value: "xxx"}]
-
         loginInfo['loginEmail'] = $('#loginEmail1').val();
         loginInfo['loginPassword'] = $('#loginPassword').val();
-
-        // var wholeForm = $('#login').serializeArray();
-        
-        // $.each(wholeForm, function() {
-        //     d[this.name] = this.value;
-        //   });
 
         alert("loginInfo: "+JSON.stringify(loginInfo));
 
@@ -41,47 +32,88 @@ $(document).ready(function() {
         return false;
     });
 
-    
 
-    // $('#login').on('submit', function(event) {
+    /**
+     * register for a new customer user
+     * validate the username and password; if not existed yet, add the new user. 
+     */
+    $('#consumerRegister').on('submit', function(event) {
+        alert('get register data done.');       
+        event.preventDefault();
 
-    //     alert('get form data done.');
+        var d={};
 
-    //     event.preventDefault();
+        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
+        var wholeForm = $('#consumerRegister').serializeArray();
 
-    //     var loginInfo={};
+        // d[userCategory]='p';//person
 
-    //     // [{name: "loginEmail1"", value: "xxx"},{name: "loginPassword", value: "xxx"}]
+        $.each(wholeForm, function() {
+            d[this.name] = this.value;
+        });
 
-    //     loginInfo['loginEmail'] = $('#loginEmail1').val();
-    //     loginInfo['loginPassword'] = $('#loginPassword').val();
+        alert(JSON.stringify(d));
 
-    //     // var wholeForm = $('#login').serializeArray();
+        $.ajax({
+            type: 'POST',
+            url: '/register',
+            data: d,
+            success: function(data) {
+                if(data.result===0){
+                    alert("Unfortunately, the email address you've entered already exists. ");
+                } else if(data.result === 1){
+                    location.reload();
+                    alert('s');
+                } else if(data.result === 2){
+                    alert("Sorry, cannot create a new account now.");
+                }
+            }
+        });
+        return false;
+    });
+
+
+    /**
+     * register for a new company user
+     * validate the username and password; if not existed yet, add the new user. 
+     */
+    $('#companyRegister').on('submit', function(event) {
+        alert('get company register data done.');       
+        event.preventDefault();
+
+        var d={};
+
+        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
+        var wholeForm = $('#companyRegister').serializeArray();
+
+        // d[userCategory]='c';//company
         
-    //     // $.each(wholeForm, function() {
-    //     //     d[this.name] = this.value;
-    //     //   });
+        $.each(wholeForm, function() {
+            d[this.name] = this.value;
+        });
 
-    //     alert("loginInfo: "+JSON.stringify(loginInfo));
+        alert(JSON.stringify(d));
 
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/login',
-    //         data: loginInfo,
-    //         success: function(data) {
-    //             alert('ajax successfully.')
-    //             alert("error:"+data.errInfo);
-    //             //do something with the data via front-end framework
-    //             if(data.errInfo==1){
-    //                 //顺葆：在这里让index.ejs里隐藏的用户名密码错误提示显示出来。。。
-    //                 $('#invalidUserMessage').show();
-    //                 $('#invalidUserMessage').toggle();
-    //             } else {
-    //                 location.reload();
-    //             }
-    //         }
-    //     });
-    //     return false;
-    // });
+        $.ajax({
+            type: 'POST',
+            url: '/register',
+            data: d,
+            success: function(data) {
+                if(data.result===0){
+                    alert("Unfortunately, the email address you've entered already exists. ");
+                } else if(data.result === 1){
+                    location.reload();
+                    alert('s');
+                } else if(data.result === 2){
+                    alert("Sorry, cannot create a new account now.");
+                }
+            }
+        });
+        return false;
+    });
+
+
+
+
 
 });
