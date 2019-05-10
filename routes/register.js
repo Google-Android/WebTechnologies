@@ -1,10 +1,8 @@
-// require('../mongoDB/tools/connection');//connect to database;
 var express = require('express');
 var router = express.Router();
 var bodyParser=require('body-parser');
-var md5 = require('blueimp-md5');
-// var User = require('../mongoDB/models/user');
 var handleData = require('../mongoDB/handleData');
+var md5Ecryption = require('../service/pwdEncryption');
 
 
 /* GET home page after login. */
@@ -38,7 +36,8 @@ router.post('/', function(req, res) {
             if(req.body.userCategory === 'p'){
                 userInfo = {
                     "email":req.body.consumerEmail,
-                    "pwd":req.body.consumerPassword,
+                    // "pwd":req.body.consumerPassword,
+                    "pwd":md5Ecryption.encryptPwd(req.body.consumerEmail,req.body.consumerPassword),
                     "personOrComp":req.body.userCategory,
                     "name":req.body.consumerFirstName,
                     "lastName":req.body.consumerLastName,
@@ -48,7 +47,8 @@ router.post('/', function(req, res) {
             } else if(req.body.userCategory === 'c'){
                 userInfo = {
                     "email":req.body.companyEmail,
-                    "pwd":req.body.companyPassword,
+                    // "pwd":req.body.companyPassword,
+                    "pwd":md5Ecryption.encryptPwd(req.body.companyEmail,req.body.companyPassword),
                     "personOrComp":req.body.userCategory,
                     "name":req.body.companyName,
                     "lastName":null,
