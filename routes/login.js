@@ -1,8 +1,8 @@
 require('../mongoDB/tools/connection');//connect to database;
 var express = require('express');
 var router = express.Router();
-var md5 = require('blueimp-md5');
 var User = require('../mongoDB/models/user');
+var md5Encryption = require('../service/pwdEncryption');
 
 
 /* GET home page after login. */
@@ -20,10 +20,11 @@ router.post('/', function(req, res, next) {
   var loginEmail = req.body.loginEmail;
   var loginPassword =req.body.loginPassword;
 
-  User.findOne({
-    email: loginEmail,
-    pwd:loginPassword
-  },function(err, user){
+  var handleData = require('../mongoDB/handleData');
+  // var condition = {"email": loginEmail, "pwd": loginPassword};
+  var condition = {"email": loginEmail, "pwd": md5Encryption.encryptPwd(loginEmail,loginPassword)};
+
+    handleData.searchUser(condition, function(err, user){
     if(err) throw err;
 
     if(!user){

@@ -27,6 +27,13 @@
   <form action="" name="postJobs">
     <button>Post Jobs</button>
   </form>
+
+  <p>
+      <% if(user) { %>
+        <%=user.name%>
+      <%}%>
+  </p>
+
 </div>
 
   </body>
