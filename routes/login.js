@@ -20,10 +20,9 @@ router.post('/', function(req, res, next) {
   var loginEmail = req.body.loginEmail;
   var loginPassword =req.body.loginPassword;
 
-  User.findOne({
-    email: loginEmail,
-    pwd:loginPassword
-  },function(err, user){
+  var handleData = require('../mongoDB/handleData');
+  var condition = {"email": loginEmail, "pwd": loginPassword};
+  handleData.searchUser(condition, function(err, user){
     if(err) throw err;
 
     if(!user){
