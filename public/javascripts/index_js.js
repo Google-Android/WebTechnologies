@@ -25,7 +25,7 @@ $(document).ready(function() {
                     $('#invalidUserMessage').show();
                     $('#invalidUserMessage').toggle();
                 } else {
-                    location.reload();
+                    window.location.href='/';
                 }
             }
         });
@@ -62,8 +62,7 @@ $(document).ready(function() {
                 if(data.result===0){
                     alert("Unfortunately, the email address you've entered already exists. ");
                 } else if(data.result === 1){
-                    location.reload();
-                    alert('s');
+                    window.location.href='/';
                 } else if(data.result === 2){
                     alert("Sorry, cannot create a new account now.");
                 }
@@ -102,8 +101,7 @@ $(document).ready(function() {
                 if(data.result===0){
                     alert("Unfortunately, the email address you've entered already exists. ");
                 } else if(data.result === 1){
-                    location.reload();
-                    alert('s');
+                    window.location.href='/';
                 } else if(data.result === 2){
                     alert("Sorry, cannot create a new account now.");
                 }

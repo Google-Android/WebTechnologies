@@ -56,14 +56,15 @@ router.post('/', function(req, res) {
                     "answer":req.body.companySecurityAnswer
                 };
             }
-            handleData.insertUser(userInfo,function (err,result) {
+            handleData.insertUser(userInfo,function (err,user) {
                 if(err){
                     res.json({result:2});
                     console.log("err:"+err);
                     throw err;
                 } else {
-                    console.log("result:"+result);
-                    res.json({result:1});
+                    console.log("user:"+user);
+                    req.session.user=user;
+                    res.json({result:1,user:user});
                 }
             });
         } else {
