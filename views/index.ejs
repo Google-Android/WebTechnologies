@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" >
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
     <title>The Hunt</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
 
@@ -13,28 +13,29 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
     <script src="/javascripts/index_js.js"></script>
-  </head>
-  <body>
-  <%- include header.ejs -%>
+</head>
+<body>
 
-  <div class="container">
-  <form action="" name="search">
-    <input type="text" name="what" placeholder="job title, keywords, or company"><input type="text" name="where" placeholder="city or postcode" value=""><button>SEARCH</button>
-    <br>
-    <input type="radio" name="search" value="job">Find Jobs
-    <input type="radio" name="search" value="cvs">Find CVs<br>
-  </form>
-  <form action="" name="postJobs">
-    <button>Post Jobs</button>
-  </form>
+    <%- include header.ejs -%>
 
-  <p>
-      <% if(user) { %>
-        <%=user.name%>
-      <%}%>
-  </p>
+
+<div class="container">
+    <form action="" name="search">
+        <input type="text" name="what" placeholder="job title, keywords, or company"><input type="text" name="where"
+                                                                                            placeholder="city or postcode"
+                                                                                            value="">
+        <button>SEARCH</button>
+        <br>
+        <input type="radio" name="search" value="job">Find Jobs
+        <input type="radio" name="search" value="cvs">Find CVs<br>
+
+    </form>
+    <form action="" name="postJobs">
+        <button>Post Jobs</button>
+    </form>
+
 
 </div>
 
-  </body>
+</body>
 </html>
