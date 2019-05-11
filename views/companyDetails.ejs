@@ -15,20 +15,14 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
     <script src="/javascripts/index_js.js"></script>
-
-    <style>
-        .fakeimg {
-            height: 200px;
-            background: #aaa;
-        }
-    </style>
 </head>
 <body>
 <%- include header.ejs -%>
 
 <div class="container">
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1 class="display-4">Company 1</h1>
+        <h1 class="display-4 text-break">Company1</h1>
+        <h2><small class="text-success">Overall Rating: </small>4.0</h2>
         <hr class="my-4">
         <a class="btn btn-primary btn-lg" href="#" role="button">Add a Review</a>
     </div>
@@ -39,27 +33,47 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#jobs">Jobs</a>
         </li>
-
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-<!--        reviews-->
+        <!--reviews-->
         <div id="reviews" class="container tab-pane active">
             <div class="card mt-2 mb-2">
-                <h5 class="card-header">Title of the comment</h5>
+                <h5 class="card-header">
+                    Title of the comment
+                    <p class="font-weight-lighter font-italic">comment publisher 1</p>
+                </h5>
                 <div class="card-body">
-<!--                    <h5 class="card-title">Special title treatment</h5>-->
-                    <p class="card-text">Main content of the comment</p>
-                    <div class="fakeimg">Fake Image</div>
+                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
+                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
+                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
+                        Main content of the comment. Main content of the comment. Main content of the comment. Main
+                        content of the comment. Main content of the comment. Main content of the comment. Main content
+                        of the comment. Main content of the comment. Main content of the comment.
+                    </p>
+                </div>
+            </div>
+            <div class="card mt-2 mb-2">
+                <h5 class="card-header">
+                    Title of the comment
+                    <p class="font-weight-lighter font-italic">comment publisher 2</p>
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
+                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
+                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
+                        Main content of the comment. Main content of the comment. Main content of the comment. Main
+                        content of the comment. Main content of the comment. Main content of the comment. Main content
+                        of the comment. Main content of the comment. Main content of the comment.
+                    </p>
                 </div>
             </div>
         </div>
-<!--        posted jobs-->
+        <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">
         </div>
-<!--   posted jobs-->
-
+        <!--posted jobs-->
     </div>
 </div>
 </div>
