@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var messageRouter = require('./routes/message');
+var job_resultsRouter = require('./routes/job_results')
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use('/login', loginRouter);
 app.use('/register',registerRouter);
 app.use('/users',usersRouter);
 app.use('/message',messageRouter);
+app.use('/job_results',job_resultsRouter);
 
 
 

@@ -1,6 +1,7 @@
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 </head>
 <!-- Nav-bar -->
 
@@ -33,18 +34,21 @@
                     <% } %>
                 </a>
             </li>
-        </ul>
-        <!--            user profile, hidden before login-->
-        <!--            login and register button, hidden after login-->
-        <a href="/message" class="btn btn-primary" aria-pressed="true">
-            Notifications <span class="badge badge-light">0</span>
-        </a>
+            <li class="nav-item ml-2">
+                <!--            user profile, hidden before login-->
+                <a href="/message" class="btn btn-primary" aria-pressed="true">
+                    Notifications <span class="badge badge-light">0</span>
+                </a>
+            </li>
 
-        <form class="form-inline mt-2 mt-md-0">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
-                Login/Register
-            </button>
-        </form>
+            <!--            login and register button, hidden after login-->
+            <li class="nav-item ml-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+                    Login/Register
+                </button>
+            </li>
+        </ul>
+
     </div>
 </nav>
 
