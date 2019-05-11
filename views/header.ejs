@@ -1,51 +1,71 @@
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" >
-
-    <title>The Hunt</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
-
-    <script src="/javascripts/jquery-3.4.0.min.js"></script>
-    <script src="/javascripts/bootstrap.min.js"></script>
-    <script src="/javascripts/popper.min.js"></script>
-    <!-- <script src="/javascripts/index_js.js"></script> -->
-    <script src="/javascripts/testJS.js"></script>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 </head>
 <!-- Nav-bar -->
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">THE HUNT</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">THE HUNT</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Find Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Find CVs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Post Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Job Request</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <%
+                if(user){
+            %>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find Jobs</a>
+                    <a class="nav-link" href="#"><i class="fa fa-thumbs-up"></i>Hi!
+                        <%=user.name %>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Find CVs</a>
+                <li class="nav-item ml-2">
+                    <!--            user profile, hidden before login-->
+                    <a href="/message" class="btn btn-primary" aria-pressed="true">
+                        Notifications
+                        <span class="badge badge-light">0</span>
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Post Jobs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Job Request</a>
-                </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+            <%
+                } else {
+            %>
+                <!--            login and register button, hidden after login-->
+                <li class="nav-item ml-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
                     Login/Register
                 </button>
-            </form>
-        </div>
-    </nav>
-</header>
+                </li>
+            <%
+                }
+            %>
+
+        </ul>
+
+    </div>
+</nav>
+
+
+<!--new-->
 
 <!--Login Modal -->
-<div class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginRegister" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!-- Nav tabs -->
@@ -68,11 +88,13 @@
                             <br>
                             <div class="form-group">
                                 <label for="loginEmail1"><strong>Email address:</strong></label>
-                                <input type="email" class="form-control" id="loginEmail1" name="loginEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <input type="email" class="form-control" id="loginEmail1" name="loginEmail1"
+                                       aria-describedby="emailHelp" placeholder="Enter email">
                             </div>
                             <div class="form-group">
                                 <label for="loginPassword"><strong>Password:</strong></label>
-                                <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="loginPassword" name="loginPassword"
+                                       placeholder="Password">
                             </div>
                             <div class="col text-center" id="invalidAlert" style="display: none">
                                 <p style="color: red">
@@ -96,47 +118,58 @@
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
                                             Consumer Register
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <form id="consumerRegister">
                                             <input type="hidden" class="form-control" name="userCategory" value="p">
                                             <div class="form-group">
                                                 <label for="consumerFirstName">First Name</label>
-                                                <input type="text" class="form-control" name="consumerFirstName" placeholder="First Name">
+                                                <input type="text" class="form-control" name="consumerFirstName"
+                                                       placeholder="First Name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerLastName">Last Name</label>
-                                                <input type="text" class="form-control" name="consumerLastName" placeholder="Last Name">
+                                                <input type="text" class="form-control" name="consumerLastName"
+                                                       placeholder="Last Name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerEmail">Email address</label>
-                                                <input type="email" class="form-control" name="consumerEmail" placeholder="Email Address">
+                                                <input type="email" class="form-control" name="consumerEmail"
+                                                       placeholder="Email Address">
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerPassword">Password</label>
-                                                <input type="password" class="form-control" name="consumerPassword" placeholder="Password">
+                                                <input type="password" class="form-control" name="consumerPassword"
+                                                       placeholder="Password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerRepeatPassword">Password</label>
-                                                <input type="password" class="form-control" name="consumerRepeatPassword" placeholder="Repeat Password">
+                                                <input type="password" class="form-control"
+                                                       name="consumerRepeatPassword" placeholder="Repeat Password">
                                             </div>
                                             <div class="form-group">
-                                                <label for="consumerSecurityQuestion">Security Question And Answer</label>
+                                                <label for="consumerSecurityQuestion">Security Question And
+                                                    Answer</label>
                                                 <select class="form-control" name="consumerSecurityQuestion">
                                                     <option value="1">What primary school did you attend?</option>
                                                     <option value="2">In what town or city was your first job?</option>
                                                     <option value="3">What is your mother's maiden name?</option>
                                                 </select>
                                                 <br>
-                                                <input type="text" class="form-control" name="consumerSecurityAnswer" placeholder="Security Answer">
+                                                <input type="text" class="form-control" name="consumerSecurityAnswer"
+                                                       placeholder="Security Answer">
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                                                <button type="submit" class="btn btn-primary btn-block">REGISTER
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -147,43 +180,53 @@
                             <div class="card">
                                 <div class="card-header" id="headingThree">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree" aria-expanded="false"
+                                                aria-controls="collapseThree">
                                             Company Register
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                     data-parent="#accordionExample">
                                     <div class="card-body">
                                         <form id="companyRegister">
                                             <input type="hidden" class="form-control" name="userCategory" value="c">
                                             <div class="form-group">
                                                 <label for="companyName">Company Name</label>
-                                                <input type="text" class="form-control" name="companyName" placeholder="Company Name">
+                                                <input type="text" class="form-control" name="companyName"
+                                                       placeholder="Company Name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="companyEmail">Email address</label>
-                                                <input type="email" class="form-control" name="companyEmail" placeholder="Email Address">
+                                                <input type="email" class="form-control" name="companyEmail"
+                                                       placeholder="Email Address">
                                             </div>
                                             <div class="form-group">
                                                 <label for="companyPassword">Password</label>
-                                                <input type="password" class="form-control" name="companyPassword" placeholder="Password">
+                                                <input type="password" class="form-control" name="companyPassword"
+                                                       placeholder="Password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="companyRepeatPassword">Repeat Password</label>
-                                                <input type="password" class="form-control" name="companyRepeatPassword" placeholder="Repeat Password">
+                                                <input type="password" class="form-control" name="companyRepeatPassword"
+                                                       placeholder="Repeat Password">
                                             </div>
                                             <div class="form-group">
-                                                <label for="companySecurityQuestion">Security Question And Answer</label>
+                                                <label for="companySecurityQuestion">Security Question And
+                                                    Answer</label>
                                                 <select class="form-control" name="companySecurityQuestion">
                                                     <option value="1">What primary school did you attend?</option>
                                                     <option value="2">In what town or city was your first job?</option>
                                                     <option value="3">What is your mother's maiden name?</option>
                                                 </select>
                                                 <br>
-                                                <input type="text" class="form-control" name="companySecurityAnswer" placeholder="Security Answer">
+                                                <input type="text" class="form-control" name="companySecurityAnswer"
+                                                       placeholder="Security Answer">
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                                                <button type="submit" class="btn btn-primary btn-block">REGISTER
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

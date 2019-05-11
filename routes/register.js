@@ -1,23 +1,28 @@
+/**
+ * This middleware is used to register for a new user.
+ * @type {createApplication}
+ */
 var express = require('express');
 var router = express.Router();
-var bodyParser=require('body-parser');
 var handleData = require('../mongoDB/handleData');
 var md5Ecryption = require('../service/pwdEncryption');
 
 
-/* GET home page after login. */
+/* GET register page after login. */
 router.get('/', function(req, res) {
     console.log('***register***get***');
 });
 
-// validation of the login email and password
+
+/**
+ * validation of all user information when doing registration.
+ * result = 0: existed user;
+ * result = 1: add new user successfully;
+ * result = 2:fail to add the new user;
+ */
 router.post('/', function(req, res) {
     console.log("***register***post***");
-    console.log(req.body);
 
-    //0: existed user; 
-    //1: add new user successfully; 
-    //2:fail to add the new user.
     var condition;
     if(req.body.userCategory==='p'){
         condition ={"email":req.body.consumerEmail};
@@ -30,10 +35,10 @@ router.post('/', function(req, res) {
             throw err;
 
         if(!user){
-            console.log('can not find this user.'+user);// user:null
-            // insert new user
+            console.log('this user have not registered before. user:'+user);// user:null
             var userInfo;
-            if(req.body.userCategory === 'p'){
+
+            if(req.body.userCategory === 'p'){ // customer user
                 userInfo = {
                     "email":req.body.consumerEmail,
                     // "pwd":req.body.consumerPassword,
@@ -44,7 +49,7 @@ router.post('/', function(req, res) {
                     "question":req.body.consumerSecurityQuestion,
                     "answer":req.body.consumerSecurityAnswer
                 };
-            } else if(req.body.userCategory === 'c'){
+            } else if(req.body.userCategory === 'c'){ // company user
                 userInfo = {
                     "email":req.body.companyEmail,
                     // "pwd":req.body.companyPassword,
@@ -56,6 +61,8 @@ router.post('/', function(req, res) {
                     "answer":req.body.companySecurityAnswer
                 };
             }
+
+            // insert new user into database
             handleData.insertUser(userInfo,function (err,user) {
                 if(err){
                     res.json({result:2});
@@ -67,11 +74,13 @@ router.post('/', function(req, res) {
                     res.json({result:1,user:user});
                 }
             });
+
         } else {
             console.log("The user has been registered before.");
             res.json({result:0});
         }
     })
 });
+
 
 module.exports = router;

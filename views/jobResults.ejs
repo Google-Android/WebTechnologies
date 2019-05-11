@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+    <script src="/javascripts/index_js.js"></script>
+</head>
+<body>
+<%- include header.ejs -%>
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-4">
+
+<!--            secondary search bar-->
+            <div class="accordion" id="secondarySearch">
+<!--                salary bar-->
+                <div class="card">
+                    <div class="card-header" id="salaryCollapse">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                SALARY
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="salaryCollapse" data-parent="#secondarySearch">
+                        <div class="card-body">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="salary30000More" name="salary30000More">
+                                <label class="custom-control-label" for="salary30000More">30000+</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="salary20000To30000" name="salary20000To30000">
+                                <label class="custom-control-label" for="salary20000To30000">20000-30000</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="salary10000To20000" name="salary10000To20000">
+                                <label class="custom-control-label" for="salary10000To20000">10000-20000</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="salary0To10000" name="salary0To10000">
+                                <label class="custom-control-label" for="salary0To10000">0-10000</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                job type-->
+                <div class="card">
+                    <div class="card-header" id="jobTypeCollapse">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#jobTypeCollapse" aria-expanded="false" aria-controls="collapseTwo">
+                                Collapsible Group Item #2
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#secondarySearch">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Collapsible Group Item #3
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#secondarySearch">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+
+            <div class="card mb-2">
+                <h5 class="card-header"><a href="#">job title(direct to the job's main page)</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">company name(direct to company's main page)</a></h5>
+                    <p class="card-text d-none d-lg-block">job description</p>
+                    <p class="card-text">salary</p>
+                </div>
+            </div>
+            <div class="card mb-2">
+                <h5 class="card-header"><a href="#">job title(direct to the job's main page)</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">company name(direct to company's main page)</a></h5>
+                    <p class="card-text">job description</p>
+                    <p class="card-text">salary</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav aria-label="..." class="float-right">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

@@ -23,11 +23,14 @@ var md5Ecryption={
         return result;
     }
 
-    // //for test
+    /**
+     * for test
+     */
     // var password ='123456';
     // var email='fqin2@sheffield.ac.uk';
     // cryptPwd(email,password);
 }
+
 
 module.exports=md5Ecryption;   // export this module
 
