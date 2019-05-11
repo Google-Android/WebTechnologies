@@ -16,10 +16,35 @@
 </head>
 <body>
 <%- include header.ejs -%>
+
+<!-- test -->
+<div>
+    <div>
+        <%
+        if(jobResults.length!=0){
+        %>
+            <p>
+                <% jobResults.forEach(function(job){ %>
+                    <li><%= job.title %></li>
+                <% }) %>
+            </p>
+        <%
+        } else {
+        %>
+            <p>
+                Null results
+            </p>
+        <%
+        }
+        %>
+    </div>
+</div>
+
+
+
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-sm-4">
-
 <!--            secondary search bar-->
             <div class="accordion" id="secondarySearch">
 <!--                salary bar-->
@@ -86,7 +111,7 @@
         </div>
         <div class="col-sm-8">
 
-            <div class="card mb-2">
+            <div class="card mb-2" id="jobResults">
                 <h5 class="card-header"><a href="#">job title(direct to the job's main page)</a></h5>
                 <div class="card-body">
                     <h5 class="card-title"><a href="">company name(direct to company's main page)</a></h5>
