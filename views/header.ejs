@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/index">Find Jobs</a>
+                <a class="nav-link" href="/">Find Jobs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Find CVs</a>
@@ -27,26 +27,34 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-thumbs-up"></i>Hi!
-                    <% if(user) { %>
-                        <%= user.name %>
-                    <% } %>
-                </a>
-            </li>
-            <li class="nav-item ml-2">
-                <!--            user profile, hidden before login-->
-                <a href="/message" class="btn btn-primary" aria-pressed="true">
-                    Notifications <span class="badge badge-light">0</span>
-                </a>
-            </li>
-
-            <!--            login and register button, hidden after login-->
-            <li class="nav-item ml-2">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+            <%
+                if(user){
+            %>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-thumbs-up"></i>Hi!
+                        <%=user.name %>
+                    </a>
+                </li>
+                <li class="nav-item ml-2">
+                    <!--            user profile, hidden before login-->
+                    <a href="/message" class="btn btn-primary" aria-pressed="true">
+                        Notifications
+                        <span class="badge badge-light">0</span>
+                    </a>
+                </li>
+            <%
+                } else {
+            %>
+                <!--            login and register button, hidden after login-->
+                <li class="nav-item ml-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
                     Login/Register
                 </button>
-            </li>
+                </li>
+            <%
+                }
+            %>
+
         </ul>
 
     </div>
