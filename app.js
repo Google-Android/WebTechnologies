@@ -6,12 +6,10 @@ var logger = require('morgan');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var messageRouter = require('./routes/message');
-var job_resultsRouter = require('./routes/job_results')
+var jobResultsRouter = require('./routes/jobResults')
 
 var app = express();
 
@@ -40,9 +38,8 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register',registerRouter);
-app.use('/users',usersRouter);
 app.use('/message',messageRouter);
-app.use('/job_results',job_resultsRouter);
+app.use('/jobResults',jobResultsRouter);
 
 
 
@@ -61,5 +58,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
