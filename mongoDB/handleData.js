@@ -52,11 +52,26 @@ var handleData={
     searchJob: function(condition,callback){
         require('./tools/connection');
         var JobModel= require('./models/job');
-        JobModel.find({$or:[{title: condition }, {companyName: condition },{jobType: condition}] }, function(err,result){
+        JobModel.find({$or:[{title: {$regex:condition}}, {companyName: { $regex:condition}},{jobType: { $regex:condition}}]},function(err,result){
             if (err) throw err;
             callback(null, result);
         });
-    }
+    },
+
 }
+
+// var a="Amazon";
+//
+//
+// //console.log(role_query);
+//
+// handleData.searchJob(a,function(err,docs){
+//     if(!err){
+//         console.log(docs);
+//     }
+// });
+
+
+
 
 module.exports=handleData;   // export this module
