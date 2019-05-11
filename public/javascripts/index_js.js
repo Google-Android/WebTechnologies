@@ -25,7 +25,7 @@ $(document).ready(function() {
                 //do something with the data via front-end framework
                 if(data.errInfo==1){
                     //顺葆：在这里让index.ejs里隐藏的用户名密码错误提示显示出来。。。
-                    $('#invalidUserMessage').show();
+                    $('#errorNotification').show();
                     $('#invalidUserMessage').toggle();
                 } else {
                     window.location.href='/';

@@ -1,8 +1,8 @@
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="/javascripts/index_js.js"></script>
+
 </head>
 <!-- Nav-bar -->
 
@@ -97,11 +97,10 @@
                                 <input type="password" class="form-control" id="loginPassword" name="loginPassword"
                                        placeholder="Password">
                             </div>
-                            <div class="col text-center" id="invalidAlert" style="display: none">
-                                <p style="color: red">
-                                    Invalid username or password!
-                                </p>
+                            <div id="errorNotification" style="display:none;">
+                                <p class="text-danger">Invalid E-mail or password!</p>
                             </div>
+
                             <br>
                             <div class="col text-center">
                                 <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
@@ -111,7 +110,7 @@
                         </form>
                     </div>
 
-                    <!--            register-->
+                    <!--register-->
                     <br>
                     <div class="tab-pane container" id="registerPane">
                         <div class="accordion" id="accordionExample">
