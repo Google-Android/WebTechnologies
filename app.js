@@ -10,6 +10,12 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var messageRouter = require('./routes/message');
 var jobResultsRouter = require('./routes/jobResults');
+var jobSeekerResultsRouter = require('./routes/jobSeekerResults');
+var companyDetailsRouter = require('./routes/companyDetails');
+var personDetailsRouter = require('./routes/personDetails');
+var postJobsRouter = require('./routes/postJobs');
+var jobRequestsRouter = require('./routes/jobRequests');
+var userDetailsRouter = require('./routes/userDetails');
 
 var app = express();
 
@@ -40,6 +46,12 @@ app.use('/login', loginRouter);
 app.use('/register',registerRouter);
 app.use('/message',messageRouter);
 app.use('/jobResults',jobResultsRouter);
+app.use('/jobSeekerResults',jobSeekerResultsRouter);
+app.use('/companyDetails',companyDetailsRouter);
+app.use('/personDetails',personDetailsRouter);
+app.use('/postJobs',postJobsRouter);
+app.use('/jobRequests',jobRequestsRouter);
+app.use('/userDetails',userDetailsRouter);
 
 
 

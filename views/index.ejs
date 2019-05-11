@@ -27,19 +27,19 @@
 <!--search jumbotron-->
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
-        <form class="col-12">
+        <form class="col-12" id="jobSearch">
             <div class="jumbotron">
                 <h1 class="display-4">Find Jobs</h1>
                 <hr class="my-4">
                 <div class="form-group">
                     <label for="keyword">Keywords</label>
-                    <input type="text" class="form-control" id="keyword" placeholder="job title, company name, job type">
+                    <input type="text" class="form-control" name="keyword" placeholder="job title, company name, job type">
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="city, postcode">
+                    <input type="text" class="form-control" name="location" placeholder="city, postcode">
                 </div>
-                <button type="button" class="btn btn-primary">SEARCH</button>
+                <button type="submit" class="btn btn-primary">SEARCH</button>
             </div>
         </form>
     </div>
