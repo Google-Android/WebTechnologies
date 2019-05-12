@@ -20,8 +20,25 @@ var jobData= {
                 callback(null, result);
             });
 
+    },
+
+    showJobDetails: function (company, callback) {
+        require('../mongoDB/tools/connection');
+        var JobModel = require('../mongoDB/models/job');
+        JobModel.find({companyName:company},
+            function (err, result) {
+                if (err) throw err;
+                callback(null, result);
+            });
+
     }
 }
 
 module.exports=jobData;   // export this module
+
+// jobData.showJobDetails("Urban Outfitters Inc.",function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+// })
 
