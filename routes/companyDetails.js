@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var reviewData = require('../service/reviewData');
+var createFolder = require('../service/createFolder');
 
 router.get('/', function(req, res) {
   console.log('***companyDetails***get***');
@@ -13,18 +14,13 @@ router.get('/', function(req, res) {
 
     if(reviews){// exists reviews for this company
       console.log('reviews size:'+reviews.length);
+      console.log("personOrComp: "+req.session.user.personOrComp);
       res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviews});
     } else { // no reviews for this company
       res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':null});
     }
   });
 
-  //if user has been stored in session, the username will be shown on web page.
-  // if(req.session.user){
-  //   res.render('companyDetails', { title: 'Express' });
-  // } else{
-  //   res.render('companyDetails',{user:null});
-  // }
 });
 
 /* validation of the login email and password */
@@ -38,9 +34,12 @@ router.post('/', function(req, res, next) {
     var reviewTitle = req.body.reviewTitle;
     var reviewRate = req.body.reviewRating;
     var reviewComment = req.body.reviewComment;
-    var reviewImage = req.body.reviewImage;
+    console.log("username:"+username+",companyName:"+companyName+",reviewTitle:"+reviewTitle+",reviewRate:"+reviewRate+",reviewComment:"+reviewComment);
 
-    console.log("username:"+username+",companyName:"+companyName+",reviewTitle:"+reviewTitle+",reviewRate:"+reviewRate+",reviewComment:"+reviewComment+",reviewImage:"+reviewImage);
+    console.log("image:"+req.files.reviewImage);
+
+    createFolder.initFolder('./image/');
+
 
     reviewData.createReview(username,companyName,reviewRate,reviewComment,reviewImage,reviewTitle,function(err,review){
         if(err){
