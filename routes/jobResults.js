@@ -37,6 +37,7 @@ router.post('/', function(req, res, next) {
         } else {
             console.log('The number of search results:'+jobResults.length);
             console.log('get results of job done.');
+            console.log("user:"+req.session.user);
             res.render('jobResults',{user:req.session.user,"jobResults":jobResults});
             // res.json({result:1,"jobResults":jobResults});
         }

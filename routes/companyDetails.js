@@ -13,9 +13,9 @@ router.get('/', function(req, res) {
 
     if(reviews){// exists reviews for this company
       console.log('reviews size:'+reviews.length);
-      res.render('companyDetails', { user:req.session.user,'reviews':reviews});
+      res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviews});
     } else { // no reviews for this company
-      res.render('companyDetails', { user:req.session.user,'reviews':null});
+      res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':null});
     }
   });
 
@@ -30,6 +30,34 @@ router.get('/', function(req, res) {
 /* validation of the login email and password */
 router.post('/', function(req, res, next) {
   console.log("***companyDetails***post***");
+
+  if(req.session.user){ // have login already
+    var username = req.session.user.name;
+    var companyName = req.body.companyName;
+
+    var reviewTitle = req.body.reviewTitle;
+    var reviewRate = req.body.reviewRating;
+    var reviewComment = req.body.reviewComment;
+    var reviewImage = req.body.reviewImage;
+
+    console.log("username:"+username+",companyName:"+companyName+",reviewTitle:"+reviewTitle+",reviewRate:"+reviewRate+",reviewComment:"+reviewComment+",reviewImage:"+reviewImage);
+
+    reviewData.createReview(username,companyName,reviewRate,reviewComment,reviewImage,reviewTitle,function(err,review){
+        if(err){
+            res.json({result:2});
+            console.log("err:"+err);
+            throw err;
+        } else {
+            console.log("review:"+review);
+            res.json({result:1,review:review});
+        }
+    });
+
+  } else { // need to login first
+    res.json({result:0});
+  }
+  
+
 
 });
 

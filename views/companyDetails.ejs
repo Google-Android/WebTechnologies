@@ -15,6 +15,9 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/companyDetailsJS.js"></script>
+
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
@@ -33,8 +36,8 @@
             </div>
 <!--            review modal-->
             <div class="modal-body">
-                <!--      繁华       评论表单-->
                 <form id="companyReview">
+                    <input type="hidden" name="companyName" value="<%=companyName%>">
                     <div class="form-group">
                         <label for="reviewTitle">Title</label>
                         <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
@@ -62,7 +65,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col text-center">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">PUSH</button>
                         </div>
                     </div>
                 </form>
@@ -72,7 +75,7 @@
 </div>
 <div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1 class="display-4 text-break">Company1</h1>
+        <h1 class="display-4 text-break"><%=companyName%></h1>
         <h2>
             <small class="text-success">Overall Rating:</small>
             4.0
