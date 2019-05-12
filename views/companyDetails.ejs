@@ -95,56 +95,22 @@
     <div class="tab-content">
         <!--繁华reviews-->
         <div id="reviews" class="container tab-pane active">
-<<<<<<< Updated upstream
             <%
                 reviews.forEach(function(review){
             %>
-=======
             <!--            循环从这开始-->
->>>>>>> Stashed changes
             <div class="card mt-2 mb-2">
                 <h5 class="card-header">
                         <%=review.title %>
                     <p class="font-weight-lighter font-italic"><%=review.publisherName %></p>
                 </h5>
                 <div class="card-body">
-<<<<<<< Updated upstream
                     <h5 class="card-title"><small>Rating: </small><%=review.score %></h5>
                     <p class="card-text"><%=review.comment %></p>
                     <p class="card-text"><%=review.pictureUrl %></p>
-=======
-                    <h5 class="card-title">
-                        <small>Rating:</small>
-                        4.0
-                    </h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
                 </div>
             </div>
             <!--            循环结束-->
-            <div class="card mt-2 mb-2">
-                <h5 class="card-header">
-                    Title of the comment
-                    <p class="font-weight-lighter font-italic">comment publisher 2</p>
-                </h5>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <small>Rating:</small>
-                        4.0
-                    </h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
->>>>>>> Stashed changes
-                </div>
-            </div>
             <%
                 })
             %>
