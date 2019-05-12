@@ -2,9 +2,261 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>The hunt</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+
+    <style>
+        body,html {
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
+<%- include header.ejs -%>
+<!--search panel-->
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <form class="col-12" id="findCvs" method="POST" action="/jobResults">
+            <div class="jumbotron">
+                <h1 class="display-4">Find CVs</h1>
+                <hr class="my-4">
+                <div class="form-group">
+                    <label for="cvKeyword">Keywords</label>
+                    <input type="text" class="form-control" name="cvKeyword" placeholder="job title, company name, job type">
+                </div>
+                <div class="form-group">
+                    <label for="cvLocation">Location</label>
+                    <input type="text" class="form-control" name="cvLocation" placeholder="city, postcode">
+                </div>
+                <button type="submit" class="btn btn-primary">SEARCH</button>
+            </div>
+        </form>
+    </div>
+</div>
 
+<!--cv search results-->
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <!--filter-->
+        <div class="col-sm-4">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">Filter</h1>
+                    <form action="" id="cvSecondarySearch">
+                        <!--secondary search bar-->
+                        <div class="form-group">
+                            <label for="cvKeyword">Keywords</label>
+                            <input type="text" class="form-control" name="cvKeyword"
+                                   placeholder="job title, company name, job type" value="Amazon">
+                        </div>
+                        <div class="accordion" id="cvSecondarySearch">
+                            <!--salary-->
+                            <div class="card">
+                                <div class="card-header" id="cvSalaryCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseSalary" aria-expanded="true"
+                                                aria-controls="collapseSalary">
+                                            Salary
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseSalary" class="collapse" aria-labelledby="cvSalaryCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvSalary3000More"
+                                                   name="cvSalary3000More">
+                                            <label class="custom-control-label" for="cvSalary3000More">£3000+</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="cvSalary2000To3000"
+                                                   name="cvSalary2000To3000">
+                                            <label class="custom-control-label"
+                                                   for="cvSalary2000To3000">£2000-£3000</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="cvSalary1000To2000"
+                                                   name="cvSalary1000To2000">
+                                            <label class="custom-control-label"
+                                                   for="cvSalary1000To2000">£1000-£2000</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvSalary0To1000"
+                                                   name="cvSalary0To1000">
+                                            <label class="custom-control-label" for="cvSalary0To1000">£0-£1000</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--industry-->
+                            <div class="card">
+                                <div class="card-header" id="industryCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseIndustry" aria-expanded="false"
+                                                aria-controls="collapseIndustry">
+                                            Location
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseIndustry" class="collapse" aria-labelledby="industryCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryEducation"
+                                                   name="cvIndustryEducation">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryEducation">Education</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryIt"
+                                                   name="cvIndustryIt">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryIt">IT</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryAccounting"
+                                                   name="cvIndustryAccounting">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryAccounting">Accounting</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryEnergy"
+                                                   name="cvIndustryEnergy">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryEnergy">Energy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryAgriculture"
+                                                   name="cvIndustryAgriculture">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryAgriculture">Agriculture</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryTransportation"
+                                                   name="cvIndustryTransportation">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryTransportation">Transportation</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvIndustryRealEstate"
+                                                   name="cvIndustryRealEstate">
+                                            <label class="custom-control-label"
+                                                   for="cvIndustryRealEstate">Real Estate</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvOther"
+                                                   name="cvOther">
+                                            <label class="custom-control-label"
+                                                   for="cvOther">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--job type-->
+                            <div class="card">
+                                <div class="card-header" id="jobTypeCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseJobType" aria-expanded="true"
+                                                aria-controls="collapseJobType">
+                                            Job Types
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseJobType" class="collapse" aria-labelledby="jobTypeCollapse"
+                                     data-parent="#cvSecondarySearch">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvJobTypeFullTime"
+                                                   name="cvJobTypeFullTime">
+                                            <label class="custom-control-label"
+                                                   for="cvJobTypeFullTime">Full-Time</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvJobTypePartTime"
+                                                   name="cvJobTypePartTime">
+                                            <label class="custom-control-label"
+                                                   for="cvJobTypePartTime">Part-Time</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvJobTypeInternship"
+                                                   name="cvJobTypeInternship">
+                                            <label class="custom-control-label"
+                                                   for="cvJobTypeInternship">Internship</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Location-->
+                            <div class="card">
+                                <div class="card-header" id="locationCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseLocation" aria-expanded="false"
+                                                aria-controls="collapseLocation">
+                                            Location
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseLocation" class="collapse" aria-labelledby="locationCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvLocationSheffield"
+                                                   name="cvLocationSheffield">
+                                            <label class="custom-control-label"
+                                                   for="cvLocationSheffield">Sheffield</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvLocationLondon"
+                                                   name="cvLocationLondon">
+                                            <label class="custom-control-label" for="cvLocationLondon">London</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="cvLocationManchester"
+                                                   name="cvLocationManchester">
+                                            <label class="custom-control-label"
+                                                   for="cvLocationManchester">Manchester</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cvLocationOther"
+                                                   name="cvLocationOther">
+                                            <label class="custom-control-label" for="locationOther">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Refine</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--searching result area-->
+        <div class="col-sm-8">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container text-center">
+                    <h1 class="display-4">No Related Result! </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
