@@ -1,5 +1,5 @@
 /**
- * all function here are used for components in index page.
+ * all function here are used for components in company detail page.
  */
 $(document).ready(function() {
 
@@ -11,22 +11,27 @@ $(document).ready(function() {
         alert('get companyReview data done.');
         event.preventDefault();
 
-        var d={};
+        var companyName = $('#companyName').val();
+        var reviewTitle = $('#reviewTitle').val();
+        var reviewRating = $('#reviewRating').val();
+        var reviewComment = $('#reviewComment').val();
+        var reviewImage = document.getElementById("reviewImage");
 
-        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
-        var wholeForm = $('#companyReview').serializeArray();
+        alert('companyName:'+companyName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
 
-        $.each(wholeForm, function() {
-            d[this.name] = this.value;
-        });
-
-        alert("image:"+ $('#reviewImage').val());
-        alert(JSON.stringify(d));
+        var d = new FormData();
+        d.append('companyName',companyName);
+        d.append('reviewTitle',reviewTitle);
+        d.append('reviewRating',reviewRating);
+        d.append('reviewComment',reviewComment);
+        d.append('reviewImage',reviewImage.files[0]);
 
         $.ajax({
             type: 'POST',
             url: '/companyDetails',
             data: d,
+            contentType: false,
+            processData: false,
             success: function(data) {
                 if(data.result===0){
                     alert("Please login first.");
@@ -39,7 +44,4 @@ $(document).ready(function() {
         });
         return false;
     });
-
-
-
 });

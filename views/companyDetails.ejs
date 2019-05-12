@@ -22,7 +22,6 @@
 <body class="customize-body">
 <%- include header.ejs -%>
 
-
 <!-- Modal -->
 <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewCompanyModal"
      aria-hidden="true">
@@ -36,8 +35,8 @@
             </div>
 <!--            review modal-->
             <div class="modal-body">
-                <form id="companyReview">
-                    <input type="hidden" name="companyName" value="<%=companyName%>">
+                <form id="companyReview" encType="multipart/form-data">
+                    <input type="hidden" name="companyName" id="companyName" value="<%=companyName%>">
                     <div class="form-group">
                         <label for="reviewTitle">Title</label>
                         <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
@@ -68,7 +67,7 @@
                             <button type="submit" class="btn btn-primary btn-lg btn-block">PUSH</button>
                         </div>
                     </div>
-                </form>
+                </form> 
             </div>
         </div>
     </div>

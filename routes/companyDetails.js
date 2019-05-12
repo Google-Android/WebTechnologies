@@ -1,8 +1,38 @@
 var express = require('express');
 var router = express.Router();
 var reviewData = require('../service/reviewData');
-var createFolder = require('../service/createFolder');
+var fs = require('fs');
+var multer = require('multer');
 
+var createFolder = function(folder){
+    try{
+        fs.accessSync(folder);
+    }catch(e){
+        fs.mkdirSync(folder);
+    }
+};
+
+// var uploadFolder = './image/';
+var uploadFolder = './public/image/';
+
+createFolder(uploadFolder);
+
+var currentTime = Date.now();
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null,uploadFolder);
+    },
+    filename: function(req,file,cb){
+        cb(null,currentTime+'-'+file.originalname);
+    }
+});
+
+// set the upload path
+var upload = multer({storage:storage});
+
+/**
+ *
+ */
 router.get('/', function(req, res) {
   console.log('***companyDetails***get***');
 
@@ -23,9 +53,10 @@ router.get('/', function(req, res) {
 
 });
 
-/* validation of the login email and password */
-router.post('/', function(req, res, next) {
+/*  */
+router.post('/', upload.single('reviewImage') ,function(req, res) {
   console.log("***companyDetails***post***");
+  console.dir("file:"+req.file.originalname);
 
   if(req.session.user){ // have login already
     var username = req.session.user.name;
@@ -36,12 +67,8 @@ router.post('/', function(req, res, next) {
     var reviewComment = req.body.reviewComment;
     console.log("username:"+username+",companyName:"+companyName+",reviewTitle:"+reviewTitle+",reviewRate:"+reviewRate+",reviewComment:"+reviewComment);
 
-    console.log("image:"+req.files.reviewImage);
 
-    createFolder.initFolder('./image/');
-
-
-    reviewData.createReview(username,companyName,reviewRate,reviewComment,reviewImage,reviewTitle,function(err,review){
+    reviewData.createReview(username,companyName,reviewRate,reviewComment,currentTime+'-'+req.file.originalname,reviewTitle,function(err,review){
         if(err){
             res.json({result:2});
             console.log("err:"+err);
@@ -55,9 +82,6 @@ router.post('/', function(req, res, next) {
   } else { // need to login first
     res.json({result:0});
   }
-  
-
-
 });
 
 

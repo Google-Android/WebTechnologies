@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var multer = require('multer');
+
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -28,6 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // use session to store user info
 app.use(session({
