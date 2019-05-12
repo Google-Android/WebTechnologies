@@ -26,7 +26,6 @@ $(document).ready(function() {
                 if(data.errInfo==1){
                     //顺葆：在这里让index.ejs里隐藏的用户名密码错误提示显示出来。。。
                     $('#errorNotification').show();
-                    $('#invalidUserMessage').toggle();
                 } else {
                     window.location.href='/';
                 }
