@@ -13,120 +13,145 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
-    <script src="/javascripts/index_js.js"></script>
 </head>
 <body>
 <%- include header.ejs -%>
 
-<!-- test -->
-<%
-if(jobResults.length != 0){
-%>
-
-    <% jobResults.forEach(function(job){ %>
-        <%= job.title %>
-    <% }) %>
-
-<%
-} else {
-%>
-    <p>
-        Null results
-    </p>
-<%
-}
-%>
 
 <div class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-sm-4">
-            <!--            secondary search bar-->
-            <div class="accordion" id="secondarySearch">
-                <!--                salary bar-->
-                <div class="card">
-                    <div class="card-header" id="salaryCollapse">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                SALARY
-                            </button>
-                        </h2>
-                    </div>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">Filter</h1>
+                    <form action="" id="secondarySearch">
+                        <!--            secondary search bar-->
+                        <div class="form-group">
+                            <label for="keyword">Keywords</label>
+                            <input type="text" class="form-control" name="keyword"
+                                   placeholder="job title, company name, job type" value="Amazon">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" placeholder="city, postcode" value="">
+                        </div>
+                        <div class="accordion" id="secondarySearch">
+                            <!--                salary-->
+                            <div class="card">
+                                <div class="card-header" id="salaryCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseSalary" aria-expanded="true"
+                                                aria-controls="collapseSalary">
+                                            SALARY
+                                        </button>
+                                    </h2>
+                                </div>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="salaryCollapse"
-                         data-parent="#secondarySearch">
-                        <div class="card-body">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="salary30000More"
-                                       name="salary30000More">
-                                <label class="custom-control-label" for="salary30000More">30000+</label>
+                                <div id="collapseSalary" class="collapse" aria-labelledby="salaryCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="salary30000More"
+                                                   name="salary30000More">
+                                            <label class="custom-control-label" for="salary30000More">30000+</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="salary20000To30000"
+                                                   name="salary20000To30000">
+                                            <label class="custom-control-label" for="salary20000To30000">20000-30000</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="salary10000To20000"
+                                                   name="salary10000To20000">
+                                            <label class="custom-control-label" for="salary10000To20000">10000-20000</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="salary0To10000"
+                                                   name="salary0To10000">
+                                            <label class="custom-control-label" for="salary0To10000">0-10000</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="salary20000To30000"
-                                       name="salary20000To30000">
-                                <label class="custom-control-label" for="salary20000To30000">20000-30000</label>
+                            <!--job type-->
+                            <div class="card">
+                                <div class="card-header" id="jobTypeCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseJobType" aria-expanded="true"
+                                                aria-controls="collapseJobType">
+                                            Job Types
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseJobType" class="collapse" aria-labelledby="jobTypeCollapse"
+                                     data-parent="#secondarySearch">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="jobTypeFullTime"
+                                                   name="jobTypeFullTime">
+                                            <label class="custom-control-label" for="jobTypeFullTime">Full-Time</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="jobTypePartTime"
+                                                   name="jobTypePartTime">
+                                            <label class="custom-control-label" for="jobTypePartTime">Part-Time</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="jobTypeInternship"
+                                                   name="jobTypeInternship">
+                                            <label class="custom-control-label" for="jobTypeInternship">Internship</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="salary10000To20000"
-                                       name="salary10000To20000">
-                                <label class="custom-control-label" for="salary10000To20000">10000-20000</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="salary0To10000"
-                                       name="salary0To10000">
-                                <label class="custom-control-label" for="salary0To10000">0-10000</label>
+                            <div class="card">
+                                <div class="card-header" id="locationCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseLocation" aria-expanded="false"
+                                                aria-controls="collapseLocation">
+                                            Location
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseLocation" class="collapse" aria-labelledby="locationCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="locationSheffield"
+                                                   name="locationSheffield">
+                                            <label class="custom-control-label" for="locationSheffield">Sheffield</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="locationLondon"
+                                                   name="locationLondon">
+                                            <label class="custom-control-label" for="locationLondon">London</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="locationManchester"
+                                                   name="locationManchester">
+                                            <label class="custom-control-label" for="locationManchester">Manchester</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="locationEdinburgh"
+                                                   name="locationEdinburgh">
+                                            <label class="custom-control-label" for="locationEdinburgh">Edinburgh</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!--                job type-->
-                <div class="card">
-                    <div class="card-header" id="jobTypeCollapse">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                    data-target="#jobTypeCollapse" aria-expanded="false" aria-controls="collapseTwo">
-                                Collapsible Group Item #2
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#secondarySearch">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
+                        <div class="row mt-2">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Refine</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                         data-parent="#secondarySearch">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                            squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                            nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                            single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                            beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                            lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                            probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-<!--        searching result area-->
+        <!--        searching result area-->
         <div class="col-sm-8">
             <%
             if(jobResults.length != 0){
@@ -135,9 +160,9 @@ if(jobResults.length != 0){
                     <div class="card mb-2" id="jobResults">
                         <h5 class="card-header"><a href="#"><%= job.title %></a></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><a href="">company name(direct to company's main page)</a></h5>
-                            <p class="card-text d-none d-lg-block">job description</p>
-                            <p class="card-text">salary</p>
+                            <h5 class="card-title"><a href=""><%= job.companyName%></a></h5>
+                            <p class="card-text d-none d-lg-block"><%= job.description%></p>
+                            <p class="card-text"><%= job.salary%></p>
                         </div>
                     </div>
                 <% }) %>
@@ -153,20 +178,5 @@ if(jobResults.length != 0){
         </div>
     </div>
 </div>
-<nav aria-label="..." class="float-right">
-    <ul class="pagination">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-        </li>
-    </ul>
-</nav>
 </body>
 </html>

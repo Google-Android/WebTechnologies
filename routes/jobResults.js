@@ -4,7 +4,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var handleData = require('../mongoDB/handleData');
+var jobData = require('../service/jobData');
 
 
 /* get jobResults page with results. */
@@ -19,15 +19,15 @@ router.post('/', function(req, res, next) {
     console.log("***jobResults***post***");
     // console.dir('post query:'+req.query);
 
-    var keyword = req.body.keyword;
-    var location = req.body.location;
+    var keyword = req.body.keyword==null?"":req.body.keyword;
+    var location = req.body.location==null?"":req.body.location;
 
     // search in db...........
-    var condition = keyword;
+    var condition = keyword==null?"":keyword;
     console.log('keyword:'+keyword+", location:"+location);
     console.log('job search condition:'+condition);
 
-    handleData.searchJob(condition,function (err, jobResults) {
+    jobData.searchJob(keyword,location,function (err, jobResults){
         if(err) throw err;
 
         if(!jobResults){// cannot find any jobs within the condition
