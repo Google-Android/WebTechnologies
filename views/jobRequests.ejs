@@ -14,21 +14,100 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 </head>
-<body>
+<body class="customize-body">
 <%- include header.ejs -%>
-<div class="container">
-    <div class="card text-center">
-        <div class="card-header">
-            Featured
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted">
-            2 days ago
-        </div>
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <form class="col-12" id="jobRequest" method="POST" action="">
+            <div class="jumbotron">
+                <h1 class="display-4">Upload your CV</h1>
+                <hr class="my-4">
+                <form id="companyReview">
+                    <div class="form-group">
+                        <label for="requestJobTitle">Title</label>
+                        <input type="text" class="form-control" id="requestJobTitle" name="requestJobTitle" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="requestJobType">Job Type</label>
+                        <select class="form-control" id="requestJobType" name="requestJobType">
+                            <option value="fullTime">Full Time</option>
+                            <option value="partTime">Part Time</option>
+                            <option value="internship">InternShip</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="requestSalary">Salary</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">£</span>
+                                </div>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="requestPaymentCycle">Payment cycle</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">per</span>
+                                </div>
+                                <select id="per" class="form-control">
+                                    <option>hour</option>
+                                    <option>day</option>
+                                    <option>week</option>
+                                    <option>month</option>
+                                    <option>year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestEducation">Education</label>
+                        <textarea class="form-control" id="description" rows="3" name="requestEducation" placeholder="Add your education history here."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="workingExperience">Working Experience</label>
+                        <textarea class="form-control" id="workingExperience" rows="3" name="workingExperience" placeholder="Add you working experience here."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestProfilePhoto">Profile photo</label>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="requestProfilePhoto" name="requestProfilePhoto">
+                            <label class="custom-file-label" for="requestProfilePhoto">Choose file</label>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4>Intentional Workplace</h4>
+                    <div class="form-group">
+                        <label for="street">Street</label>
+                        <input type="text" class="form-control" id="street" placeholder="Street">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="City">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" placeholder="State">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postalCode">Postal Code</label>
+                            <input type="text" class="form-control" id="postalCode" placeholder="Postal Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="Country">
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
     </div>
 </div>
 </body>
