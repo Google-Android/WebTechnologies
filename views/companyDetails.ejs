@@ -77,10 +77,35 @@
         <h1 class="display-4 text-break"><%=companyName%></h1>
         <h2>
             <small class="text-success">Overall Rating:</small>
-            4.0
+            <%
+            var overallRating = 0;
+            var countReview = 0;
+            var averageScore = 0;
+            if(reviews){
+                reviews.forEach(function(review){
+                    countReview++;
+                    overallRating+=review.score;
+                });
+                <!-- if there exists review for this company -->
+                if(countReview!=0){
+                    averageScore=overallRating/countReview;
+                    averageScore=averageScore.toString();
+                    if (averageScore.length > 2)
+                        averageScore=averageScore.substring(0, 3);
+            %>
+                <%=averageScore %>
+            <%
+            <!-- if there is not any review for this company -->
+                } else {
+            %>
+                0
+            <%
+                }
+            }
+            %>
         </h2>
         <hr class="my-4">
-    <%
+        <%
         if(user){
         %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
