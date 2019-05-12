@@ -17,17 +17,15 @@
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
-
-
 <div class="container" style="margin-top:30px">
     <div class="row">
-        <!--        filter-->
+        <!--filter-->
         <div class="col-sm-4">
             <div class="jumbotron">
                 <div class="container">
                     <h1 class="display-4">Filter</h1>
                     <form action="" id="secondarySearch">
-                        <!--            secondary search bar-->
+                        <!--secondary search bar-->
                         <div class="form-group">
                             <label for="keyword">Keywords</label>
                             <input type="text" class="form-control" name="keyword"
@@ -49,26 +47,90 @@
                                 <div id="collapseSalary" class="collapse" aria-labelledby="salaryCollapse">
                                     <div class="card-body">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="salary30000More"
-                                                   name="salary30000More">
-                                            <label class="custom-control-label" for="salary30000More">30000+</label>
+                                            <input type="checkbox" class="custom-control-input" id="salary3000More"
+                                                   name="salary3000More">
+                                            <label class="custom-control-label" for="salary3000More">£3000+</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="salary20000To30000"
-                                                   name="salary20000To30000">
+                                            <input type="checkbox" class="custom-control-input" id="salary2000To3000"
+                                                   name="salary2000To0000">
                                             <label class="custom-control-label"
-                                                   for="salary20000To30000">20000-30000</label>
+                                                   for="salary2000To3000">£2000-£3000</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="salary10000To20000"
-                                                   name="salary10000To20000">
+                                            <input type="checkbox" class="custom-control-input" id="salary1000To2000"
+                                                   name="salary1000To2000">
                                             <label class="custom-control-label"
-                                                   for="salary10000To20000">10000-20000</label>
+                                                   for="salary1000To2000">£1000-£2000</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="salary0To10000"
-                                                   name="salary0To10000">
-                                            <label class="custom-control-label" for="salary0To10000">0-10000</label>
+                                            <input type="checkbox" class="custom-control-input" id="salary0To1000"
+                                                   name="salary0To1000">
+                                            <label class="custom-control-label" for="salary0To1000">£0-£1000</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--industry-->
+                            <div class="card">
+                                <div class="card-header" id="industryCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseIndustry" aria-expanded="false"
+                                                aria-controls="collapseIndustry">
+                                            Industry
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseIndustry" class="collapse" aria-labelledby="industryCollapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryEducation"
+                                                   name="industryEducation">
+                                            <label class="custom-control-label"
+                                                   for="industryEducation">Education</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryIt"
+                                                   name="industryIt">
+                                            <label class="custom-control-label"
+                                                   for="industryIt">IT</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryAccounting"
+                                                   name="industryAccounting">
+                                            <label class="custom-control-label"
+                                                   for="industryAccounting">Accounting</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryEnergy"
+                                                   name="industryEnergy">
+                                            <label class="custom-control-label"
+                                                   for="industryEnergy">Energy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryAgriculture"
+                                                   name="industryAgriculture">
+                                            <label class="custom-control-label"
+                                                   for="industryAgriculture">Agriculture</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryTransportation"
+                                                   name="industryTransportation">
+                                            <label class="custom-control-label"
+                                                   for="industryTransportation">Transportation</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="industryRealEstate"
+                                                   name="industryRealEstate">
+                                            <label class="custom-control-label"
+                                                   for="industryRealEstate">Real Estate</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="other"
+                                                   name="other">
+                                            <label class="custom-control-label"
+                                                   for="other">Other</label>
                                         </div>
                                     </div>
                                 </div>
@@ -106,6 +168,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--location-->
                             <div class="card">
                                 <div class="card-header" id="locationCollapse">
                                     <h2 class="mb-0">
@@ -154,7 +217,7 @@
             </div>
         </div>
 
-        <!--        searching result area-->
+        <!--searching result area-->
         <div class="col-sm-8">
             <%
             if(jobResults.length != 0){

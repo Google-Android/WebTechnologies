@@ -44,7 +44,6 @@ router.get('/', function(req, res) {
 
     if(reviews){// exists reviews for this company
       console.log('reviews size:'+reviews.length);
-      console.log("personOrComp: "+req.session.user.personOrComp);
       res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviews});
     } else { // no reviews for this company
       res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':null});
