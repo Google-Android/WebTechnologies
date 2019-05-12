@@ -52,22 +52,47 @@
                                     <span class="input-group-text">per</span>
                                 </div>
                                 <select id="per" class="form-control">
-                                    <option>hour</option>
-                                    <option>day</option>
-                                    <option>week</option>
-                                    <option>month</option>
-                                    <option>year</option>
+                                    <option value="hour">hour</option>
+                                    <option value="day">day</option>
+                                    <option value="week">week</option>
+                                    <option value="month">month</option>
+                                    <option value="year">year</option>
                                 </select>
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <h4>Education</h4>
                     <div class="form-group">
-                        <label for="requestEducation">Education</label>
-                        <textarea class="form-control" id="description" rows="3" name="requestEducation" placeholder="Add your education history here."></textarea>
+                        <label for="requestHighestEducation">Highest Education</label>
+                        <select class="form-control" id="requestHighestEducation" name="requestHighestEducation">
+                            <option value="phd">PhD</option>
+                            <option value="master">Master</option>
+                            <option value="bachelor">Bachelor</option>
+                            <option value="highSchoolAndLower">High school and lower</option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="workingExperience">Working Experience</label>
-                        <textarea class="form-control" id="workingExperience" rows="3" name="workingExperience" placeholder="Add you working experience here."></textarea>
+                        <label for="requestEducationDetails">Details</label>
+                        <textarea class="form-control" id="requestEducationDetails" rows="3" name="requestEducationDetails" placeholder="Add your education history here."></textarea>
+                    </div>
+                    <hr>
+
+                    <h4>Working</h4>
+                    <div class="form-group">
+                        <label for="requestWorkingYears">Working years</label>
+                        <select class="form-control" id="requestWorkingYears" name="requestWorkingYears">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5AndMore">5 and more</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="requestWorkingExperience">Working Experience</label>
+                        <textarea class="form-control" id="requestWorkingExperience" rows="3" name="requestWorkingExperience" placeholder="Add you working experience here."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="requestProfilePhoto">Profile photo</label>
