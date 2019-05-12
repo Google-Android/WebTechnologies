@@ -20,6 +20,7 @@ var jobRequestsRouter = require('./routes/jobRequests');
 var userDetailsRouter = require('./routes/userDetails');
 var jobDetailsRouter = require('./routes/jobDetails');
 var requestDetailsRouter = require('./routes/requestDetails');
+var findCvsRouter = require('./routes/findCvs');
 
 var app = express();
 
@@ -64,6 +65,7 @@ app.use('/jobRequests',jobRequestsRouter);
 app.use('/userDetails',userDetailsRouter);
 app.use('/jobDetails',jobDetailsRouter);
 app.use('/requestDetails',requestDetailsRouter);
+app.use('/findCvs',findCvsRouter);
 
 
 
