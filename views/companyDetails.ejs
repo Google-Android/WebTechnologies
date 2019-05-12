@@ -10,20 +10,77 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+    <link rel="stylesheet" href="/stylesheets/customizeStyle.css">
 
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 </head>
-<body>
+<body class="customize-body">
 <%- include header.ejs -%>
 
-<div class="container">
+
+<!-- Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Review this company</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+<!--            review modal-->
+            <div class="modal-body">
+                <!--      繁华       评论表单-->
+                <form id="companyReview">
+                    <div class="form-group">
+                        <label for="reviewTitle">Title</label>
+                        <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <select class="form-control" id="reviewRating" name="reviewRating">
+                            <option value="5">5 Excellent</option>
+                            <option value="4">4 Good</option>
+                            <option value="3">3 Acceptable</option>
+                            <option value="2">2 Fair</option>
+                            <option value="1">1 Poor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Review</label>
+                        <textarea class="form-control" id="reviewComment" rows="3" name="reviewComment" placeholder="Add comment here"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Image</label>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="reviewImage" name="reviewImage">
+                            <label class="custom-file-label" for="reviewImage">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
         <h1 class="display-4 text-break">Company1</h1>
-        <h2><small class="text-success">Overall Rating: </small>4.0</h2>
+        <h2>
+            <small class="text-success">Overall Rating:</small>
+            4.0
+        </h2>
         <hr class="my-4">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Add a Review</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
+            REVIEW THIS COMPANY
+        </button>
     </div>
     <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
@@ -36,45 +93,48 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <!--reviews-->
+        <!--繁华reviews-->
         <div id="reviews" class="container tab-pane active">
+            <%
+                reviews.forEach(function(review){
+            %>
+<!--            review of company-->
             <div class="card mt-2 mb-2">
                 <h5 class="card-header">
-                    Title of the comment
-                    <p class="font-weight-lighter font-italic">comment publisher 1</p>
+                        <%=review.title %>
+                    <p class="font-weight-lighter font-italic"><%=review.publisherName %></p>
                 </h5>
                 <div class="card-body">
-                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
+                    <h5 class="card-title"><small>Rating: </small><%=review.score %></h5>
+                    <p class="card-text"><%=review.comment %></p>
+                    <img src="<%=review.pictureUrl %>" class="img-thumbnail">
                 </div>
             </div>
-            <div class="card mt-2 mb-2">
-                <h5 class="card-header">
-                    Title of the comment
-                    <p class="font-weight-lighter font-italic">comment publisher 2</p>
-                </h5>
-                <div class="card-body">
-                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
-                </div>
-            </div>
+            <%
+                })
+            %>
         </div>
         <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">
+            <!--            繁华 循环开始-->
+            <div class="card mt-2 mb-2" id="jobResults">
+                <h5 class="card-header"><a href="#">job title</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">Company name</a></h5>
+                    <p class="card-text d-none d-lg-block">description</p>
+                    <p class="card-text">salary</p>
+                </div>
+            </div>
+            <!--            循环结束-->
         </div>
-        <!--posted jobs-->
     </div>
 </div>
-</div>
+<script>
+    // Show the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 </html>

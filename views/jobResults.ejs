@@ -9,17 +9,19 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+    <link rel="stylesheet" href="/stylesheets/customizeStyle.css">
 
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 </head>
-<body>
+<body class="customize-body">
 <%- include header.ejs -%>
 
 
 <div class="container" style="margin-top:30px">
     <div class="row">
+<!--        filter-->
         <div class="col-sm-4">
             <div class="jumbotron">
                 <div class="container">
@@ -160,7 +162,9 @@
                     <div class="card mb-2" id="jobResults">
                         <h5 class="card-header"><a href="#"><%= job.title %></a></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><a href=""><%= job.companyName%></a></h5>
+                            <h5 class="card-title"><a href="/companyDetails?companyName=<%= job.companyName%>"><%= job.companyName%></a></h5>
+                            <p class="font-weight-lighter font-italic"><%=job.city%></p>
+                            <hr>
                             <p class="card-text d-none d-lg-block"><%= job.description%></p>
                             <p class="card-text"><%= job.salary%></p>
                         </div>
