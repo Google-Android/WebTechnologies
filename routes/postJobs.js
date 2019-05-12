@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET index page after login. */
 router.get('/', function(req, res, next) {
   console.log('***postJobs***get***');
-  res.render('postJobs', { title: 'Express' });
+  res.render('postJobs', {user:req.session.user});
 });
 
 

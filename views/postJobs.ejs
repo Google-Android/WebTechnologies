@@ -2,9 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Post a Job</title>
 
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+    <link rel="stylesheet" href="/stylesheets/customizeStyle.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+
+    <style>
+        body,html {
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="customize-body">
+<%- include header.ejs -%>
+<div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <form class="col-12" id="jobSearch" method="POST" action="/jobResults">
+            <div class="jumbotron">
+                <h1 class="display-4">Post a Job</h1>
+                <hr class="my-4">
+                <form id="companyReview">
+                    <div class="form-group">
+                        <label for="reviewTitle">Title</label>
+                        <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobType">Job Type</label>
+                        <select class="form-control" id="jobType" name="jobType">
+                            <option value="fullTime">Full Time</option>
+                            <option value="partTime">Part Time</option>
+                            <option value="internship">InternShip</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="salary">Salary</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">£</span>
+                                </div>
+                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="salary">Payment cycle</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">per</span>
+                                </div>
+                                <select id="per" class="form-control">
+                                    <option>hour</option>
+                                    <option>day</option>
+                                    <option>week</option>
+                                    <option>month</option>
+                                    <option>year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3" name="description" placeholder="Add description here"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Image</label>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="reviewImage" name="reviewImage">
+                            <label class="custom-file-label" for="reviewImage">Choose file</label>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="street">Street</label>
+                        <input type="text" class="form-control" id="street" placeholder="Street">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="City">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" placeholder="State">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postalCode">Postal Code</label>
+                            <input type="text" class="form-control" id="postalCode" placeholder="Postal Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" placeholder="Country">
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col text-center">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
