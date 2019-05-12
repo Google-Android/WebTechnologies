@@ -21,7 +21,7 @@
 
 <div class="container" style="margin-top:30px">
     <div class="row">
-<!--        filter-->
+        <!--        filter-->
         <div class="col-sm-4">
             <div class="jumbotron">
                 <div class="container">
@@ -33,19 +33,15 @@
                             <input type="text" class="form-control" name="keyword"
                                    placeholder="job title, company name, job type" value="Amazon">
                         </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" class="form-control" name="location" placeholder="city, postcode" value="">
-                        </div>
                         <div class="accordion" id="secondarySearch">
-                            <!--                salary-->
+                            <!--salary-->
                             <div class="card">
                                 <div class="card-header" id="salaryCollapse">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                 data-target="#collapseSalary" aria-expanded="true"
                                                 aria-controls="collapseSalary">
-                                            SALARY
+                                            Salary
                                         </button>
                                     </h2>
                                 </div>
@@ -60,12 +56,14 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="salary20000To30000"
                                                    name="salary20000To30000">
-                                            <label class="custom-control-label" for="salary20000To30000">20000-30000</label>
+                                            <label class="custom-control-label"
+                                                   for="salary20000To30000">20000-30000</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="salary10000To20000"
                                                    name="salary10000To20000">
-                                            <label class="custom-control-label" for="salary10000To20000">10000-20000</label>
+                                            <label class="custom-control-label"
+                                                   for="salary10000To20000">10000-20000</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="salary0To10000"
@@ -102,7 +100,8 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="jobTypeInternship"
                                                    name="jobTypeInternship">
-                                            <label class="custom-control-label" for="jobTypeInternship">Internship</label>
+                                            <label class="custom-control-label"
+                                                   for="jobTypeInternship">Internship</label>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +121,8 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="locationSheffield"
                                                    name="locationSheffield">
-                                            <label class="custom-control-label" for="locationSheffield">Sheffield</label>
+                                            <label class="custom-control-label"
+                                                   for="locationSheffield">Sheffield</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="locationLondon"
@@ -132,12 +132,13 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="locationManchester"
                                                    name="locationManchester">
-                                            <label class="custom-control-label" for="locationManchester">Manchester</label>
+                                            <label class="custom-control-label"
+                                                   for="locationManchester">Manchester</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="locationEdinburgh"
-                                                   name="locationEdinburgh">
-                                            <label class="custom-control-label" for="locationEdinburgh">Edinburgh</label>
+                                            <input type="checkbox" class="custom-control-input" id="locationOther"
+                                                   name="locationOther">
+                                            <label class="custom-control-label" for="locationOther">Other</label>
                                         </div>
                                     </div>
                                 </div>
@@ -162,20 +163,24 @@
                     <div class="card mb-2" id="jobResults">
                         <h5 class="card-header"><a href="#"><%= job.title %></a></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><a href="/companyDetails?companyName=<%= job.companyName%>"><%= job.companyName%></a></h5>
-                            <p class="font-weight-lighter font-italic"><%=job.city%></p>
+                            <h5 class="card-title"><a
+                                        href="/companyDetails?companyName=<%= job.companyName %>"><%= job.companyName %></a>
+                            </h5>
+                            <p class="font-weight-lighter font-italic"><%= job.city %></p>
                             <hr>
-                            <p class="card-text d-none d-lg-block"><%= job.description%></p>
-                            <p class="card-text"><%= job.salary%></p>
+                            <p class="card-text d-none d-lg-block"><%= job.description %></p>
+                            <p class="card-text"><%= job.salary %></p>
                         </div>
                     </div>
                 <% }) %>
             <%
             } else {
             %>
-                <p>
-                    Null results
-                </p>
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Related Result! </h1>
+                    </div>
+                </div>
             <%
             }
             %>
