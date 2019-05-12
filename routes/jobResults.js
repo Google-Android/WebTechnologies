@@ -21,11 +21,12 @@ router.post('/', function(req, res, next) {
 
     var keyword = req.body.keyword==null?"":req.body.keyword;
     var location = req.body.location==null?"":req.body.location;
+    if(location!=null){
+        location=location.replace(/ /g,'');
+    }
 
-    // search in db...........
-    var condition = keyword==null?"":keyword;
+    // search jobs in database
     console.log('keyword:'+keyword+", location:"+location);
-    console.log('job search condition:'+condition);
 
     jobData.searchJob(keyword,location,function (err, jobResults){
         if(err) throw err;
