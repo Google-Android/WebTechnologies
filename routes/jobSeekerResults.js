@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET index page after login. */
 router.get('/', function(req, res, next) {
   console.log('***jobSeekerResults***get***');
-  res.render('jobSeekerResults', { title: 'Express' });
+  res.render('jobSeekerResults', {user:req.session.user});
 });
 
 
