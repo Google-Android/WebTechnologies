@@ -82,7 +82,7 @@
         </h2>
         <hr class="my-4">
     <%
-        if(user.personOrComp=="p"){
+        if(user){
         %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
                 REVIEW THIS COMPANY
@@ -90,6 +90,8 @@
         <%
         } else {
         %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">Login/Register</button>
+
             <h5 class="text-info">Only costumer users can add reviews</h5>
         <%
         }
