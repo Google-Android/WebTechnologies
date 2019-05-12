@@ -38,36 +38,23 @@
     <div class="tab-content">
         <!--reviews-->
         <div id="reviews" class="container tab-pane active">
+            <%
+                reviews.forEach(function(review){
+            %>
             <div class="card mt-2 mb-2">
                 <h5 class="card-header">
-                    Title of the comment
-                    <p class="font-weight-lighter font-italic">comment publisher 1</p>
+                        <%=review.title %>
+                    <p class="font-weight-lighter font-italic"><%=review.publisherName %></p>
                 </h5>
                 <div class="card-body">
-                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
+                    <h5 class="card-title"><small>Rating: </small><%=review.score %></h5>
+                    <p class="card-text"><%=review.comment %></p>
+                    <p class="card-text"><%=review.pictureUrl %></p>
                 </div>
             </div>
-            <div class="card mt-2 mb-2">
-                <h5 class="card-header">
-                    Title of the comment
-                    <p class="font-weight-lighter font-italic">comment publisher 2</p>
-                </h5>
-                <div class="card-body">
-                    <h5 class="card-title"><small>Rating: </small>4.0</h5>
-                    <p class="card-text">Main content of the comment. Main content of the comment. Main content of the
-                        comment. Main content of the comment. Main content of the comment. Main content of the comment.
-                        Main content of the comment. Main content of the comment. Main content of the comment. Main
-                        content of the comment. Main content of the comment. Main content of the comment. Main content
-                        of the comment. Main content of the comment. Main content of the comment.
-                    </p>
-                </div>
-            </div>
+            <%
+                })
+            %>
         </div>
         <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">

@@ -39,6 +39,11 @@ app.use(session({
   }
 }));
 
+app.use(function (req,res,next) {
+    res.locals.session=req.session;
+    next();
+});
+
 
 //set url of each route
 app.use('/', indexRouter);
