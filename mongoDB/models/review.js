@@ -7,6 +7,7 @@ var reviewSchema=new Schema({
     score:Number,
     comment:String,
     pictureUrl:String
+    title:String
 });
 
 

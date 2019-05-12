@@ -1,7 +1,7 @@
 
 var reviewData= {
 
-    createReview: function (publisher, object,rating,review,picUrl,callback) {
+    createReview: function (publisher, object,rating,review,picUrl,reviewTitle,callback) {
         require('../mongoDB/tools/connection');
         var Review = require('../mongoDB/models/review');
         Review.create({
@@ -9,7 +9,8 @@ var reviewData= {
             objectName:object,
             score:rating,
             comment:review,
-            pictureUrl:"../image/"+picUrl
+            pictureUrl:"../image/"+picUrl,
+            title:reviewTitle,
         }, function (err, doc) {
             if (err) throw err;
             callback(null, doc);
