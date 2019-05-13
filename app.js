@@ -22,7 +22,7 @@ var requestDetailsRouter = require('./routes/requestDetails');
 var findCvsRouter = require('./routes/findCvs');
 var consumerUserDetailsRouter = require('./routes/consumerUserDetails');
 var companyUserDetailsRouter = require('./routes/companyUserDetails');
-
+var cvDetailsRouter = require('./routes/cvDetails');
 
 var app = express();
 
@@ -69,7 +69,7 @@ app.use('/requestDetails',requestDetailsRouter);
 app.use('/findCvs',findCvsRouter);
 app.use('/consumerUserDetails',consumerUserDetailsRouter);
 app.use('/companyUserDetails',companyUserDetailsRouter);
-
+app.use('/cvDetails',cvDetailsRouter);
 
 
 
