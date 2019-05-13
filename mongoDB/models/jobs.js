@@ -3,21 +3,18 @@
 var Schema=mongoose.Schema;
 var jobSchema=new Schema({
     title: String,
-    companyName: String,//Schema.Types.ObjectId,
+    companyName: String,
     companyEmail:String,
-    industry:String,
     jobType:String,
-    city:String,
-    postCode:String,
-    salary: {
-        hour:Number,
-        day:Number,
-        week:Number,
-        month:Number,
-        year:Number
-    },
-    picture:String,
+    industry:String,
+    salary:Number,
     description:String,
+    picture:String,
+    street:String,
+    city:String,
+    state:String,
+    postcode:String,
+    country:String,
     postDate:String
 });
 
