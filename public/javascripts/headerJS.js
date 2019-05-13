@@ -26,9 +26,9 @@ $(document).ready(function() {
                 if(data.errInfo==1){
                     $('#errorNotification').show();
                 } else {
-                    // window.location.reload();
+                    window.location.reload();
                     // window.location.href='/';
-                    $('#loginRegister').modal('hide');
+                    // $('#loginRegister').modal('hide');
 
                 }
             }

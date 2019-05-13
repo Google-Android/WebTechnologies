@@ -29,7 +29,10 @@
                         <div class="form-group">
                             <label for="keyword">Keywords</label>
                             <input type="text" class="form-control" name="keyword"
-                                   placeholder="job title, company name, job type" value="Amazon">
+                                   placeholder="job title, company name, job type" value="<%=keyword %>">
+                            <label for="keyword">Location</label>
+                            <input type="text" class="form-control" name="location"
+                                   placeholder="city,postcode" value="<%=location %>">
                         </div>
                         <div class="accordion" id="secondarySearch">
                             <!--salary-->
@@ -209,7 +212,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col text-center">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Refine</button>
+                                <input type="submit" class="btn btn-primary btn-lg btn-block">Refine</input>
                             </div>
                         </div>
                     </form>
@@ -224,10 +227,10 @@
             %>
                 <% jobResults.forEach(function(job){ %>
                     <div class="card mb-2" id="jobResults">
-                        <h5 class="card-header"><a href="#"><%= job.title %></a></h5>
+                        <h5 class="card-header"><a href="/jobDetails?jobId=<%=job.id%>"><%= job.title %></a></h5>
                         <div class="card-body">
-                            <h5 class="card-title"><a
-                                        href="/companyDetails?companyName=<%= job.companyName %>"><%= job.companyName %></a>
+                            <h5 class="card-title">
+                                <a href="/companyDetails?companyName=<%= job.companyName %>"><%= job.companyName %></a>
                             </h5>
                             <p class="font-weight-lighter font-italic"><%= job.city %></p>
                             <hr>
