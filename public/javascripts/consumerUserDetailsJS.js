@@ -13,3 +13,4 @@ var consumerManagementPasswordConfirmation = function () {
     }
     return check;
 }
+
