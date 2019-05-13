@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Hunt</title>
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+</head>
+<body class="customize-body">
+<!--send CV Modal -->
+<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Curriculum Vitae</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="consumerCv">
+                    <div class="form-group">
+                        <label for="achievement">Achievement</label>
+                        <textarea class="form-control" id="achievement"
+                                  rows="3">show users existing cv content here</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="education">Education</label>
+                        <textarea class="form-control" id="education"
+                                  rows="3">show users existing cv content here</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="workExperience">Work Experience</label>
+                        <textarea class="form-control" id="workExperience"
+                                  rows="3">show users existing cv content here</textarea>
+                    </div>
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary btn-block">SEND
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include header.ejs -%>
+<div class="container">
+    <div class="card mt-2">
+        <div class="card-header">
+            <!--            yiping-->
+            <!--            user name here-->
+            <a href=""><h1>consumer's name</h1></a>
+            <p class="font-weight-lighter font-italic">user's email</p>
+        </div>
+        <div class="card-body">
+            <label for="achievement"><b>Achievement</b></label>
+            <p class="card-text" id="achievement">here is user's achievement. here is user's achievement. here is user's
+                achievement. here is user's achievement. here is user's achievement. here is user's achievement. here is
+                user's achievement. here is user's achievement. here is user's achievement. here is user's achievement.
+                here is user's achievement. here is user's achievement. here is user's achievement.
+            </p>
+            <label for="education"><b>Education</b></label>
+            <p class="card-text" id="education">
+                here is user's education.here is user's education.here is user's education.here is user's
+                education.vhere is user's education.here is user's education.here is user's education.
+                here is user's education.
+                here is user's education.here is user's education.here is user's education.
+            </p>
+            <label for="workExperience"><b>Work Experience</b></label>
+            <p class="card-text" id="workExperience">
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+                Here is user's work experience.
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
