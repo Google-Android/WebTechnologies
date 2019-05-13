@@ -16,14 +16,22 @@
 </head>
 <body>
 <%- include header.ejs -%>
-<div class="jumbotron">
-    <h1 class="display-4">Message Center</h1>
+<div class="jumbotron text-center">
+    <h1 class="display-4">Notification Center</h1>
 </div>
 
 <div class="container" style="margin-top:30px">
     <div class="container">
         <div class="alert alert-info alert-dismissible fade show" id="message1">
-            <strong><a href="">User</a></strong> applied for your job you posted, Click <a href="">here</a> to view CV!
+<!--            direct to personDetails.ejs-->
+            <strong><a href="">User</a></strong>
+            applied for the
+<!--            direct to jobDetails.ejs-->
+            <a href="">job</a>
+            you posted, Click
+<!--            direct to userCv.ejs-->
+            <a href="">here</a>
+            to view the CV!
         </div>
     </div>
 </div>
