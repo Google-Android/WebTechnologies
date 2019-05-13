@@ -76,11 +76,11 @@
         <div id="account" class="container tab-pane fade">
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container">
-                    <form id="companyUserDetailManagement">
+                    <form id="companyUserDetailManagement" oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value!= companyRepeatPassword.value ? "Passwords do not match." : "")'>
                         <div class="form-group">
                             <label for="currentCompanyPassword">Current Password</label>
                             <input type="password" class="form-control" name="currentCompanyPassword"
-                                   placeholder="Current Password">
+                                   placeholder="Current Password" required>
                             <p class="text-danger" id="passwordWrong">Password wrong!</p>
 
                         </div>
@@ -106,7 +106,6 @@
                             <label for="companyRepeatPassword">Repeat Password</label>
                             <input type="password" class="form-control" name="companyRepeatPassword"
                                    placeholder="Repeat Password">
-                            <p class="text-danger" id="passwordMatch">Repeat password doesn't match!</p>
                         </div>
                         <div class="form-group">
                             <label for="companySecurityQuestion">Security Question And

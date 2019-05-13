@@ -1,7 +1,9 @@
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="/javascripts/headerJS.js"></script>
+
 
 </head>
 <!-- Nav-bar -->
@@ -29,11 +31,11 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <%
-                if(user){
+            if(user){
             %>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fa fa-thumbs-up"></i>Hi!
-                        <%=user.name %>
+                        <%= user.name %>
                     </a>
                 </li>
                 <li class="nav-item ml-2">
@@ -43,14 +45,16 @@
                     </a>
                 </li>
             <%
-                } else {
+            } else {
             %>
                 <!--            login and register button, hidden after login-->
                 <li class="nav-item ml-2">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">Login/Register</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">
+                        Login/Register
+                    </button>
                 </li>
             <%
-                }
+            }
             %>
 
         </ul>
@@ -110,7 +114,7 @@
                     <!--register-->
                     <br>
                     <div class="tab-pane container" id="registerPane">
-                        <div class="accordion" id="accordionExample">
+                        <div class="accordion" id="loginAccordion">
                             <!--                Consumer Register-->
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
@@ -123,9 +127,12 @@
                                     </h2>
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                     data-parent="#accordionExample">
+                                     data-parent="#loginAccordion">
                                     <div class="card-body">
-                                        <form id="consumerRegister">
+                                        <!--consumer register-->
+                                        <!--check password confirmation-->
+                                        <form id="consumerRegister" method=post
+                                              oninput='consumerRepeatPassword.setCustomValidity(consumerRepeatPassword.value!= consumerPassword.value ? "Passwords do not match." : "")'>
                                             <input type="hidden" class="form-control" name="userCategory" value="p">
                                             <div class="form-group">
                                                 <label for="consumerFirstName">First Name</label>
@@ -184,10 +191,11 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                     data-parent="#accordionExample">
+                                <div id="collapseThree" class="collapse"
+                                     data-parent="#loginAccordion">
                                     <div class="card-body">
-                                        <form id="companyRegister">
+                                        <form id="companyRegister"
+                                              oninput='"companyRepeatPassword".setCustomValidity("companyRepeatPassword".value != "companyPassword".value ? "Passwords do not match." : "")'>
                                             <input type="hidden" class="form-control" name="userCategory" value="c">
                                             <div class="form-group">
                                                 <label for="companyName">Company Name</label>
@@ -207,7 +215,7 @@
                                             <div class="form-group">
                                                 <label for="companyRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control" name="companyRepeatPassword"
-                                                       placeholder="Repeat Password">
+                                                       placeholder="Repeat Password" onchange="checkCompanyPassword">
                                             </div>
                                             <div class="form-group">
                                                 <label for="companySecurityQuestion">Security Question And
