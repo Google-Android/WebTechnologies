@@ -68,10 +68,10 @@ var jobData= {
     //
     // },
 
-    secondarySearchJob: function (keyword, location, jType, sal1,sal2, jobIndustry,callback) {
+    secondarySearchJob: function (keyword, location, jType, sal, jobIndustry,callback) {
         require('../mongoDB/tools/connection');
         var JobModel = require('../mongoDB/models/jobs');
-        if(sal2==null){
+        if(sal==4){
             JobModel.find({
                 $and: [
                     {
@@ -84,7 +84,7 @@ var jobData= {
                     }, {
                         jobType: {$regex: jType, $options: 'i'}
                     }, {
-                        salary: {$gte: sal1}
+                        salary: {$gte: (sal-1)*1000}
                     },{
                         industry: {$regex:jobIndustry, $options: 'i'}
                     }
@@ -115,7 +115,7 @@ var jobData= {
                         }, {
                             jobType: {$regex: jType, $options: 'i'}
                         },{
-                            salary: {$gte: sal1, $lte: sal2}
+                            salary: {$gte: (sal-1)*1000, $lte: sal*1000}
                         },{
                             industry: {$regex:jobIndustry, $options: 'i'}
                         }
