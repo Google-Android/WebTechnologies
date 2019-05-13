@@ -2,9 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Company Details</title>
 
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/responsivetypography.css">
+    <link rel="stylesheet" href="/stylesheets/customizeStyle.css">
+
+    <script src="/javascripts/jquery-3.4.0.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/companyDetailsJS.js"></script>
+
+</head>
+<body class="customize-body">
+<%- include header.ejs -%>
+
+<!--person review Modal -->
+<div class="modal fade" id="reviewPersonModal" tabindex="-1" role="dialog""
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewCompanyModal">Review this person</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--            review modal-->
+            <div class="modal-body">
+                <form id="personReview" encType="multipart/form-data">
+                    <input type="hidden" name="companyName" id="companyName" value="">
+                    <div class="form-group">
+                        <label for="reviewTitle">Title</label>
+                        <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <select class="form-control" id="reviewRating" name="reviewRating">
+                            <option value="5">5 Excellent</option>
+                            <option value="4">4 Good</option>
+                            <option value="3">3 Acceptable</option>
+                            <option value="2">2 Fair</option>
+                            <option value="1">1 Poor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Review</label>
+                        <textarea class="form-control" id="reviewComment" rows="3" name="reviewComment" placeholder="Add comment here"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Image</label>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="reviewImage" name="reviewImage">
+                            <label class="custom-file-label" for="reviewImage">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="jumbotron text-center" style="margin-bottom:0">
+<!--        person name here-->
+        <h1 class="display-4 text-break">Jinping Xi</h1>
+        <h2>
+            <small class="text-success">Overall Rating:</small>
+                4
+        </h2>
+        <hr class="my-4">
+        <%
+        if(user){
+        %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewPersonModal">
+                REVIEW THIS PERSON
+            </button>
+        <%
+        } else {
+        %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">Login/Register</button>
+
+            <h5 class="text-info">Only logged in users can review</h5>
+        <%
+        }
+        %>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <divclass="container">
+
+            <div class="jumbotron jumbotron-fluid mt-2">
+                <div class="container text-center">
+                    <h1 class="display-4">No Review!</h1>
+                </div>
+            </div>
+
+            <div class="card mt-2 mb-2">
+                <h5 class="card-header">
+                    title of review
+                    <p class="font-weight-lighter font-italic">company name</p>
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title"><small>Rating: </small>4</h5>
+                    <p class="card-text">comment goes here</p>
+                    <img src="/image/aaa.jpg" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //Show the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 </body>
 </html>
