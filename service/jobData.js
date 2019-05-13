@@ -155,7 +155,7 @@ var jobData= {
             city: adCity,
             postCode: zipcode,
             salary: sal,
-            picture: picUrl,
+            picture: "../image/"+picUrl,
             description: details,
             postDate: date,
             street: adStreet,
