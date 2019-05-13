@@ -22,7 +22,6 @@
 <body class="customize-body">
 <%- include header.ejs -%>
 
-<!-- Modal -->
 <div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
         <h1 class="display-4 text-break">Company itself</h1>
@@ -32,12 +31,13 @@
         </h2>
         <hr class="my-4">
     </div>
+<!--    tabs-->
     <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
             <a class="nav-link active" data-toggle="pill" href="#account">Account Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#reviews">Reviews</a>
+            <a class="nav-link" data-toggle="pill" href="#reviews">Received Reviews</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#jobs">Job Management</a>
@@ -56,8 +56,10 @@
                             <label for="currentCompanyPassword">Current Password</label>
                             <input type="password" class="form-control" name="currentCompanyPassword"
                                    placeholder="Current Password" required>
-                            <p class="text-danger" id="passwordWrong">Password wrong!</p>
-
+                            <!--show off when user input wrong current password-->
+                            <div class="invalid-feedback" id="wrongCompanyPassword" style="display: none">
+                                Wrong password!
+                            </div>
                         </div>
                         <hr>
                         <input type="hidden" class="form-control" name="userCategory" value="companyUserManagement">
@@ -68,9 +70,8 @@
                         </div>
                         <div class="form-group">
                             <label for="companyEmail">Email address</label>
-                            <input type="email" class="form-control" name="companyEmail"
-                                   placeholder="Email Address" required>
-                            <p class="text-danger" id="emailExists">Email address already exists!</p>
+                            <input type="email" class="form-control" name="companyEmail" value="baidu@baidu.com"
+                                   disabled>
                         </div>
                         <div class="form-group">
                             <label for="companyPassword">Change Password</label>
@@ -106,14 +107,12 @@
         <!--reviews-->
         <div id="reviews" class="container tab-pane fade">
             <!--      fanhua notification of no review      -->
-
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container text-center">
                     <h1 class="display-4">No Review!</h1>
                 </div>
             </div>
-
-            <!--            review of company-->
+            <!--review of company-->
             <div class="card mt-2 mb-2">
                 <h5 class="card-header">
                     Good company
@@ -128,7 +127,6 @@
                     <img src="/image/aaa.jpg" class="img-thumbnail">
                 </div>
             </div>
-
         </div>
         <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">
@@ -153,8 +151,6 @@
             </div>
             <!--循环结束-->
         </div>
-
-
     </div>
 </div>
 <script>

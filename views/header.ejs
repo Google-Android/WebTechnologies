@@ -84,7 +84,7 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <!--            login-->
+                    <!--login-->
                     <div class="tab-pane active container" id="loginPane">
                         <form id="login">
                             <br>
@@ -98,10 +98,10 @@
                                 <input type="password" class="form-control" id="loginPassword" name="loginPassword"
                                        placeholder="Password" required>
                             </div>
-                            <div id="errorNotification" style="display:none;">
-                                <p class="text-danger">Invalid E-mail or password!</p>
+                            <div class="invalid-feedback" id="invalidUsernamePasswordNotification"
+                                 style="display:none;">
+                                Invalid E-mail or password!
                             </div>
-
                             <br>
                             <div class="col text-center">
                                 <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
@@ -115,7 +115,7 @@
                     <br>
                     <div class="tab-pane container" id="registerPane">
                         <div class="accordion" id="loginAccordion">
-                            <!--                Consumer Register-->
+                            <!--Consumer Register-->
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <h2 class="mb-0">
@@ -131,8 +131,7 @@
                                     <div class="card-body">
                                         <!--consumer register-->
                                         <!--check password confirmation-->
-                                        <form id="consumerRegister" method=post
-                                              oninput='consumerRepeatPassword.setCustomValidity(consumerRepeatPassword.value!= consumerPassword.value ? "Passwords do not match." : "")'>
+                                        <form id="consumerRegister" method="post">
                                             <input type="hidden" class="form-control" name="userCategory" value="p">
                                             <div class="form-group">
                                                 <label for="consumerFirstName">First Name</label>
@@ -148,16 +147,25 @@
                                                 <label for="consumerEmail">Email address</label>
                                                 <input type="email" class="form-control" name="consumerEmail"
                                                        placeholder="Email Address" required>
+                                                <div class="invalid-feedback" id="duplicateConsumerEmailNotification"
+                                                     style="display:none;">
+                                                    E-mail address is already in used.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerPassword">Password</label>
-                                                <input type="password" class="form-control" name="consumerPassword"
+                                                <input type="password" class="form-control" name="consumerPassword" id="consumerPassword"
                                                        placeholder="Password" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="consumerRepeatPassword">Password</label>
+                                                <label for="consumerRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control"
-                                                       name="consumerRepeatPassword" placeholder="Repeat Password" required>
+                                                       name="consumerRepeatPassword" id="consumerRepeatPassword" placeholder="Repeat Password"
+                                                       required onkeyup='consumerPasswordConfirmation();'>
+                                                <div class="invalid-feedback"
+                                                     style="display:none;" id="consumerPasswordNotMatching">
+                                                    Passwords are not Matching
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerSecurityQuestion">Security Question And
@@ -180,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <!--                Company Register-->
+                            <!--Company Register-->
                             <div class="card">
                                 <div class="card-header" id="headingThree">
                                     <h2 class="mb-0">
@@ -194,8 +202,7 @@
                                 <div id="collapseThree" class="collapse"
                                      data-parent="#loginAccordion">
                                     <div class="card-body">
-                                        <form id="companyRegister"
-                                              oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value != companyPassword.value ? "Passwords do not match." : "")'>
+                                        <form id="companyRegister">
                                             <input type="hidden" class="form-control" name="userCategory" value="c">
                                             <div class="form-group">
                                                 <label for="companyName">Company Name</label>
@@ -206,16 +213,24 @@
                                                 <label for="companyEmail">Email address</label>
                                                 <input type="email" class="form-control" name="companyEmail"
                                                        placeholder="Email Address" required>
+                                                <div class="invalid-feedback" style="display: none"
+                                                     id="duplicateCompanyEmailNotification">
+                                                    Email address is already in used.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="companyPassword">Password</label>
                                                 <input type="password" class="form-control" name="companyPassword"
-                                                       placeholder="Password" required>
+                                                       placeholder="Password" id="companyPassword" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="companyRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control" name="companyRepeatPassword"
-                                                       placeholder="Repeat Password" required>
+                                                       placeholder="Repeat Password" id="companyRepeatPassword" required onkeyup='companyPasswordConfirmation()'>
+                                                <div class="invalid-feedback"
+                                                     style="display:none;" id="companyPasswordNotMatching">
+                                                    Passwords are not Matching
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="companySecurityQuestion">Security Question And

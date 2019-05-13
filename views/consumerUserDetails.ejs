@@ -24,7 +24,7 @@
 
 <div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1 class="display-4 text-break">Company itself</h1>
+        <h1 class="display-4 text-break">Consumer Himself</h1>
         <h2>
             <small class="text-success">Overall Rating:</small>
             4.0
@@ -36,7 +36,7 @@
             <a class="nav-link  active" data-toggle="pill" href="#account">Account Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#reviews">Reviews</a>
+            <a class="nav-link" data-toggle="pill" href="#reviews">Received Reviews</a>
         </li>
 
         <li class="nav-item">
@@ -56,8 +56,10 @@
                             <label for="currentCompanyPassword">Current Password</label>
                             <input type="password" class="form-control" name="currentCompanyPassword"
                                    placeholder="Current Password">
-                            <p class="text-danger" id="passwordWrong">Password wrong!</p>
-
+                            <!--show off when user input wrong current password-->
+                            <div class="invalid-feedback" id="wrongConsumerPassword" style="display: none">
+                                Wrong password!
+                            </div>
                         </div>
                         <hr>
                         <input type="hidden" class="form-control" name="userCategory" value="companyUserManagement">
@@ -73,9 +75,7 @@
                         </div>
                         <div class="form-group">
                             <label for="consumerEmail">Email address</label>
-                            <input type="email" class="form-control" name="consumerEmail"
-                                   placeholder="Email Address" required>
-                            <p class="text-danger" id="emailExists">Email address already exists!</p>
+                            <input type="email" class="form-control" name="consumerEmail" value="user@mail.com" disabled>
                         </div>
                         <div class="form-group">
                             <label for="consumerPassword">Change Password</label>
@@ -133,7 +133,6 @@
                     <img src="/image/aaa.jpg" class="img-thumbnail">
                 </div>
             </div>
-
         </div>
         <!--cv-->
         <div id="cv" class="container tab-pane fade">
@@ -157,7 +156,6 @@
                             <button type="submit" class="btn btn-primary btn-block">Save Changes
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
