@@ -57,21 +57,25 @@ var cvData= {
     showCv: function(cvId,callback){
         require('../mongoDB/tools/connection');
         var CvModel = require('../mongoDB/models/cvs');
-        CvModel.findOne({_id:cvId}, {achievement:1, education: 1, workExperience: 1},
-            function(err, result) {
-                if (err) throw err;
-                else{
-                    callback(null, result);
-                }
+        if(cvId!="no") {
+            CvModel.findOne({_id: cvId}, {achievement: 1, education: 1, workExperience: 1},
+                function (err, result) {
+                    if (err) throw err;
+                    else {
+                        callback(null, result);
+                    }
 
-            });
+                });
+        }else{
+            callback(null,null);
+        }
     },
 
-
-    completeRequestInfo: function(accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date){
+    // 已经有cv信息了
+    completeRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
         require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvs');
-        CvModel.findOne({_id:cvId},function(err,doc){
+        var RequestModel = require('../mongoDB/models/cvs');
+        RequestModel.findOne({_id:cvId},function(err,doc){
             if (err) throw err;
             else{
                 doc.achievement=accomplishment,
@@ -88,41 +92,89 @@ var cvData= {
                 doc.postcode=zipcode,
                 doc.country=adCoun,
                 doc.postDate=date,
+                doc.save();
                 callback(null, doc);
             }
         })
     },
 
 
-    // fillRequest: function(accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback,){
-    //     require('../mongoDB/tools/connection');
-    //     var RequestModel = require('../mongoDB/models/cvs');
-    //
-    //     RequestModel.create({
-    //         achievement: accomplishment,
-    //         education: edu,
-    //         workExperience: experience,
-    //         title: jobName,
-    //         jobType: type,
-    //         industry: jobIndustry,
-    //         salary: sal,
-    //         profileUrl: "../image/"+picUrl,
-    //         street: adStreet,
-    //         city: adCity,
-    //         state: adState,
-    //         postcode: zipcode,
-    //         country: adCoun,
-    //         postDate: date
-    //     },function (err, result) {
-    //         if (err) throw err;
-    //         callback(null, result);
-    //     });
-    // }
+
+
+    fillInBlankRequestInfo: function(accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
+        require('../mongoDB/tools/connection');
+        var RequestModel = require('../mongoDB/models/cvs');
+
+        RequestModel.create({
+            achievement: accomplishment,
+            education: edu,
+            workExperience: experience,
+            title: jobName,
+            jobType: type,
+            industry: jobIndustry,
+            salary: sal,
+            profileUrl: "../image/"+picUrl,
+            street: adStreet,
+            city: adCity,
+            state: adState,
+            postcode: zipcode,
+            country: adCoun,
+            postDate: date,
+        },function(err,doc){
+            if (err) throw err;
+            callback(null, doc);
+        });
+    },
+
+
+
+    // 总的方法！
+    mainRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
+        require('../mongoDB/tools/connection');
+        var tempCvData =require('./cvData');
+        tempCvData.showCv(cvId,function(err,result){
+            if (err) throw err;
+            else {
+                //result 是空
+
+                if (!result) {
+                    tempCvData.fillInBlankRequestInfo(accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
+                        function(err,doc){
+                            if (err) throw err;
+                            callback(null, doc);
+                        });
+                } else {
+                    tempCvData.completeRequestInfo(cvId, accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
+                        function(err,doc){
+                            if (err) throw err;
+                            callback(null, doc);
+                        });
+                }
+            }
+
+        });
+
+    }
 
 
 }
 
 module.exports=cvData;
+
+// cvData.mainRequestInfo("no","q","w","e","r","t","y",22,
+//     "i","o","p","a","s","d","ee",
+//     function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+//
+//     });
+
+cvData.showCv("no",function(err,doc){
+    if(!err){
+        console.log(doc);
+    }
+})
 
 // cvData.createCv("s","s","d",function(err,doc){
 //     console.log(doc);
