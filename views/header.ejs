@@ -180,7 +180,7 @@
                                                        placeholder="Security Answer" required>
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block">REGISTER
+                                                <button type="submit" class="btn btn-primary btn-block" onclick="return consumerPasswordConfirmation()">REGISTER
                                                 </button>
                                             </div>
                                         </form>
@@ -202,7 +202,7 @@
                                 <div id="collapseThree" class="collapse"
                                      data-parent="#loginAccordion">
                                     <div class="card-body">
-                                        <form id="companyRegister">
+                                        <form id="companyRegister" method="post">
                                             <input type="hidden" class="form-control" name="userCategory" value="c">
                                             <div class="form-group">
                                                 <label for="companyName">Company Name</label>
@@ -245,7 +245,7 @@
                                                        placeholder="Security Answer" required>
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block">REGISTER
+                                                <button type="submit" class="btn btn-primary btn-block"  onclick="return companyPasswordConfirmation()">REGISTER
                                                 </button>
                                             </div>
                                         </form>
