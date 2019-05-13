@@ -116,27 +116,33 @@ $(document).ready(function () {
  * show notification when the two passwords entered by consumers are not consistent when register
  */
 var consumerPasswordConfirmation = function() {
+    var consumerCheck = false;
     if (document.getElementById('consumerPassword').value ==
         document.getElementById('consumerRepeatPassword').value) {
         $('#consumerPasswordNotMatching').hide();
-
+        consumerCheck = true;
     } else {
         $('#consumerPasswordNotMatching').show();
-
+        consumerCheck = false;
     }
+    return consumerCheck;
 }
 
 /**
  * show notification when the two passwords entered by companies are not consistent when register
  */
 var companyPasswordConfirmation = function() {
+    var companyCheck = false;
     if (document.getElementById('companyPassword').value ==
         document.getElementById('companyRepeatPassword').value) {
         $('#companyPasswordNotMatching').hide();
-
+        companyCheck = true;
     } else {
         $('#companyPasswordNotMatching').show();
-
+        companyCheck = false;
     }
+    return companyCheck;
 }
+
+
 
