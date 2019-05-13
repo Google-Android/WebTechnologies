@@ -13,6 +13,9 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/jobDetailsJS.js"></script>
+
 </head>
 <body class="customize-body">
 <!--send CV Modal -->
@@ -27,19 +30,32 @@
             </div>
             <div class="modal-body">
                 <form id="consumerCv">
-                    <input type="hidden" name="companyEmail" value="<%=job.companyEmail %>">
+                    <input type="hidden" name="companyName" value="<%=job.companyName %>">
+                    <input type="hidden" name="jobTitle" value="<%=job.title %>">
                     <input type="hidden" name="jobId" value="<%=job.id %>">
                     <div class="form-group">
                         <label for="achievement">Achievement</label>
-                        <textarea class="form-control" name="achievement" rows="3">show users existing cv content here</textarea>
+                        <textarea class="form-control" name="achievement" rows="3">
+                            <% if(cv){ %>
+                                <%=cv.achievement%>
+                            <% } %>
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="education">Education</label>
-                        <textarea class="form-control" name="education" rows="3">show users existing cv content here</textarea>
+                        <textarea class="form-control" name="education" rows="3">
+                            <% if(cv){ %>
+                            <%=cv.education%>
+                            <% } %>
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="workExperience">Work Experience</label>
-                        <textarea class="form-control" name="workExperience" rows="3">show users existing cv content here</textarea>
+                        <textarea class="form-control" name="workExperience" rows="3">
+                            <% if(cv){ %>
+                            <%=cv.workExperience%>
+                            <% } %>
+                        </textarea>
                     </div>
                     <div class="col text-center">
                         <button type="submit" class="btn btn-primary btn-block">SEND

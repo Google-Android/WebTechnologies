@@ -28,16 +28,12 @@ $(document).ready(function() {
             data: d,
             success: function(data) {
                 alert('ajax success.');
-
-                // alert('jobResults:'+data.jobResults.length);
-                // if(data.result === 0){
-                //     alert('jobResults is null.')
-                //     window.location.href='/jobResults?jobResults='+data.jobResults;
-                // } else if(data.result === 1){
-                //     // var jobs = eval("("+data.jobResults+")");
-                //     // alert('jobResults:'+jobs[0].title);
-                //     window.location.href='/jobResults?jobResults='+data.jobResults;
-                // }
+                if(data.result === 0){
+                    alert('cannot send cv now.');
+                    window.location.href='/jobDetails?jobId='+data.jobId;
+                } else if(data.result === 1){
+                    window.location.href='/jobDetails?jobId='+data.jobId;
+                }
             }
         });
         return false;
