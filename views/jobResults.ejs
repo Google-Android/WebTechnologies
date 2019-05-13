@@ -14,6 +14,9 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/jobResultsJS.js"></script>
+
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
@@ -51,24 +54,24 @@
                                     <div class="card-body">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="salary3000More"
-                                                   name="salary">
+                                                   name="salary" value="4">
                                             <label class="custom-control-label" for="salary3000More">£3000+</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="salary2000To3000"
-                                                   name="salary">
+                                                   name="salary" value="3">
                                             <label class="custom-control-label"
                                                    for="salary2000To3000">£2000-£3000</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="salary1000To2000"
-                                                   name="salary">
+                                                   name="salary" value="2">
                                             <label class="custom-control-label"
                                                    for="salary1000To2000">£1000-£2000</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="salary0To1000"
-                                                   name="salary">
+                                                   name="salary" value="1">
                                             <label class="custom-control-label" for="salary0To1000">£0-£1000</label>
                                         </div>
                                     </div>
@@ -89,49 +92,49 @@
                                     <div class="card-body">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryEducation"
-                                                   name="industry">
+                                                   name="industry" value="Education">
                                             <label class="custom-control-label"
                                                    for="industryEducation">Education</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryIt"
-                                                   name="industry">
+                                                   name="industry" value="IT">
                                             <label class="custom-control-label"
                                                    for="industryIt">IT</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryAccounting"
-                                                   name="industry">
+                                                   name="industry" value="Accounting">
                                             <label class="custom-control-label"
                                                    for="industryAccounting">Accounting</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryEnergy"
-                                                   name="industry">
+                                                   name="industry" value="Energy">
                                             <label class="custom-control-label"
                                                    for="industryEnergy">Energy</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryAgriculture"
-                                                   name="industry">
+                                                   name="industry" value="Agriculture">
                                             <label class="custom-control-label"
                                                    for="industryAgriculture">Agriculture</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryTransportation"
-                                                   name="industry">
+                                                   name="industry" value="Transportation">
                                             <label class="custom-control-label"
                                                    for="industryTransportation">Transportation</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="industryRealEstate"
-                                                   name="industry">
+                                                   name="industry" value="Real Estate">
                                             <label class="custom-control-label"
                                                    for="industryRealEstate">Real Estate</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="other"
-                                                   name="industry">
+                                                   name="industry" value="Other">
                                             <label class="custom-control-label"
                                                    for="other">Other</label>
                                         </div>
@@ -154,17 +157,17 @@
                                     <div class="card-body">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="jobTypeFullTime"
-                                                   name="jobType">
+                                                   name="jobType" value="Full-Time">
                                             <label class="custom-control-label" for="jobTypeFullTime">Full-Time</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="jobTypePartTime"
-                                                   name="jobType">
+                                                   name="jobType" value="Part-Time">
                                             <label class="custom-control-label" for="jobTypePartTime">Part-Time</label>
                                         </div>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="jobTypeInternship"
-                                                   name="jobType">
+                                                   name="jobType" value="Internship">
                                             <label class="custom-control-label"
                                                    for="jobTypeInternship">Internship</label>
                                         </div>
@@ -183,7 +186,7 @@
         </div>
 
         <!--searching result area-->
-        <div class="col-sm-8">
+        <div class="col-sm-8" id="searchingResultDiv">
             <%
             if(jobResults.length != 0){
             %>

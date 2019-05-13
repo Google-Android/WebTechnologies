@@ -19,9 +19,9 @@ router.get('/', function(req, res, next) {
     }
 
     // search jobs in database
-    console.log('keyword:'+keyword+", location:"+location);
 
     if(searchType == '1'){ // search in index page
+        console.log('keyword:'+keyword+", location:"+location);
         jobData.searchJob(keyword,location,function (err, jobResults){
             if(err) throw err;
 
@@ -30,18 +30,38 @@ router.get('/', function(req, res, next) {
                 res.json({result:0});
             } else {
                 console.log('The number of search results:'+jobResults.length);
-                console.log('get results of job done.');
                 console.log("user:"+req.session.user);
                 res.render('jobResults',{user:req.session.user,"jobResults":jobResults,'keyword':req.query.keyword,'location':req.query.location});
                 // res.json({result:1,"jobResults":jobResults});
             }
         });
     } else if(searchType == '2'){
-        var salary = req.query.salary;
-        var industry = req.query.industry;
-        var jobType = req.query.jobType;
+        var salary = req.query.salary==null?"":req.query.salary;
+        var industry = req.query.industry==null?"":req.query.industry;
+        var jobType = req.query.jobType==null?"":req.query.jobType;
 
+        console.log('keyword:'+keyword+", location:"+location+",salary:"+salary+",industry:"+industry+",jobType:"+jobType);
 
+        jobData.secondarySearchJob(location,location,jobType,salary,industry,function(err,jobResults){
+            if(err) {
+                res.json({'result':0});
+                throw err;
+                console.log("err:"+err);
+            }
+
+            if(!jobResults){// cannot find any jobs within the condition
+                console.log('cannot find any jobs here.');
+                res.send({user:req.session.user,'result':2,'keyword':keyword,'location':location,'salary':salary,'industry':industry,"jobType":jobType});
+            } else if(jobResults.length == 0){
+                console.log('cannot find any jobs here.');
+                res.send({user:req.session.user,'result':2,'keyword':keyword,'location':location,'salary':salary,'industry':industry,"jobType":jobType});
+            } else {
+                console.log('The number of search results:'+jobResults.length);
+                console.log("user:"+req.session.user);
+                res.send({user:req.session.user,'result':1,"jobResults":jobResults,'keyword':keyword,'location':location,'salary':salary,'industry':industry,"jobType":jobType});
+                // res.render('jobResults',{user:req.session.user,"jobResults":jobResults,'keyword':req.query.keyword,'location':req.query.location});
+            }
+        });
 
 
     }
