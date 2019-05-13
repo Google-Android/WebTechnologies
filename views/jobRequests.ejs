@@ -14,6 +14,9 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/addressAutocompleteJS.js"></script>
+
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
@@ -92,21 +95,25 @@
                     <hr>
                     <h4>Intentional Workplace</h4>
                     <div class="form-group">
-                        <label for="street">Street</label>
-                        <input type="text" class="form-control" id="street" placeholder="Street" required>
+                        <label for="autocomplete">Search Address</label>
+                        <input type="text" class="form-control" id="autocomplete" placeholder="Street">
+                    </div>
+                    <div class="form-group">
+                        <label for="route">Street</label>
+                        <input type="text" class="form-control" id="route" placeholder="Street" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control" id="city" placeholder="City" required>
+                            <label for="postal_town">City</label>
+                            <input type="text" class="form-control" id="postal_town" placeholder="City" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="state">State</label>
-                            <input type="text" class="form-control" id="state" placeholder="State" required>
+                            <label for="administrative_area_level_1">State</label>
+                            <input type="text" class="form-control" id="administrative_area_level_1" placeholder="State" required>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="postalCode">Postal Code</label>
-                            <input type="text" class="form-control" id="postalCode" placeholder="Postal Code" required>
+                            <label for="postal_code">Postal Code</label>
+                            <input type="text" class="form-control" id="postal_code" placeholder="Postal Code" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -123,5 +130,7 @@
         </form>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA3vvAfUE6YA-kCOTxPhXHyBxORiMAtkw&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </body>
 </html>
