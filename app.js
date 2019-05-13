@@ -24,6 +24,7 @@ var consumerUserDetailsRouter = require('./routes/consumerUserDetails');
 var companyUserDetailsRouter = require('./routes/companyUserDetails');
 var cvDetailsRouter = require('./routes/cvDetails');
 var userCvRouter = require('./routes/userCv');
+var forgotPasswordRouter = require('./routes/forgotPassword');
 
 var app = express();
 
@@ -72,6 +73,7 @@ app.use('/consumerUserDetails',consumerUserDetailsRouter);
 app.use('/companyUserDetails',companyUserDetailsRouter);
 app.use('/cvDetails',cvDetailsRouter);
 app.use('/userCv',userCvRouter);
+app.use('/forgotPassword',forgotPasswordRouter);
 
 
 // catch 404 and forward to error handler
