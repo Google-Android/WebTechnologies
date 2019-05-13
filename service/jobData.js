@@ -3,15 +3,17 @@ var jobData= {
     searchJob: function (condition, condition2, callback) {
         require('../mongoDB/tools/connection');
         var JobModel = require('../mongoDB/models/jobs');
+        var newCondition;
         var keyArr=condition.split(" ");
+        if(keyArr.length!=1) {
+            var key_query = "";
+            for (var i = 0; i < keyArr.length; i++) {
+                key_query = key_query + keyArr + "|";
+            }
+        key_query = key_query.substring(key_query.length);
 
-        var key_query="";
-        for(var i=0;i<keyArr.length;i++){
-            key_query=key_query+keyArr+"|";
-        }
-        key_query=key_query.substring(key_query.length);
-
-        var newCondition=new RegExp(key_query);
+        newCondition = new RegExp(key_query);
+        }else{newCondition=condition}
 
         JobModel.find({
                 $and: [
