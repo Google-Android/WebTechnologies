@@ -76,7 +76,8 @@
         <div id="account" class="container tab-pane fade">
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container">
-                    <form id="consumerUserDetailManagement" method="post" oninput='consumerRepeatPassword.setCustomValidity(consumerRepeatPassword.value!= consumerPassword.value ? "Passwords do not match." : "")'>
+                    <form id="consumerUserDetailManagement" method="post"
+                          oninput='consumerRepeatPassword.setCustomValidity(consumerRepeatPassword.value!= consumerPassword.value ? "Passwords do not match." : "")'>
                         <div class="form-group">
                             <label for="currentCompanyPassword">Current Password</label>
                             <input type="password" class="form-control" name="currentCompanyPassword"
@@ -138,7 +139,7 @@
             <!--fanhua no job provided notification-->
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container">
-                    <form id="consumerCvManagement" >
+                    <form id="consumerCvManagement">
                         <div class="form-group">
                             <label for="achievement">Achievement</label>
                             <textarea class="form-control" id="achievement" rows="3"></textarea>

@@ -195,7 +195,7 @@
                                      data-parent="#loginAccordion">
                                     <div class="card-body">
                                         <form id="companyRegister"
-                                              oninput='"companyRepeatPassword".setCustomValidity("companyRepeatPassword".value != "companyPassword".value ? "Passwords do not match." : "")'>
+                                              oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value != companyPassword.value ? "Passwords do not match." : "")'>
                                             <input type="hidden" class="form-control" name="userCategory" value="c">
                                             <div class="form-group">
                                                 <label for="companyName">Company Name</label>
@@ -215,7 +215,7 @@
                                             <div class="form-group">
                                                 <label for="companyRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control" name="companyRepeatPassword"
-                                                       placeholder="Repeat Password" onchange="checkCompanyPassword">
+                                                       placeholder="Repeat Password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="companySecurityQuestion">Security Question And

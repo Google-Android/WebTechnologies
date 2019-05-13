@@ -76,7 +76,8 @@
         <div id="account" class="container tab-pane fade">
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container">
-                    <form id="companyUserDetailManagement" oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value!= companyRepeatPassword.value ? "Passwords do not match." : "")'>
+                    <form id="companyUserDetailManagement"
+                          oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value!= companyRepeatPassword.value ? "Passwords do not match." : "")'>
                         <div class="form-group">
                             <label for="currentCompanyPassword">Current Password</label>
                             <input type="password" class="form-control" name="currentCompanyPassword"
