@@ -23,6 +23,7 @@ var findCvsRouter = require('./routes/findCvs');
 var consumerUserDetailsRouter = require('./routes/consumerUserDetails');
 var companyUserDetailsRouter = require('./routes/companyUserDetails');
 var cvDetailsRouter = require('./routes/cvDetails');
+var userCvRouter = require('./routes/userCv');
 
 var app = express();
 
@@ -70,7 +71,7 @@ app.use('/findCvs',findCvsRouter);
 app.use('/consumerUserDetails',consumerUserDetailsRouter);
 app.use('/companyUserDetails',companyUserDetailsRouter);
 app.use('/cvDetails',cvDetailsRouter);
-
+app.use('/userCv',userCvRouter);
 
 
 // catch 404 and forward to error handler
