@@ -2,13 +2,23 @@
 var jobData= {
     searchJob: function (condition, condition2, callback) {
         require('../mongoDB/tools/connection');
-        var JobModel = require('../mongoDB/models/job');
+        var JobModel = require('../mongoDB/models/jobs');
+        var keyArr=condition.split(" ");
+
+        var key_query="";
+        for(var i=0;i<keyArr.length;i++){
+            key_query=key_query+keyArr+"|";
+        }
+        key_query=key_query.substring(key_query.length);
+
+        var newCondition=new RegExp(key_query);
+
         JobModel.find({
                 $and: [
                     {
-                        $or: [{title: {$regex: condition, $options: 'i'}},
-                              {companyName: {$regex: condition, $options: 'i'}},
-                              {jobType: {$regex: condition, $options: 'i'}}]
+                        $or: [{title: {$regex: newCondition, $options: 'i'}},
+                              {companyName: {$regex: newCondition, $options: 'i'}},
+                              {jobType: {$regex: newCondition, $options: 'i'}}]
                     },
                     {
                         $or: [{city: {$regex: condition2, $options: 'i'}}, {postcode: {$regex: condition2, $options: 'i'}}]
@@ -60,7 +70,7 @@ var jobData= {
 
     secondarySearchJob: function (keyword, location, jType, sal1,sal2, jobIndustry,callback) {
         require('../mongoDB/tools/connection');
-        var JobModel = require('../mongoDB/models/job');
+        var JobModel = require('../mongoDB/models/jobs');
         if(sal2==null){
             JobModel.find({
                 $and: [
@@ -122,7 +132,7 @@ var jobData= {
 
     showJobDetails: function (id, callback) {
         require('../mongoDB/tools/connection');
-        var JobModel = require('../mongoDB/models/job');
+        var JobModel = require('../mongoDB/models/jobs');
         JobModel.find({_id: id},
             function (err, result) {
                 if (err) throw err;
@@ -131,12 +141,13 @@ var jobData= {
 
     },
 
-    postJob: function(jobName,company,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCoun,callback){
+    postJob: function(jobName,company,email,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCoun,callback){
         require('../mongoDB/tools/connection');
-        var JobModel = require('../mongoDB/models/job');
+        var JobModel = require('../mongoDB/models/jobs');
         JobModel.create({
             title: jobName,
             companyName: company,
+            companyEmail:email,
             industry: jobIndustry,
             jobType: type,
             city: adCity,
@@ -176,27 +187,32 @@ module.exports=jobData;   // export this module
 //     }
 // })
 
-var a="amazon part-time";
-var b="s1";
+// var a="amazon part-time";
+// var b="s1";
+//
+//
+// var keyArr=a.split(" ");
+//
+// var key_query="";
+// for(var i=0;i<keyArr.length;i++){
+//     key_query=key_query+keyArr+"|";
+// }
+// key_query=key_query.substring(key_query.length);
+//
+// let condition=new RegExp(key_query);
+//
+// //console.log(role_query);
+// //keyword, location, jType, sal1,sal2, callback
+// jobData.searchJob(condition,b,function(err,docs){
+//     if(!err){
+//         console.log(docs);
+//     }
+// });
 
 
-var keyArr=a.split(" ");
 
-var key_query="";
-for(var i=0;i<keyArr.length;i++){
-    key_query=key_query+keyArr+"|";
-}
-key_query=key_query.substring(key_query.length);
 
-let condition=new RegExp(key_query);
 
-//console.log(role_query);
-//keyword, location, jType, sal1,sal2, callback
-jobData.searchJob(condition,b,function(err,docs){
-    if(!err){
-        console.log(docs);
-    }
-});
 // jobData.secondarySearchJob(a,b,"Part-Time",0,null,"nanny",function(err,docs){
 //     if(!err){
 //         console.log(docs);

@@ -4,6 +4,7 @@ var Schema=mongoose.Schema;
 var jobSchema=new Schema({
     title: String,
     companyName: String,//Schema.Types.ObjectId,
+    companyEmail:String,
     industry:String,
     jobType:String,
     city:String,
