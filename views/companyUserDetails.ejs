@@ -34,10 +34,10 @@
     </div>
     <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="pill" href="#reviews">Reviews</a>
+            <a class="nav-link active" data-toggle="pill" href="#account">Account Management</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#account">Account Management</a>
+            <a class="nav-link" data-toggle="pill" href="#reviews">Reviews</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="pill" href="#jobs">Job Management</a>
@@ -46,7 +46,65 @@
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div id="reviews" class="container tab-pane active">
+        <!--account management-->
+        <div id="account" class="container tab-pane active">
+            <div class="jumbotron jumbotron-fluid mt-2">
+                <div class="container">
+                    <form id="companyUserDetailManagement"
+                          oninput='companyRepeatPassword.setCustomValidity(companyPassword.value!= companyRepeatPassword.value ? "Passwords do not match." : "")'>
+                        <div class="form-group">
+                            <label for="currentCompanyPassword">Current Password</label>
+                            <input type="password" class="form-control" name="currentCompanyPassword"
+                                   placeholder="Current Password" required>
+                            <p class="text-danger" id="passwordWrong">Password wrong!</p>
+
+                        </div>
+                        <hr>
+                        <input type="hidden" class="form-control" name="userCategory" value="companyUserManagement">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" name="companyName"
+                                   placeholder="Company Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyEmail">Email address</label>
+                            <input type="email" class="form-control" name="companyEmail"
+                                   placeholder="Email Address" required>
+                            <p class="text-danger" id="emailExists">Email address already exists!</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="companyPassword">Change Password</label>
+                            <input type="password" class="form-control" name="companyPassword"
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyRepeatPassword">Repeat Password</label>
+                            <input type="password" class="form-control" name="companyRepeatPassword"
+                                   placeholder="Repeat Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="companySecurityQuestion">Security Question And
+                                Answer</label>
+                            <select class="form-control" name="companySecurityQuestion">
+                                <option value="1">What primary school did you attend?</option>
+                                <option value="2">In what town or city was your first job?</option>
+                                <option value="3">What is your mother's maiden name?</option>
+                            </select>
+                            <br>
+                            <input type="text" class="form-control" name="companySecurityAnswer"
+                                   placeholder="Security Answer" required>
+                        </div>
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-primary btn-block">Save Changes
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--reviews-->
+        <div id="reviews" class="container tab-pane fade">
             <!--      fanhua notification of no review      -->
 
             <div class="jumbotron jumbotron-fluid mt-2">
@@ -71,63 +129,6 @@
                 </div>
             </div>
 
-        </div>
-        <!--account management-->
-        <div id="account" class="container tab-pane fade">
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container">
-                    <form id="companyUserDetailManagement"
-                          oninput='companyRepeatPassword.setCustomValidity(companyRepeatPassword.value!= companyRepeatPassword.value ? "Passwords do not match." : "")'>
-                        <div class="form-group">
-                            <label for="currentCompanyPassword">Current Password</label>
-                            <input type="password" class="form-control" name="currentCompanyPassword"
-                                   placeholder="Current Password" required>
-                            <p class="text-danger" id="passwordWrong">Password wrong!</p>
-
-                        </div>
-                        <hr>
-                        <input type="hidden" class="form-control" name="userCategory" value="companyUserManagement">
-                        <div class="form-group">
-                            <label for="companyName">Company Name</label>
-                            <input type="text" class="form-control" name="companyName"
-                                   placeholder="Company Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyEmail">Email address</label>
-                            <input type="email" class="form-control" name="companyEmail"
-                                   placeholder="Email Address">
-                            <p class="text-danger" id="emailExists">Email address already exists!</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="companyPassword">Change Password</label>
-                            <input type="password" class="form-control" name="companyPassword"
-                                   placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyRepeatPassword">Repeat Password</label>
-                            <input type="password" class="form-control" name="companyRepeatPassword"
-                                   placeholder="Repeat Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="companySecurityQuestion">Security Question And
-                                Answer</label>
-                            <select class="form-control" name="companySecurityQuestion">
-                                <option value="1">What primary school did you attend?</option>
-                                <option value="2">In what town or city was your first job?</option>
-                                <option value="3">What is your mother's maiden name?</option>
-                            </select>
-                            <br>
-                            <input type="text" class="form-control" name="companySecurityAnswer"
-                                   placeholder="Security Answer">
-                        </div>
-                        <div class="col text-center">
-                            <button type="submit" class="btn btn-primary btn-block">Save Changes
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
         </div>
         <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">
