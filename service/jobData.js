@@ -153,7 +153,7 @@ var jobData= {
             industry: jobIndustry,
             jobType: type,
             city: adCity,
-            postCode: zipcode,
+            postcode: zipcode,
             salary: sal,
             picture: "../image/"+picUrl,
             description: details,

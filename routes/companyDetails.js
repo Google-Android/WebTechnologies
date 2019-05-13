@@ -12,7 +12,6 @@ var createFolder = function(folder){
     }
 };
 
-// var uploadFolder = './image/';
 var uploadFolder = './public/image/';
 
 createFolder(uploadFolder);
