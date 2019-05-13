@@ -24,52 +24,71 @@ var handleData= {
         });
     },
 
-    findCV: function (condition, callback) {
-        require('./tools/connection');
-        var Cv = require('./models/uploadCV');
-        Cv.findOne(condition, function (err, result) {
+    addCvIntoUser: function (userId, accomplishment, edu, experience, callback) {
+        var userData = require('./handleData');
+        var tempCv = require("../service/cvData");
+        userData.searchUser({_id: userId}, function (err, doc) {
             if (err) throw err;
-            callback(null, result);
-        });
-    },
+            else {
+                if (doc.cv === "no") {
 
-    insertCV: function (condition, callback) {
-        require('./tools/connection');
-        var CvModel = require('./models/uploadCV');
-        CvModel.create(condition, function (err, result) {
-            if (err) throw err;
-            callback(null, result);
-        });
-    },
-    removeCV: function (condition, callback) {
-        require('./tools/connection');
-        var CvModel = require('./models/uploadCV');
-        CvModel.remove(condition, function (err, result) {
-            if (err) throw err;
-            callback(null, result);
-        });
-    },
-    searchJob: function (condition, condition2, callback) {
-        require('./tools/connection');
-        var JobModel = require('./models/job');
-        JobModel.find({
-            $and: [
-                {
-                    $or: [{title: {$regex: condition}}, {companyName: {$regex: condition}}, {jobType: {$regex: condition}}]
-                },
-                {
-                    $or: [{city: {$regex: condition2}}, {postCode: {$regex: condition2}}]
+                    //新增cv
+                    tempCv.createCv(accomplishment, edu, experience, function (error, result) {
+                            doc.cv = result._id;
+                            doc.save();
+                        }
+                    );
+                } else {
+
+                    tempCv.updateCv(doc.cv, accomplishment, edu, experience);
+
                 }
-            ]
-        },
+                callback(null, doc);
 
-        function (err, result) {
-            if (err) throw err;
-            callback(null, result);
-        });
-
+            }
+        })
     }
+
+
+
+
 }
 
 
-module.exports=handleData;   // export this module
+module.exports=handleData;
+// export this module
+
+
+
+
+
+handleData.addCvIntoUser("5cd5572dc4cca61a76737198","asd","sdd","sss",function(err,doc){
+    if(!err){
+        console.log(doc);
+    }
+});
+// var tempCv= require("../service/cvData");
+// //tempCv.createCv();
+// handleData.searchUser({_id:"5cd82dbe3a49da328c62a7c5"},function(err,doc){
+//     console.log(doc);
+//     if(doc.cv=="no"){
+//         console.log("sss");
+//         tempCv.createCv("k", "j", "gg", function (error, result) {
+//             console.log(result);
+//             console.log(result._id);
+//             doc.cv = result._id;
+//             doc.save();
+//             console.log(doc.cv);
+//         });
+//
+//
+//
+//     }else {
+//         tempCv.updateCv(doc.cv,"d","qwe","qweeee");
+//         console.log("sssss");
+//     }
+// });
+
+
+
+

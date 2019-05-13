@@ -22,8 +22,13 @@ var userSchema=new Schema({
     lastName:String,
 
     question:Number,
-    answer:String
+    answer:String,
+    cv:{
+        type: String,
+        default:"no"
+
+    }
 });
 
 
-module.exports=mongoose.model("user", userSchema);
+module.exports=mongoose.model("users", userSchema);
