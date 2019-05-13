@@ -113,7 +113,7 @@ $(document).ready(function () {
 
 });
 /**
- * show notification when the two passwords entered by consumers are not consistent
+ * show notification when the two passwords entered by consumers are not consistent when register
  */
 var consumerPasswordConfirmation = function() {
     if (document.getElementById('consumerPassword').value ==
@@ -127,7 +127,7 @@ var consumerPasswordConfirmation = function() {
 }
 
 /**
- * show notification when the two passwords entered by companies are not consistent
+ * show notification when the two passwords entered by companies are not consistent when register
  */
 var companyPasswordConfirmation = function() {
     if (document.getElementById('companyPassword').value ==

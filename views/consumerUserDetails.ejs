@@ -16,7 +16,8 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 
-    <script src="/javascripts/companyDetailsJS.js"></script>
+    <script src="/javascripts/consumerUserDetailsJS.js"></script>
+
 
 </head>
 <body class="customize-body">
@@ -78,14 +79,18 @@
                             <input type="email" class="form-control" name="consumerEmail" value="user@mail.com" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="consumerPassword">Change Password</label>
-                            <input type="password" class="form-control" name="consumerPassword"
-                                   placeholder="Password">
+                            <label for="consumerManagementPassword">Change Password</label>
+                            <input type="password" class="form-control" name="consumerManagementPassword"
+                                   placeholder="Password" id="consumerManagementPassword">
                         </div>
                         <div class="form-group">
-                            <label for="consumerRepeatPassword">Repeat Password</label>
-                            <input type="password" class="form-control" name="consumerRepeatPassword"
-                                   placeholder="Repeat Password">
+                            <label for="consumerManagementRepeatPassword">Repeat Password</label>
+                            <input type="password" class="form-control" name="consumerManagementRepeatPassword"
+                                   placeholder="Repeat Password" id="consumerManagementRepeatPassword" onkeyup="consumerManagementPasswordConfirmation()">
+                            <div class="invalid-feedback"
+                                 style="display:none;" id="consumerManagementPasswordNotMatching">
+                                Passwords are not Matching
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="consumerSecurityQuestion">Security Question And
