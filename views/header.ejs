@@ -34,9 +34,16 @@
             if(user){
             %>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-thumbs-up"></i>Hi!
-                        <%= user.name %>
-                    </a>
+                    <div class="dropdown">
+
+                        <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#">Hi!
+                            <%= user.name %>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item ml-2">
                     <!--            user profile, hidden before login-->
@@ -154,13 +161,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerPassword">Password</label>
-                                                <input type="password" class="form-control" name="consumerPassword" id="consumerPassword"
+                                                <input type="password" class="form-control" name="consumerPassword"
+                                                       id="consumerPassword"
                                                        placeholder="Password" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="consumerRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control"
-                                                       name="consumerRepeatPassword" id="consumerRepeatPassword" placeholder="Repeat Password"
+                                                       name="consumerRepeatPassword" id="consumerRepeatPassword"
+                                                       placeholder="Repeat Password"
                                                        required onkeyup='consumerPasswordConfirmation();'>
                                                 <div class="invalid-feedback"
                                                      style="display:none;" id="consumerPasswordNotMatching">
@@ -180,7 +189,8 @@
                                                        placeholder="Security Answer" required>
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block" onclick="return consumerPasswordConfirmation()">REGISTER
+                                                <button type="submit" class="btn btn-primary btn-block"
+                                                        onclick="return consumerPasswordConfirmation()">REGISTER
                                                 </button>
                                             </div>
                                         </form>
@@ -226,7 +236,8 @@
                                             <div class="form-group">
                                                 <label for="companyRepeatPassword">Repeat Password</label>
                                                 <input type="password" class="form-control" name="companyRepeatPassword"
-                                                       placeholder="Repeat Password" id="companyRepeatPassword" required onkeyup='companyPasswordConfirmation()'>
+                                                       placeholder="Repeat Password" id="companyRepeatPassword" required
+                                                       onkeyup='companyPasswordConfirmation()'>
                                                 <div class="invalid-feedback"
                                                      style="display:none;" id="companyPasswordNotMatching">
                                                     Passwords are not Matching
@@ -245,7 +256,8 @@
                                                        placeholder="Security Answer" required>
                                             </div>
                                             <div class="col text-center">
-                                                <button type="submit" class="btn btn-primary btn-block"  onclick="return companyPasswordConfirmation()">REGISTER
+                                                <button type="submit" class="btn btn-primary btn-block"
+                                                        onclick="return companyPasswordConfirmation()">REGISTER
                                                 </button>
                                             </div>
                                         </form>
