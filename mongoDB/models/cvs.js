@@ -5,7 +5,26 @@ var Schema=mongoose.Schema;
 var cvSchema=new Schema({
     achievement: String,
     education:String,
-    workExperience: String
+    workExperience: String,
+    title:String,
+    jobType:String,
+    industry:String,
+    salary:Number,
+    profileUrl:String,
+    street:String,
+    city:String,
+    state:String,
+    postcode:String,
+    country:String,
+    postDate:String
+
+
+    //companyName: String,   username last name  email
+   // companyEmail:String,
+
+
+
+
 });
 
 

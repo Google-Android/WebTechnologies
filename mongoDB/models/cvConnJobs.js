@@ -9,4 +9,4 @@ var cvConnJobSchema=new Schema({
 });
 
 
-module.exports=mongoose.model("cvConnJobs", cvConnJobSchema);
+module.exports=mongoose.model("cvconnjobs", cvConnJobSchema);

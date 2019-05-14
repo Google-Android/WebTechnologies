@@ -132,36 +132,32 @@ var cvData= {
     mainRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
         require('../mongoDB/tools/connection');
         var tempCvData =require('./cvData');
-        tempCvData.showCv(cvId,function(err,result){
-            if (err) throw err;
-            else {
-                //result 是空
+        // tempCvData.showCv(cvId,function(err,result){
+        //     if (err) throw err;
+        //     else {
+        //         //result 是空
 
-                if (!result) {
-                    tempCvData.fillInBlankRequestInfo(accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
-                        function(err,doc){
-                            if (err) throw err;
-                            callback(null, doc);
-                        });
-                } else {
-                    tempCvData.completeRequestInfo(cvId, accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
-                        function(err,doc){
-                            if (err) throw err;
-                            callback(null, doc);
-                        });
-                }
-            }
-
-        });
-
+                // if (!result) {
+        if(cvId=="no"){
+            tempCvData.fillInBlankRequestInfo(accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
+                function(err,doc){
+                // if (err) throw err;
+                 callback(null, doc);
+            });
+         } else {
+            tempCvData.completeRequestInfo(cvId, accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
+                function(err,doc){
+                if (err) throw err;
+                callback(null, doc);
+            });
+        }
     }
-
 
 }
 
 module.exports=cvData;
 
-// cvData.mainRequestInfo("no","q","w","e","r","t","y",22,
+// cvData.mainRequestInfo("5cda77d7a8a1062f541bd4ff","Sisley","w","e","r","t","y",22,
 //     "i","o","p","a","s","d","ee",
 //     function(err,doc){
 //     if(!err){
@@ -170,11 +166,17 @@ module.exports=cvData;
 //
 //     });
 
-cvData.showCv("no",function(err,doc){
-    if(!err){
-        console.log(doc);
-    }
-})
+// cvData.showCv("no",function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+// })
+
+// cvData.sendCv("5cd9a96e7607bc2578d74ddd","kkk","ddddd",function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+// })
 
 // cvData.createCv("s","s","d",function(err,doc){
 //     console.log(doc);
