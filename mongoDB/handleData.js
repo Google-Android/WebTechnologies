@@ -24,6 +24,19 @@ var handleData= {
         });
     },
 
+    changePassword: function(userEmail,newPwd,callback){
+        require('./tools/connection');
+        var User = require('./models/user');
+        User.findOne({email:userEmail}),function(err,doc){
+            if (err) throw err;
+            else {
+                doc.password = newPwd;
+                doc.save();
+                callback(null,doc);
+            }
+        }
+    },
+
     addCvIntoUser: function (userId, accomplishment, edu, experience, callback) {
         var userData = require('./handleData');
         var tempCv = require("../service/cvData");
@@ -62,11 +75,12 @@ module.exports=handleData;
 
 
 
-handleData.addCvIntoUser("5cd5572dc4cca61a76737198","asd","sdd","sss",function(err,doc){
-    if(!err){
-        console.log(doc);
-    }
-});
+// handleData.addCvIntoUser("5cd5572dc4cca61a76737198","asd","sdd","sss",function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+// });
+
 // var tempCv= require("../service/cvData");
 // //tempCv.createCv();
 // handleData.searchUser({_id:"5cd82dbe3a49da328c62a7c5"},function(err,doc){
