@@ -1,79 +1,23 @@
 
 var jobData= {
-    searchJob: function (condition, condition2, callback) {
+
+
+
+
+    secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
         require('../mongoDB/tools/connection');
         var JobModel = require('../mongoDB/models/jobs');
-        var newCondition;
-        var keyArr=condition.split(" ");
-        if(keyArr.length!=1) {
-            var key_query = "";
-            for (var i = 0; i < keyArr.length; i++) {
-                key_query = key_query + keyArr + "|";
-            }
-        key_query = key_query.substring(key_query.length);
+        if(jobIndustry=="undefined"){
+            jobIndustry="";
+        }
+        if(jType=="undefined"){
+            jType="";
+        }
+        if(sal=="undefined"){
+            sal="0";            //   -1000
+        }
 
-        newCondition = new RegExp(key_query);
-        }else{newCondition=condition}
-
-        JobModel.find({
-                $and: [
-                    {
-                        $or: [{title: {$regex: newCondition, $options: 'i'}},
-                              {companyName: {$regex: newCondition, $options: 'i'}},
-                              {jobType: {$regex: newCondition, $options: 'i'}}]
-                    },
-                    {
-                        $or: [{city: {$regex: condition2, $options: 'i'}}, {postcode: {$regex: condition2, $options: 'i'}}]
-                    }
-                ]
-            },
-
-            function (err, result) {
-                if (err) throw err;
-                callback(null, result);
-            }).sort({postDate:-1,title:1});
-
-    },
-
-    // job: function (condition, condition2, callback) {
-    //     require('../mongoDB/tools/connection');
-    //     var JobModel = require('../mongoDB/models/job');
-    //
-    //     for(int i=0;i<condition.length;i++){
-    //
-    //     }
-    //
-    //     var _filter={
-    //         $and: [
-    //
-    //         {
-    //             $or: [{title: {$regex: condition[i], $options: 'i'}},
-    //                 {companyName: {$regex: condition[i], $options: 'i'}},
-    //                 {jobType: {$regex: condition[i], $options: 'i'}}]
-    //         }
-    //
-    //             },
-    //             {
-    //                 $or: [{city: {$regex: condition2, $options: 'i'}}, {postcode: {$regex: condition2, $options: 'i'}}]
-    //             }
-    //         ]
-    //
-    //     },
-    //
-    //     JobModel.find(_filter,function (err, result) {
-    //             if (err) throw err;
-    //             callback(null, result);
-    //         }).sort({postDate:-1,title:1}).forEach(
-    //     function(item) { item.forEach(
-    //
-    // );
-    //
-    // },
-
-    secondarySearchJob: function (keyword, location, jType, sal, jobIndustry,callback) {
-        require('../mongoDB/tools/connection');
-        var JobModel = require('../mongoDB/models/jobs');
-        if(sal==4){
+        if((sal=="4")||(sal=="0")){
             JobModel.find({
                 $and: [
                     {
@@ -166,7 +110,51 @@ var jobData= {
                 if (err) throw err;
                 callback(null, result);
             });
-    }
+    },
+
+
+        searchJob: function (newCondition, condition2, callback) {
+            require('../mongoDB/tools/connection');
+            var tool=require('../mongoDB/tools/utility');
+            var JobModel = require('../mongoDB/models/jobs');
+            //     tool.dealWithMultiStrings(condition,function(err,newCondition){
+            //        if(!err){
+
+
+            // var newCondition;
+            // var keyArr=condition.split(" ");
+            // if(keyArr.length!=1) {
+            //     var key_query = "";
+            //     for (var i = 0; i < keyArr.length; i++) {
+            //         key_query = key_query + keyArr + "|";
+            //     }
+            // key_query = key_query.substring(key_query.length);
+            //
+            // newCondition = new RegExp(key_query);
+            // }else{newCondition=condition}
+
+            JobModel.find({
+                    $and: [
+                        {
+                            $or: [{title: {$regex: newCondition, $options: 'i'}},
+                                {companyName: {$regex: newCondition, $options: 'i'}},
+                                {jobType: {$regex: newCondition, $options: 'i'}}]
+                        },
+                        {
+                            $or: [{city: {$regex: condition2, $options: 'i'}}, {postcode: {$regex: condition2, $options: 'i'}}]
+                        }
+                    ]
+                },
+
+                function (err, result) {
+                    if (err) throw err;
+                    callback(null, result);
+                }).sort({postDate:-1,title:1});
+
+        }
+        //    });
+
+
 
 };
 
@@ -213,11 +201,27 @@ module.exports=jobData;   // export this module
 
 
 
-
-
-// jobData.secondarySearchJob(a,b,"Part-Time",0,null,"nanny",function(err,docs){
+// var a="amazon";
+// var b="s1";
+//
+// jobData.secondarySearchJob("amazon","","undefined","undefined","undefined",function(err,doc){
+//     if(!err){
+//         console.log(doc);
+//     }
+// });
+// jobData.secondarySearchJob(a,"","",0,null,"nanny",function(err,docs){
 //     if(!err){
 //         console.log(docs);
 //     }
+// });
+
+
+
+// 加经纬度
+// require('../mongoDB/tools/connection');
+// var JobModel = require('../mongoDB/models/jobs');
+//
+// JobModel.updateMany({}, {$set: {longitude: -12.88}},function(err,doc){
+//
 // });
 
