@@ -53,10 +53,10 @@ router.post('/', upload.single('JobImage'), function(req, res) {
   var industry = req.body.requestJobIndustry;
   var salary = req.body.salary;
   var description = req.body.description;
-  var street = req.body.street;
-  var city = req.body.city;
-  var state = req.body.state;
-  var postalCode = req.body.postalCode;
+  var street = req.body.route;
+  var city = req.body.postal_town;
+  var state = req.body.administrative_area_level_1;
+  var postalCode = req.body.postal_code;
   var country = req.body.country;
 
   console.log('title:'+title+",requestJobType:"+jobType+",requestJobIndustry:"+industry+",postSalary:"+salary

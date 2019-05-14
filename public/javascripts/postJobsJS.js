@@ -20,10 +20,10 @@ $(document).ready(function () {
         var salary = $('#salary').val();
         var description = $('#description').val();
         var jobImage = document.getElementById("jobImage");
-        var street = $('#street').val();
-        var city = $('#city').val();
-        var state = $('#state').val();
-        var postalCode = $('#postalCode').val();
+        var route = $('#route').val();
+        var postal_town = $('#postal_town').val();
+        var administrative_area_level_1 = $('#administrative_area_level_1').val();
+        var postal_code = $('#postal_code').val();
         var country = $('#country').val();
 
         var d = new FormData();
@@ -36,10 +36,10 @@ $(document).ready(function () {
         d.append('salary',salary);
         d.append('description',description);
         d.append('JobImage',jobImage.files[0]);
-        d.append('street',street);
-        d.append('city',city);
-        d.append('state',state);
-        d.append('postalCode',postalCode);
+        d.append('route',route);
+        d.append('postal_town',postal_town);
+        d.append('administrative_area_level_1',administrative_area_level_1);
+        d.append('postal_code',postal_code);
         d.append('country',country);
 
         alert('ajax begin.....');
