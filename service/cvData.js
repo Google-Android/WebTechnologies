@@ -71,6 +71,23 @@ var cvData= {
         }
     },
 
+    showWholeCv: function(cvId,callback){
+        require('../mongoDB/tools/connection');
+        var CvModel = require('../mongoDB/models/cvs');
+        if(cvId!="no") {
+            CvModel.findOne({_id: cvId},
+                function (err, result) {
+                    if (err) throw err;
+                    else {
+                        callback(null, result);
+                    }
+
+                });
+        }else{
+            callback(null,null);
+        }
+    },
+
     // 已经有cv信息了
     completeRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
         require('../mongoDB/tools/connection');
@@ -188,4 +205,11 @@ module.exports=cvData;
 //     if (!err) {
 //         console.log(doc);
 //     }
+// });
+
+// require('../mongoDB/tools/connection');
+// var JobModel = require('../mongoDB/models/cvs');
+//
+// JobModel.updateMany({}, {$set: {latitude: 12.88}},function(err,doc){
+//
 // });
