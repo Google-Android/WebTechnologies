@@ -144,6 +144,7 @@
             </div>
         <%
             } else if(user.personOrComp == 'c'){
+                if(jobs.length == 0){
         %>
             <div id="userJobs" class="container tab-pane fade">
                 <!--fanhua no job provided notification-->
@@ -152,26 +153,33 @@
                         <h1 class="display-4">No Job Provided!</h1>
                     </div>
                 </div>
-                <!--fanhua job list-->
-                <!--            繁华 循环开始-->
+        <%
+                } else {
+        %>
+            <div id="userJobs" class="container tab-pane fade">
+        <%
+                    jobs.forEach(function(job){
+        %>
+           
                 <div class="card mt-2 mb-2" id="jobResults">
-                    <h5 class="card-header"><a href="#">job title</a></h5>
+                    <h5 class="card-header"><a href="/jobDetails?jobId=<%=job.id %>"><%=job.title %></a></h5>
                     <div class="card-body">
                         <p class="card-text">City:
-    <!--                        city goes here-->
+                            <%=job.city %>
                         </p>
-                        <p class="card-text">Salary: £
-    <!--                        salary here-->
-                            /month</p>
+                        <p class="card-text">Salary: £ <%=job.salary %>/month</p>
                         <p class="card-text">Post Time:
-    <!--                    job post time-->
+                            <%=job.postDate %>
                         </p>
                     </div>
                     <div class="card-footer text-muted">
-                        <a href="#" class="btn btn-primary">DELETE</a>
+                        <a href="/consumerUserDetails?operation=deleteJob&jobId=<%=job.id %>" class="btn btn-primary">DELETE</a>
                     </div>
                 </div>
-                <!--循环结束-->
+        <%
+                    })
+             }
+        %>                
             </div>
         <%
             }
