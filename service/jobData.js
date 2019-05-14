@@ -1,6 +1,4 @@
 
-
-
 var jobData= {
 
     searchJob: function (condition, condition2, callback) {
@@ -31,88 +29,97 @@ var jobData= {
     },
 
 
-    secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
+    // secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
+    //     var JobModel = require('../mongoDB/models/jobs');
+    //     var tool = require('../mongoDB/tools/dbUtil');
+    //     tool.dbConnection();
+    //
+    //     if(jobIndustry=="undefined"){
+    //         jobIndustry="";
+    //     }
+    //     if(jType=="undefined"){
+    //         jType="";
+    //     }
+    //     if(sal=="undefined"){
+    //         sal="0";            //   -1000
+    //     }
+    //
+    //     tool.dealWithMultiStrings(keyword, function (err, result) {
+    //         if (!err) {
+    //             if ((sal == "4") || (sal == "0")) {
+    //                 JobModel.find({
+    //                     $and: [
+    //                         {
+    //                             $or: [{title: result},
+    //                                 {companyName: result},
+    //                                 {jobType: result}]
+    //                         },
+    //                         {
+    //                             $or: [{city: {$regex: location, $options: 'i'}},
+    //                                   {postcode: {$regex: location, $options: 'i'}}]
+    //                         },
+    //                         {
+    //                             jobType: {$regex: jType, $options: 'i'}
+    //                         },
+    //                         {
+    //                             salary: {$gte: (sal - 1) * 1000}
+    //                         },
+    //                         {
+    //                             industry: {$regex: jobIndustry, $options: 'i'}
+    //                         }
+    //                     ]
+    //                 }, function (err, result) {
+    //                     if (err) throw err;
+    //                     callback(null, result);
+    //                 }).sort({postDate: -1, title: 1});
+    //
+    //
+    //             } else {
+    //                 JobModel.find({
+    //                         $and: [
+    //                             {
+    //                                 $or: [{title: result},
+    //                                     {companyName: result},
+    //                                     {jobType: result}]
+    //                             },
+    //                             {
+    //                                 $or: [{city: {$regex: location, $options: 'i'}},
+    //                                     {postcode: {$regex: location, $options: 'i'}}]
+    //                             }, {
+    //                                 jobType: {$regex: jType, $options: 'i'}
+    //                             }, {
+    //                                 salary: {$gte: (sal - 1) * 1000, $lte: sal * 1000}
+    //                             }, {
+    //                                 industry: {$regex: jobIndustry, $options: 'i'}
+    //                             }
+    //                         ]
+    //                     },
+    //
+    //                     function (err, result) {
+    //                         if (err) throw err;
+    //                         callback(null, result);
+    //                     }).sort({postDate: -1, title: 1});
+    //             }
+    //         }
+    //         });
+    // },
+
+    showAllJobsByCompanyName: function(company, callback) {
+        require('../mongoDB/tools/dbUtil').dbConnection();
         var JobModel = require('../mongoDB/models/jobs');
-        var tool = require('../mongoDB/tools/dbUtil');
-        tool.dbConnection();
-
-        if(jobIndustry=="undefined"){
-            jobIndustry="";
-        }
-        if(jType=="undefined"){
-            jType="";
-        }
-        if(sal=="undefined"){
-            sal="0";            //   -1000
-        }
-
-        tool.dealWithMultiStrings(keyword, function (err, result) {
-            if (!err) {
-                if ((sal == "4") || (sal == "0")) {
-                    JobModel.find({
-                        $and: [
-                            {
-                                $or: [{title: result},
-                                    {companyName: result},
-                                    {jobType: result}]
-                            },
-                            {
-                                $or: [{city: {$regex: location, $options: 'i'}},
-                                      {postcode: {$regex: location, $options: 'i'}}]
-                            },
-                            {
-                                jobType: {$regex: jType, $options: 'i'}
-                            },
-                            {
-                                salary: {$gte: (sal - 1) * 1000}
-                            },
-                            {
-                                industry: {$regex: jobIndustry, $options: 'i'}
-                            }
-                        ]
-                    }, function (err, result) {
-                        if (err) throw err;
-                        callback(null, result);
-                    }).sort({postDate: -1, title: 1});
-
-
-                } else {
-                    JobModel.find({
-                            $and: [
-                                {
-                                    $or: [{title: result},
-                                        {companyName: result},
-                                        {jobType: result}]
-                                },
-                                {
-                                    $or: [{city: {$regex: location, $options: 'i'}},
-                                        {postcode: {$regex: location, $options: 'i'}}]
-                                }, {
-                                    jobType: {$regex: jType, $options: 'i'}
-                                }, {
-                                    salary: {$gte: (sal - 1) * 1000, $lte: sal * 1000}
-                                }, {
-                                    industry: {$regex: jobIndustry, $options: 'i'}
-                                }
-                            ]
-                        },
-
-                        function (err, result) {
-                            if (err) throw err;
-                            callback(null, result);
-                        }).sort({postDate: -1, title: 1});
-                }
-            }
+        JobModel.find({companyName: company},
+            function (err, result) {
+                if (err) throw err;
+                callback(null, result);
             });
+
     },
-
-
 
 
     showJobDetails: function(id, callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();
         var JobModel = require('../mongoDB/models/jobs');
-        JobModel.find({_id: id},
+        JobModel.findOne({_id: id},
             function (err, result) {
                 if (err) throw err;
                 callback(null, result);
@@ -162,11 +169,84 @@ var jobData= {
         });
     },
 
-    dealWithString: function(str) {
-        if (str == "undefined") {
-            str = "";
-        }
-        return str;
+
+
+    secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
+        var JobModel = require('../mongoDB/models/jobs');
+        var tool = require('../mongoDB/tools/dbUtil');
+        tool.dbConnection();
+
+
+        if(jType == "undefined") jType = "";
+        if(jobIndustry == "undefined") jobIndustry = "";
+        //If the user does not select the salary option, the system displays a result that includes all salaries.
+        //set sal="0", then look for all jobs whose salary is more than -1,000.    (sal - 1) * 1000= -1000
+        if(sal=="undefined")  sal="0";
+
+
+        //dealWithMultiStrings() method allows user input multiple strings in the keyword search box, such as "Amazon full-time IT",
+        //This method can convert "Amazon full-time IT" to "/Amazon|full-time|IT/i"
+        tool.dealWithMultiStrings(keyword, function (err, result) {
+            if (!err) {
+
+                //Query salary with no upper limit.  To be specific, query salary>3000 or salary>-1000
+                if ((sal == "4") || (sal == "0")) {
+                    JobModel.find({
+                        $and: [
+                            {
+                                $or: [{title: result},
+                                      {companyName: result},
+                                      {jobType: result}]
+                            },
+                            {
+                                $or: [{city: {$regex: location, $options: 'i'}},
+                                    {postcode: {$regex: location, $options: 'i'}}]
+                            },
+                            {
+                                jobType: {$regex: jType, $options: 'i'}
+                            },
+                            {
+                                salary: {$gte: (sal - 1) * 1000}
+                            },
+                            {
+                                industry: {$regex: jobIndustry, $options: 'i'}
+                            }]
+                    }, function (err, result) {
+                        if (err) throw err;
+                        callback(null, result);
+                    //The search results are mainly displayed in order of the time  of posting jobs.
+                    }).sort({postDate: -1, title: 1});
+
+                } else {
+                    JobModel.find({
+                        $and: [
+                            {
+                                $or: [{title: result},
+                                      {companyName: result},
+                                      {jobType: result}]
+                            },
+                            {
+                                $or: [{city: {$regex: location, $options: 'i'}},
+                                      {postcode: {$regex: location, $options: 'i'}}]
+
+                            },
+                            {
+                                jobType: {$regex: jType, $options: 'i'}
+                            },
+                            {
+                                salary: {$gte: (sal - 1) * 1000, $lte: sal * 1000}
+                            },
+                            {
+                                ndustry: {$regex: jobIndustry, $options: 'i'}
+                            }
+                            ]
+                    }, function (err, result) {
+                        if (err) throw err;
+                        callback(null, result);
+                    }).sort({postDate: -1, title: 1});
+                }
+            }
+        });
     }
 
 
@@ -174,6 +254,14 @@ var jobData= {
 
 module.exports=jobData;  // export this module
 
+
+
+
+// jobData.showAllJobsByCompanyName("Amazon", function(err,doc) {
+//     console.log(doc);
+//
+//
+// });
 
 
 
@@ -191,11 +279,31 @@ module.exports=jobData;  // export this module
 //     }
 //     })
 
-// jobData.showJobDetails("urban outfitters",function(err,doc){
-//     if(!err){
-//         console.log(doc);
-//     }
+
+// var http = require('http');
+// var server = http.createServer();
+//
+//
+// server.on('request', function (req, res) {
+//     var a;
+//     jobData.showJobDetails("5cd7eea7f7cc5623797890b2", function (err, doc) {
+//         if (!err) {
+//             console.log(doc.description);
+//             a=doc.description;
+//             res.setHeader('Content-Type', 'text/html; charset=utf-8');
+//             res.end("<p>"+a+"</p>");
+//
+//         }
+//     });
+//
 // })
+//     server.listen(5000, function () {
+//         console.log('Server is running...')
+//     });
+
+
+
+
 
 // var a="amazon";
 // var b="s1";
