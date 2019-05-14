@@ -43,7 +43,7 @@ $(document).ready(function() {
 });
 
 /**
- * show notification when the two passwords entered by consumers are not consistent in password reset webpage.
+ * show notification when the two passwords entered by consumers are not consistent in password reset web page.
  * @returns {boolean}
  */
 var passwordCheck = function () {
