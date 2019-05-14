@@ -48,7 +48,7 @@ $(document).ready(function() {
 
                     for(var i=0; i<jobResults.length; i++){
                         html += '<div class="card mb-2" id="jobResults">';
-                        html += '<h5 class="card-header"><a href="/jobDetails?jobId='+jobResults[i].id+'">'+jobResults[i].title+'</a></h5>';
+                        html += '<h5 class="card-header"><a href="/jobDetails?jobId='+jobResults[i]._id+'">'+jobResults[i].title+'</a></h5>';
                         html += '<div class="card-body">';
                         html += '<h5 class="card-title">';
                         html += '<a href="/companyDetails?companyName='+jobResults[i].companyName+'">'+jobResults[i].companyName+'</a>';

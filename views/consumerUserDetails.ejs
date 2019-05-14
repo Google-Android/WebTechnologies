@@ -25,10 +25,35 @@
 
 <div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1 class="display-4 text-break">Consumer Himself</h1>
+        <h1 class="display-4 text-break"><%=user.name %></h1>
         <h2>
             <small class="text-success">Overall Rating:</small>
-            4.0
+            <%
+            var overallRating = 0;
+            var countReview = 0;
+            var averageScore = 0;
+            if(reviews){
+                reviews.forEach(function(review){
+                    countReview++;
+                    overallRating+=review.score;
+                });
+                <!-- if there exists review for this company -->
+                if(countReview!=0){
+                    averageScore=overallRating/countReview;
+                    averageScore=averageScore.toString();
+                    if (averageScore.length > 2)
+                        averageScore=averageScore.substring(0, 3);
+            %>
+                <%=averageScore %>
+            <%
+            <!-- if there is not any review for this company -->
+                } else {
+            %>
+                0
+            <%
+                }
+            }
+            %>
         </h2>
         <hr class="my-4">
     </div>
@@ -37,99 +62,120 @@
         <li class="nav-item" id="userReviewsTab">
             <a class="nav-link active" data-toggle="pill" href="#userReviews">Received Reviews</a>
         </li>
-        <!--tab of cv management, invisible for company user, fanhua-->
-        <li class="nav-item" id="userCvsTab">
-            <a class="nav-link" data-toggle="pill" href="#userCv">CV Management</a>
-        </li>
-        <!--tab of job management, invisible for consumer user, fanhua-->
-        <li class="nav-item" id="userJobsTab">
-            <a class="nav-link" data-toggle="pill" href="#userJobs">Job Management</a>
-        </li>
+        <%
+            if(user.personOrComp == 'p'){
+        %>
+            <li class="nav-item" id="userCvsTab">
+                <a class="nav-link" data-toggle="pill" href="#userCv">CV Management</a>
+            </li>
+        <%
+            } else if(user.personOrComp == 'c'){
+        %>
+            <li class="nav-item" id="userJobsTab">
+                <a class="nav-link" data-toggle="pill" href="#userJobs">Job Management</a>
+            </li>
+        <%
+            }
+        %>        
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <!--reviews, visible for both kind of users-->
         <div id="userReviews" class="container tab-pane active">
-            <!--      fanhua notification of no review      -->
-
+        <%
+            if(reviews.length == 0){
+        %>
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container text-center">
                     <h1 class="display-4">No Review!</h1>
                 </div>
             </div>
-
-            <!--            review of company-->
+        <%
+            }else{
+                reviews.forEach(function(review){
+        %>
             <div class="card mt-2 mb-2">
                 <h5 class="card-header">
-                    Good company
-                    <p class="font-weight-lighter font-italic">Shunbao</p>
+                    <%=review.title %>
+                    <p class="font-weight-lighter font-italic"><%=review.publisherName %></p>
                 </h5>
                 <div class="card-body">
                     <h5 class="card-title">
                         <small>Rating:</small>
-                        5
+                        <%=review.score %>
                     </h5>
-                    <p class="card-text">This is a good company</p>
-                    <img src="/image/aaa.jpg" class="img-thumbnail">
+                    <p class="card-text"><%=review.comment %></p>
+                    <img src="<%=review.pictureUrl %>" class="img-thumbnail">
                 </div>
             </div>
-        </div>
-        <!--cv, invisible for company user, fanhua -->
-        <div id="userCv" class="container tab-pane fade">
-            <!--fanhua no job provided notification-->
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container">
-                    <form id="consumerCvManagement">
-                        <div class="form-group">
-                            <label for="achievement">Achievement</label>
-                            <textarea class="form-control" id="achievement" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="education">Education</label>
-                            <textarea class="form-control" id="education" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="workExperience">Work Experience</label>
-                            <textarea class="form-control" id="workExperience" rows="3"></textarea>
-                        </div>
-                        <div class="col text-center">
-                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!--posted jobs, invisible for consumer user, fanhua-->
-        <div id="userJobs" class="container tab-pane fade">
-            <!--fanhua no job provided notification-->
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container text-center">
-                    <h1 class="display-4">No Job Provided!</h1>
-                </div>
-            </div>
-            <!--fanhua job list-->
-            <!--            繁华 循环开始-->
-            <div class="card mt-2 mb-2" id="jobResults">
-                <h5 class="card-header"><a href="#">job title</a></h5>
-                <div class="card-body">
-                    <p class="card-text">City:
-<!--                        city goes here-->
-                    </p>
-                    <p class="card-text">Salary: £
-<!--                        salary here-->
-                        /month</p>
-                    <p class="card-text">Post Time:
-<!--                    job post time-->
-                    </p>
-                </div>
-                <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-primary">DELETE</a>
-                </div>
-            </div>
-            <!--循环结束-->
+        <%
+                })
+            }
+        %>
         </div>
 
+        <%
+            if(user.personOrComp == 'p'){
+        %>
+            <div id="userCv" class="container tab-pane fade">
+                <!--fanhua no job provided notification-->
+                <div class="jumbotron jumbotron-fluid mt-2">
+                    <div class="container">
+                        <form id="consumerCvManagement">
+                            <div class="form-group">
+                                <label for="achievement">Achievement</label>
+                                <textarea class="form-control" id="achievement" name="achievement" rows="3"><%if(cv != null){%> <%=cv.achievement %> <%}%></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="education">Education</label>
+                                <textarea class="form-control" id="education" name="education" rows="3"><%if(cv != null){%> <%=cv.education %> <%}%></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="workExperience">Work Experience</label>
+                                <textarea class="form-control" id="workExperience" name="workExperience" rows="3"><%if(cv != null){%> <%=cv.workExperience %> <%}%></textarea>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <%
+            } else if(user.personOrComp == 'c'){
+        %>
+            <div id="userJobs" class="container tab-pane fade">
+                <!--fanhua no job provided notification-->
+                <div class="jumbotron jumbotron-fluid mt-2">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Job Provided!</h1>
+                    </div>
+                </div>
+                <!--fanhua job list-->
+                <!--            繁华 循环开始-->
+                <div class="card mt-2 mb-2" id="jobResults">
+                    <h5 class="card-header"><a href="#">job title</a></h5>
+                    <div class="card-body">
+                        <p class="card-text">City:
+    <!--                        city goes here-->
+                        </p>
+                        <p class="card-text">Salary: £
+    <!--                        salary here-->
+                            /month</p>
+                        <p class="card-text">Post Time:
+    <!--                    job post time-->
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="#" class="btn btn-primary">DELETE</a>
+                    </div>
+                </div>
+                <!--循环结束-->
+            </div>
+        <%
+            }
+        %>
     </div>
 </div>
 </body>
