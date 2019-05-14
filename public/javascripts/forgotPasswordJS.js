@@ -100,6 +100,7 @@ function checkEmail() {
                 $('#secretQuestionDiv').show();
                 $('#resetPasswordDiv').show();
                 $('#reset').show();
+                $('#next').hide();
 
             } else if(data.result === 2){ // this email have not been registered before.
                 alert('invalid email.');

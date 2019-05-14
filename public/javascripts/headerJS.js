@@ -112,8 +112,10 @@ $(document).ready(function () {
 
 
 });
+
 /**
  * show notification when the two passwords entered by consumers are not consistent when register
+ * @returns {boolean}
  */
 var consumerPasswordConfirmation = function() {
     var consumerCheck = false;
@@ -130,6 +132,7 @@ var consumerPasswordConfirmation = function() {
 
 /**
  * show notification when the two passwords entered by companies are not consistent when register
+ * @returns {boolean}
  */
 var companyPasswordConfirmation = function() {
     var companyCheck = false;
