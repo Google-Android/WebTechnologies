@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
 
         console.log('keyword:'+keyword+", location:"+location+",salary:"+salary+",industry:"+industry+",jobType:"+jobType);
 
-        jobData.secondarySearchJob(location,location,jobType,salary,industry,function(err,jobResults){
+        jobData.secondarySearchJob(keyword,location,jobType,salary,industry,function(err,jobResults){
             if(err) {
                 res.json({'result':0});
                 throw err;
