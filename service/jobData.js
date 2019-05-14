@@ -115,7 +115,7 @@ var jobData= {
 
         searchJob: function (newCondition, condition2, callback) {
             require('../mongoDB/tools/connection');
-            var tool=require('../mongoDB/tools/utility');
+            //var tool=require('../mongoDB/tools/utility');
             var JobModel = require('../mongoDB/models/jobs');
             //     tool.dealWithMultiStrings(condition,function(err,newCondition){
             //        if(!err){
