@@ -33,87 +33,24 @@
         <hr class="my-4">
     </div>
     <ul class="nav nav-pills nav-justified">
-        <li class="nav-item">
-            <a class="nav-link  active" data-toggle="pill" href="#account">Account Management</a>
+        <!--tab of reviews, visible for both kind of user-->
+        <li class="nav-item" id="userReviewsTab">
+            <a class="nav-link active" data-toggle="pill" href="#userReviews">Received Reviews</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#reviews">Received Reviews</a>
+        <!--tab of cv management, invisible for company user, fanhua-->
+        <li class="nav-item" id="userCvsTab">
+            <a class="nav-link" data-toggle="pill" href="#userCv">CV Management</a>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="pill" href="#cv">CV Management</a>
+        <!--tab of job management, invisible for consumer user, fanhua-->
+        <li class="nav-item" id="userJobsTab">
+            <a class="nav-link" data-toggle="pill" href="#userJobs">Job Management</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <!--account management-->
-        <div id="account" class="container tab-pane active">
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container">
-                    <form id="consumerUserDetailManagement" method="post">
-                        <div class="form-group">
-                            <label for="currentCompanyPassword">Current Password</label>
-                            <input type="password" class="form-control" name="currentCompanyPassword"
-                                   placeholder="Current Password">
-                            <!--show off when user input wrong current password-->
-                            <div class="invalid-feedback" id="wrongConsumerPassword" style="display: none">
-                                Wrong password!
-                            </div>
-                        </div>
-                        <hr>
-                        <input type="hidden" class="form-control" name="userCategory" value="companyUserManagement">
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" name="firstName"
-                                   placeholder="First Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" name="lastName"
-                                   placeholder="Last Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="consumerEmail">Email address</label>
-                            <input type="email" class="form-control" name="consumerEmail" value="user@mail.com" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="consumerManagementPassword">Change Password</label>
-                            <input type="password" class="form-control" name="consumerManagementPassword"
-                                   placeholder="Password" id="consumerManagementPassword">
-                        </div>
-                        <div class="form-group">
-                            <label for="consumerManagementRepeatPassword">Repeat Password</label>
-                            <input type="password" class="form-control" name="consumerManagementRepeatPassword"
-                                   placeholder="Repeat Password" id="consumerManagementRepeatPassword" onkeyup="consumerManagementPasswordConfirmation()">
-                            <div class="invalid-feedback"
-                                 style="display:none;" id="consumerManagementPasswordNotMatching">
-                                Passwords are not Matching
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="consumerSecurityQuestion">Security Question And
-                                Answer</label>
-                            <select class="form-control" name="consumerSecurityQuestion">
-                                <option value="1">What primary school did you attend?</option>
-                                <option value="2">In what town or city was your first job?</option>
-                                <option value="3">What is your mother's maiden name?</option>
-                            </select>
-                            <br>
-                            <input type="text" class="form-control" name="consumerSecurityAnswer"
-                                   placeholder="Security Answer" required>
-                        </div>
-                        <div class="col text-center">
-                            <button type="submit" class="btn btn-primary btn-block" onclick="return consumerManagementPasswordConfirmation()">Save Changes
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!--reviews-->
-        <div id="reviews" class="container tab-pane fade">
+        <!--reviews, visible for both kind of users-->
+        <div id="userReviews" class="container tab-pane active">
             <!--      fanhua notification of no review      -->
 
             <div class="jumbotron jumbotron-fluid mt-2">
@@ -138,8 +75,8 @@
                 </div>
             </div>
         </div>
-        <!--cv-->
-        <div id="cv" class="container tab-pane fade">
+        <!--cv, invisible for company user, fanhua -->
+        <div id="userCv" class="container tab-pane fade">
             <!--fanhua no job provided notification-->
             <div class="jumbotron jumbotron-fluid mt-2">
                 <div class="container">
@@ -163,6 +100,30 @@
                 </div>
             </div>
         </div>
+        <!--posted jobs, invisible for consumer user, fanhua-->
+        <div id="userJobs" class="container tab-pane fade">
+            <!--fanhua no job provided notification-->
+            <div class="jumbotron jumbotron-fluid mt-2">
+                <div class="container text-center">
+                    <h1 class="display-4">No Job Provided!</h1>
+                </div>
+            </div>
+            <!--fanhua job list-->
+            <!--            繁华 循环开始-->
+            <div class="card mt-2 mb-2" id="jobResults">
+                <h5 class="card-header"><a href="#">job title</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="">Company name</a></h5>
+                    <p class="card-text d-none d-lg-block">description</p>
+                    <p class="card-text">salary</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="#" class="btn btn-primary">DELETE</a>
+                </div>
+            </div>
+            <!--循环结束-->
+        </div>
+
     </div>
 </div>
 <script>
