@@ -16,7 +16,9 @@ var cvSchema=new Schema({
     state:String,
     postcode:String,
     country:String,
-    postDate:String
+    postDate:String,
+    longitude:Number,
+    latitude:Number
 
 
     //companyName: String,   username last name  email

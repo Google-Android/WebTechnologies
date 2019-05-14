@@ -15,14 +15,22 @@ var jobSchema=new Schema({
     state:String,
     postcode:String,
     country:String,
-    postDate:String
+    postDate:String,
+    longitude:Number,
+    latitude:Number
 });
 
 
 module.exports=mongoose.model("jobs", jobSchema);
 
 
-// JobModel.find({type:/web/ },function(err, doc) {
+
+
+
+
+
+
+    // JobModel.find({type:/web/ },function(err, doc) {
 //         if (!err) {
 //             console.log(doc);
 //         }
