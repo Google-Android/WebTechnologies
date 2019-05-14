@@ -2,8 +2,6 @@
 var jobData= {
 
 
-
-
     secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
         require('../mongoDB/tools/connection');
         var JobModel = require('../mongoDB/models/jobs');
@@ -44,12 +42,9 @@ var jobData= {
             JobModel.find({
                     $and: [
                         {
-                            $or: [{title: {$regex: keyword, $options: 'i'}}, {
-                                companyName: {
-                                    $regex: keyword,
-                                    $options: 'i'
-                                }
-                            }]
+                            $or: [{title: {$regex: keyword, $options: 'i'}},
+                                {companyName: {$regex: keyword, $options: 'i'}},
+                                {jobType: {$regex: keyword, $options: 'i'}}]
                         },
                         {
                             $or: [{city: {$regex: location, $options: 'i'}}, {
@@ -113,25 +108,25 @@ var jobData= {
     },
 
 
-        searchJob: function (newCondition, condition2, callback) {
+        searchJob: function (condition, condition2, callback) {
             require('../mongoDB/tools/connection');
             //var tool=require('../mongoDB/tools/utility');
             var JobModel = require('../mongoDB/models/jobs');
-            //     tool.dealWithMultiStrings(condition,function(err,newCondition){
-            //        if(!err){
+           //     tool.dealWithMultiStrings(condition,function(err,newCondition){
+          //         if(!err){
 
 
-            // var newCondition;
-            // var keyArr=condition.split(" ");
-            // if(keyArr.length!=1) {
-            //     var key_query = "";
-            //     for (var i = 0; i < keyArr.length; i++) {
-            //         key_query = key_query + keyArr + "|";
-            //     }
-            // key_query = key_query.substring(key_query.length);
-            //
-            // newCondition = new RegExp(key_query);
-            // }else{newCondition=condition}
+            var newCondition;
+            var keyArr=condition.split(" ");
+            if(keyArr.length!=1) {
+                var key_query = "";
+                for (var i = 0; i < keyArr.length; i++) {
+                    key_query = key_query + keyArr + "|";
+                }
+            key_query = key_query.substring(0,key_query.length-1);
+
+            newCondition = new RegExp(key_query);
+            }else{newCondition=condition; }
 
             JobModel.find({
                     $and: [
@@ -177,22 +172,27 @@ module.exports=jobData;   // export this module
 //     }
 // })
 
-// var a="amazon part-time";
+// var a="amazon part-time IT";
 // var b="s1";
 //
 //
 // var keyArr=a.split(" ");
 //
 // var key_query="";
+// console.log(keyArr);
 // for(var i=0;i<keyArr.length;i++){
 //     key_query=key_query+keyArr+"|";
 // }
-// key_query=key_query.substring(key_query.length);
 //
+// console.log(key_query);
+// key_query=key_query.substring(0,key_query.length-1);
+//
+// console.log(key_query);
 // let condition=new RegExp(key_query);
 //
-// //console.log(role_query);
-// //keyword, location, jType, sal1,sal2, callback
+// console.log(condition);
+//console.log(role_query);
+//keyword, location, jType, sal1,sal2, callback
 // jobData.searchJob(condition,b,function(err,docs){
 //     if(!err){
 //         console.log(docs);
