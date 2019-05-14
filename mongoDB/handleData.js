@@ -27,14 +27,15 @@ var handleData= {
     changePassword: function(userEmail,newPwd,callback){
         require('./tools/connection');
         var User = require('./models/user');
-        User.findOne({email:userEmail}),function(err,doc){
+        User.findOne({email:userEmail},function(err,doc){
+
             if (err) throw err;
             else {
-                doc.password = newPwd;
+                doc.pwd = newPwd;
                 doc.save();
                 callback(null,doc);
             }
-        }
+        });
     },
 
     addCvIntoUser: function (userId, accomplishment, edu, experience, callback) {
@@ -71,9 +72,15 @@ var handleData= {
 module.exports=handleData;
 // export this module
 
+//
+// handleData.changePassword("baidu@baidu.com","qqq",function(err,doc){
+//     if(!err)
+//     console.log(doc);
+// });
 
-
-
+// handleData.searchUser({email:"baidu@baidu.com"},function(err,doc){
+//     console.log(doc);
+// })
 
 // handleData.addCvIntoUser("5cd5572dc4cca61a76737198","asd","sdd","sss",function(err,doc){
 //     if(!err){
