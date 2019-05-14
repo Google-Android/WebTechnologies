@@ -38,7 +38,7 @@
                             <%= user.name %>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/companyUserDetails?userId=<%=user._id %>">Profile</a>
+                            <a class="dropdown-item" href="/consumerUserDetails?userName=<%=user.name %>">Profile</a>
                             <!-- turn to index page-->
                             <a class="dropdown-item" href="/?operation=logout">Logout</a>
                         </div>
@@ -65,7 +65,7 @@
                         <%= user.name %>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/consumerUserDetails?userId=<%=user._id %>">Profile</a>
+                        <a class="dropdown-item" href="/consumerUserDetails?userName=<%=user.name %>">Profile</a>
                         <!-- turn to index page-->
                         <a class="dropdown-item" href="/?operation=logout">Logout</a>
                     </div>
