@@ -14,6 +14,8 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 
+    <script src="/javascripts/findCvsJS.js"></script>
+
     <style>
         body, html {
             height: 100%;
@@ -23,16 +25,15 @@
 <body class="customize-body">
 <%- include header.ejs -%>
 <!--search panel-->
-<div class="container h-100">
+<div class="container h-100" id="cvSearching">
     <div class="row h-100 justify-content-center align-items-center">
-        <form class="col-12" id="findCvs" method="POST" action="/jobResults">
+        <form class="col-12" id="findCvs">
             <div class="jumbotron">
                 <h1 class="display-4">Find CVs</h1>
                 <hr class="my-4">
                 <div class="form-group">
                     <label for="cvKeyword">Keywords</label>
-                    <input type="text" class="form-control" name="cvKeyword"
-                           placeholder="job title, job type">
+                    <input type="text" class="form-control" name="cvKeyword" placeholder="job title, job type">
                 </div>
                 <div class="form-group">
                     <label for="cvLocation">Location</label>
@@ -216,23 +217,7 @@
         </div>
 
         <!--searching result area-->
-        <div class="col-sm-8">
-            <div class="card mb-2" id="jobSeekerResults">
-                <h5 class="card-header"><a href="#">title</a></h5>
-                <div class="card-body">
-                    <p class="font-weight-lighter font-italic">city</p>
-                    <hr>
-                    <!--job type-->
-                    <p class="card-text d-none d-lg-block">part time</p>
-                    <!--                    salary here-->
-                    <p class="card-text">$3000/month</p>
-                </div>
-            </div>
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container text-center">
-                    <h1 class="display-4">No Related Result! </h1>
-                </div>
-            </div>
+        <div class="col-sm-8" id="jobSeekerResults">
         </div>
     </div>
 </div>
