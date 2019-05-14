@@ -7,7 +7,7 @@ var jobData= {
         tool.dbConnection();
         tool.dealWithMultiStrings(condition, function (err, result) {
             if (!err) {
-                JobModel.find({
+                JobModel.find({inUse:"1",
                         $and: [
                             {
                                 $or: [{title: result},
@@ -107,7 +107,7 @@ var jobData= {
     showAllJobsByCompanyName: function(company, callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();
         var JobModel = require('../mongoDB/models/jobs');
-        JobModel.find({companyName: company},
+        JobModel.find({companyName: company, inUse:"1"},
             function (err, result) {
                 if (err) throw err;
                 callback(null, result);
@@ -147,7 +147,8 @@ var jobData= {
                 postDate: date,
                 street: adStreet,
                 state: adState,
-                country: adCoun
+                country: adCoun,
+                inUse:"1"
             },
             function (err, result) {
                 if (err) throw err;
@@ -184,14 +185,14 @@ var jobData= {
         if(sal=="undefined")  sal="0";
 
 
-        //dealWithMultiStrings() method allows user input multiple strings in the keyword search box, such as "Amazon full-time IT",
+        //dealWithMultiStrings() method allows user to input multiple strings in the keyword search box, such as "Amazon full-time IT",
         //This method can convert "Amazon full-time IT" to "/Amazon|full-time|IT/i"
         tool.dealWithMultiStrings(keyword, function (err, result) {
             if (!err) {
 
                 //Query salary with no upper limit.  To be specific, query salary>3000 or salary>-1000
                 if ((sal == "4") || (sal == "0")) {
-                    JobModel.find({
+                    JobModel.find({inUse:"1",
                         $and: [
                             {
                                 $or: [{title: result},
@@ -218,7 +219,7 @@ var jobData= {
                     }).sort({postDate: -1, title: 1});
 
                 } else {
-                    JobModel.find({
+                    JobModel.find({inUse:"1",
                         $and: [
                             {
                                 $or: [{title: result},
