@@ -16,6 +16,7 @@
     <script src="/javascripts/popper.min.js"></script>
 
     <script src="/javascripts/addressAutocompleteJS.js"></script>
+    <script src="/javascripts/jobRequestsJS.js"></script>
 
 </head>
 <body class="customize-body">
@@ -30,43 +31,82 @@
                 <h4>CV</h4>
                     <div class="form-group">
                         <label for="achievement">Achievement</label>
-                        <textarea class="form-control" id="achievement" rows="3" required>Show off if user already write these details</textarea>
+                        <textarea class="form-control" id="achievement" name="achievement" rows="3" required>
+                            <%if(cv){%>
+                                <%=cv.achievement %>
+                            <%}%>
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="education">Education</label>
-                        <textarea class="form-control" id="education" rows="3" required>Show off if user already write these details</textarea>
+                        <textarea class="form-control" id="education" name="education" rows="3" required>
+                            <%if(cv){%>
+                                <%=cv.education %>
+                            <%}%>
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="workExperience">Work Experience</label>
-                        <textarea class="form-control" id="workExperience" rows="3" required>Show off if user already write these details</textarea>
+                        <textarea class="form-control" id="workExperience" name="workExperience" rows="3" required>
+                            <%if(cv){%>
+                                <%=cv.workExperience %>
+                            <%}%>
+                        </textarea>
                     </div>
                     <hr>
                 <h4>Basic Information</h4>
                     <div class="form-group">
                         <label for="requestJobTitle">Title</label>
                         <input type="text" class="form-control" id="requestJobTitle" name="requestJobTitle"
-                               placeholder="Title" required>
+                               placeholder="Title" value="<%if(cv){%> <%=cv.title %> <%}%>" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="requestJobType">Job Type</label>
                             <select class="form-control" id="requestJobType" name="requestJobType">
-                                <option value="fullTime">Full Time</option>
-                                <option value="partTime">Part Time</option>
-                                <option value="internship">InternShip</option>
+                                <%
+                                    if(cv){
+                                        if(cv.jobType == 'Full-Time'){
+                                %>
+                                    <option value="Full-Time" selected = "selected">Full-Time</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="InternShip">InternShip</option>
+                                <%
+                                        } else if(cv.jobType == 'Part-Time'){
+                                %>
+                                    <option value="Full-Time" >Full-Time</option>
+                                    <option value="Part-Time" selected = "selected">Part-Time</option>
+                                    <option value="InternShip">InternShip</option>
+                                <%
+                                        } else {
+                                %>
+                                    <option value="Full-Time" >Full-Time</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="InternShip" selected = "selected">InternShip</option>
+                                <%
+                                        }
+                                    } else {
+
+                                %>
+                                    <option value="Full-Time" >Full-Time</option>
+                                    <option value="Part-Time">Part-Time</option>
+                                    <option value="InternShip">InternShip</option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="requestJobIndustry">Industry</label>
                             <select class="form-control" id="requestJobIndustry" name="requestJobIndustry">
-                                <option value="it">IT</option>
-                                <option value="education">Education</option>
-                                <option value="accounting">Accounting</option>
-                                <option value="energy">Energy</option>
-                                <option value="agriculture">Agriculture</option>
-                                <option value="transportation">Transportation</option>
-                                <option value="realEstate">Real Estate</option>
-                                <option value="other">Other</option>
+                                <option value="IT" <%if(cv){if(cv.industry == 'IT'){%> selected = "selected" <%}}%>>IT</option>
+                                <option value="Education" <%if(cv){if(cv.industry == 'Education'){%> selected = "selected" <%}}%>>Education</option>
+                                <option value="Accounting" <%if(cv){if(cv.industry == 'Accounting'){%> selected = "selected" <%}}%>>Accounting</option>
+                                <option value="Energy" <%if(cv){if(cv.industry == 'Energy'){%> selected = "selected" <%}}%>>Energy</option>
+                                <option value="Agriculture" <%if(cv){if(cv.industry == 'Agriculture'){%> selected = "selected" <%}}%>>Agriculture</option>
+                                <option value="Transportation" <%if(cv){if(cv.industry == 'Transportation'){%> selected = "selected" <%}}%>>Transportation</option>
+                                <option value="Real Estate" <%if(cv){if(cv.industry == 'Real Estate'){%> selected = "selected" <%}}%>>Real Estate</option>
+                                <option value="Other" <%if(cv){if(cv.industry == 'Other'){%> selected = "selected" <%}}%>>Other</option>
                             </select>
                         </div>
                     </div>
@@ -76,7 +116,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">£</span>
                             </div>
-                            <input type="text" class="form-control" required>
+                            <input type="text" class="form-control" id="salary" name="salary" value="<%if(cv){%> <%=cv.salary %> <%}%>" required>
                             <div class="input-group-append">
                                 <span class="input-group-text">/month</span>
                             </div>
@@ -100,29 +140,29 @@
                     </div>
                     <div class="form-group">
                         <label for="route">Street</label>
-                        <input type="text" class="form-control" id="route" placeholder="Street" required>
+                        <input type="text" class="form-control" id="route" name="route" value="<%if(cv){%> <%=cv.street %> <%}%>" placeholder="Street" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="postal_town">City</label>
-                            <input type="text" class="form-control" id="postal_town" placeholder="City" required>
+                            <input type="text" class="form-control" id="postal_town" name="postal_town" value="<%if(cv){%> <%=cv.city %> <%}%>" placeholder="City" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="administrative_area_level_1">State</label>
-                            <input type="text" class="form-control" id="administrative_area_level_1" placeholder="State" required>
+                            <input type="text" class="form-control" id="administrative_area_level_1" name="administrative_area_level_1" value="<%if(cv){%> <%=cv.state %> <%}%>" placeholder="State" required>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="postal_code">Postal Code</label>
-                            <input type="text" class="form-control" id="postal_code" placeholder="Postal Code" required>
+                            <input type="text" class="form-control" id="postal_code" name="postal_code" value="<%if(cv){%> <%=cv.postcode %> <%}%>" placeholder="Postal Code" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <input type="text" class="form-control" id="country" placeholder="Country" required>
+                        <input type="text" class="form-control" id="country" name="country" value="<%if(cv){%> <%=cv.country %> <%}%>" placeholder="Country" required>
                     </div>
                     <div class="row mt-2">
                         <div class="col text-center">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">PUSH</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">PUSH</button>
                         </div>
                     </div>
                 </form>

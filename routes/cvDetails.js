@@ -1,11 +1,24 @@
 var express = require('express');
 var router = express.Router();
+var cvData = require('../service/cvData');
 
-
-/* GET index page after login. */
+/* GET cv details page. */
 router.get('/', function(req, res, next) {
   console.log('***cvDetails***get***');
-  res.render('cvDetails', { user: req.session.user });
+
+  var cvId = req.query.cvId;
+  console.log('cvId:'+cvId);
+
+  cvData.showWholeCv(cvId,function (err, cv) {
+      if(err){
+          console.log("err:"+err);
+          throw err;
+          res.render('cvDetails', { user: req.session.user });
+      } else {
+          console.log("cv:"+cv);
+          res.render('cvDetails', { user: req.session.user,'cv':cv});
+      }
+  });
 });
 
 

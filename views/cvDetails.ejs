@@ -15,94 +15,49 @@
     <script src="/javascripts/popper.min.js"></script>
 </head>
 <body class="customize-body">
-<!--send CV Modal -->
-<div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Curriculum Vitae</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="consumerCv">
-                    <div class="form-group">
-                        <label for="achievement">Achievement</label>
-                        <textarea class="form-control" id="achievement"
-                                  rows="3">show users existing cv content here</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="education">Education</label>
-                        <textarea class="form-control" id="education"
-                                  rows="3">show users existing cv content here</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="workExperience">Work Experience</label>
-                        <textarea class="form-control" id="workExperience"
-                                  rows="3">show users existing cv content here</textarea>
-                    </div>
-                    <div class="col text-center">
-                        <button type="submit" class="btn btn-primary btn-block">SEND
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <%- include header.ejs -%>
 <div class="container">
     <div class="card mt-2">
         <div class="card-header">
             <!--            yiping-->
             <!--            user name here-->
-            <a href=""><h1>consumer's name</h1></a>
-            <p class="font-weight-lighter font-italic">user's email</p>
+            <a href="/personDetails?userId=<%=user.id%>"><h1><%=user.name %></h1></a>
+            <p class="font-weight-lighter font-italic"><%=user.email %></p>
         </div>
         <div class="card-body">
-            <!--            job title-->
-            <h3 class="card-title">Job Title goes here</h3>
-            <!--            salary-->
-            <h6 class="card-text">$4000/month</h6>
-            <!--            job type here-->
-            <h6 class="card-text">Part-time</h6>
-            <!--            postal code and city-->
-            <h6 class="card-text">postal code, city</h6>
-            <hr>
-            <label for="achievement"><b>Achievement</b></label>
-            <p class="card-text" id="achievement">here is user's achievement. here is user's achievement. here is user's
-                achievement. here is user's achievement. here is user's achievement. here is user's achievement. here is
-                user's achievement. here is user's achievement. here is user's achievement. here is user's achievement.
-                here is user's achievement. here is user's achievement. here is user's achievement.
-            </p>
-            <label for="education"><b>Education</b></label>
-            <p class="card-text" id="education">
-                here is user's education.here is user's education.here is user's education.here is user's
-                education.vhere is user's education.here is user's education.here is user's education.
-                here is user's education.
-                here is user's education.here is user's education.here is user's education.
-            </p>
-            <label for="workExperience"><b>Work Experience</b></label>
-            <p class="card-text" id="workExperience">
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-                Here is user's work experience.
-            </p>
-            <!--            description here-->
-            <img src="/image/aaa.jpg" class="img-thumbnail">
-            <hr>
-            <!--            post time -->
-            <h6 class="card-text">13/05/2019 09:05</h6>
+            <%
+                if(cv){
+            %>
+                <!--            job title-->
+                <h3 class="card-title"><%=cv.title %></h3>
+                <!--            salary-->
+                <h6 class="card-text">$<%=cv.salary %>/month</h6>
+                <!--            job type here-->
+                <h6 class="card-text"><%=cv.jobType %></h6>
+                <!--            postal code and city-->
+                <h6 class="card-text"><%=cv.postcode %>, <%=cv.city %></h6>
+                <hr>
+                <label for="achievement"><b>Achievement</b></label>
+                <p class="card-text" id="achievement">
+                    <%=cv.achievement %>
+                </p>
+                <label for="education"><b>Education</b></label>
+                <p class="card-text" id="education">
+                    <%=cv.education %>
+                </p>
+                <label for="workExperience"><b>Work Experience</b></label>
+                <p class="card-text" id="workExperience">
+                    <%=cv.workExperience %>
+                </p>
+                <!--            description here-->
+                <img src="<%=cv.profileUrl %>" class="img-thumbnail">
+                <hr>
+                <!--            post time -->
+                <h6 class="card-text"><%=cv.postDate %></h6>
+            <%
+                }
+            %>
+
         </div>
     </div>
 </div>
