@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var handleData = require('../mongoDB/handleData');
+var md5Ecryption = require('../service/pwdEncryption');
 
 /* GET index page after login. */
 router.get('/', function(req, res, next) {
@@ -14,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 
 /* validation of the login email and password */
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) {
   console.log("***forgotPassword***post***");
 
   var operation = req.body.operation;
@@ -53,10 +54,9 @@ router.post('/', function(req, res, next) {
           console.log('user answer:'+user.answer+", current answer:"+secretAnswer);
           if(user.answer == secretAnswer){ // right security answer
             var password = req.body.resetPassword;
-            console.log('same answer. new pwd:'+password);
 
             //update password
-            handleData.changePassword(email,password,function (err, user) {
+            handleData.changePassword(email,md5Ecryption.encryptPwd(email,password),function (err, user) {
                 if(err){
                     throw err;
                     console.log('err:'+err);
@@ -64,21 +64,12 @@ router.post('/', function(req, res, next) {
                 }
                 if(user){
                     console.log('update password successfully. user:'+user);
-                    res.json({'result':1,'user':user});
-                } else {
-                    console.log('no user return');
+                    res.json({'result':1});
                 }
             });
           }
         }
     });
-
-
-
-
-
-
-
   }
 });
 

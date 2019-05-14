@@ -1,5 +1,5 @@
 /**
- * all function here are used for components in index page.
+ * all function here are used for components in forgotPassword page.
  */
 
 $(document).ready(function() {
@@ -11,13 +11,8 @@ $(document).ready(function() {
         alert('resetPassword');
         event.preventDefault();
 
-        // var keyword = $('#keyword').val();
-        // var location = $('#location').val();
-
-        // window.location.href='/jobResults?keyword='+keyword+'&location='+location;
         var d={};
 
-        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
         var wholeForm = $('#resetPassword').serializeArray();
 
         $.each(wholeForm, function() {
@@ -37,7 +32,7 @@ $(document).ready(function() {
                 if(data.result === 0){
                     alert('Sorry, cannot reset password now.')
                 } else if(data.result === 1){
-                    window.location.href='/?user='+data.user;
+                    window.location.href='/';
                 }
             }
         });
@@ -82,18 +77,16 @@ function checkAll() {
 
 function checkEmail() {
     var email = $('#email').val();
-    alert('email:'+email);
 
     $.ajax({
         type: 'POST',
         url: '/forgotPassword',
         data: {'operation':'checkEmail','email':email},
         success: function(data) {
-            alert('ajax success.');
+
             if(data.result === 0){
                 alert('cannot reset password now.')
             } else if(data.result === 1){ // valid existing email
-                alert('valid email.');
 
                 if(data.securityQuestion == 1){
                     $('#secretQuestion').val("What primary school did you attend?");
@@ -107,9 +100,6 @@ function checkEmail() {
                 $('#secretQuestionDiv').show();
                 $('#resetPasswordDiv').show();
                 $('#reset').show();
-
-                // var currentAnswer = $('#secretAnswer').val();
-                // alert("right answer:"+data.securityAnswer+", current answer:"+currentAnswer);
 
             } else if(data.result === 2){ // this email have not been registered before.
                 alert('invalid email.');
