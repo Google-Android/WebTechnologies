@@ -17,21 +17,19 @@ var jobSchema=new Schema({
     country:String,
     postDate:String,
     longitude:Number,
-    latitude:Number
+    latitude:Number,
+    inUse:String   // "1" represents published job in use. "0" represents this job has been deleted.
+
 });
 
 
 module.exports=mongoose.model("jobs", jobSchema);
 
+    //
+    // Model=mongoose.model("jobs", jobSchema);
+    // Model.updateMany({},{$set:{inUse:"1"}},function(err,doc){
+    //     console.log(doc);
+    // })
 
 
 
-
-
-
-
-    // JobModel.find({type:/web/ },function(err, doc) {
-//         if (!err) {
-//             console.log(doc);
-//         }
-//     });
