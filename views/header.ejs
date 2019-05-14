@@ -33,24 +33,22 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                <div class="dropdown">
-
-                <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#">Hi!
-                <%= user.name %>
-                </a>
-                <div class="dropdown-menu">
-                <!-- company:/companyUserDetails ; person: /consumerUserDetails +id-->
-                <a class="dropdown-item" href="">Profile</a>
-                <!-- turn to index page-->
-                <a class="dropdown-item" href="#">Logout</a>
-                </div>
-                </div>
+                    <div class="dropdown">
+                        <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#">Hi!
+                            <%= user.name %>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/companyUserDetails?userId=<%=user._id %>">Profile</a>
+                            <!-- turn to index page-->
+                            <a class="dropdown-item" href="/?operation=logout">Logout</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item ml-2">
-                <!--            user profile, hidden before login-->
-                <a href="/message" class="btn btn-primary" aria-pressed="true">
-                Notifications
-                </a>
+                    <!--            user profile, hidden before login-->
+                    <a href="/message" class="btn btn-primary" aria-pressed="true">
+                    Notifications
+                    </a>
                 </li>
             </ul>
             <%
@@ -63,14 +61,14 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                 <div class="dropdown">
-
-                <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#">Hi!
-                <%= user.name %>
-                </a>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Logout</a>
-                </div>
+                    <a class="nav-link  dropdown-toggle" data-toggle="dropdown" href="#">Hi!
+                        <%= user.name %>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/consumerUserDetails?userId=<%=user._id %>">Profile</a>
+                        <!-- turn to index page-->
+                        <a class="dropdown-item" href="/?operation=logout">Logout</a>
+                    </div>
                 </div>
                 </li>
             </ul>
