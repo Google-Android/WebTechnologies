@@ -23,7 +23,6 @@ var jobData= {
         //Next,query these four words--"Amazon","Gucci", "full-time" and "IT" respectively in the title field, companyName field and jobType filed.
         //Take the union of query results. (Query results ignore case)
         var keyword=tool.dealWithMultiStrings(keyword);
-        console.log(keyword);
         var location=tool.dealWithMultiStrings(location);
 
 
@@ -36,16 +35,16 @@ var jobData= {
                         //The keywords you type in the first search box can be job title, company name or job type.
                         //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
                         //and then take the union of the query results.
-                        $or: [{title: keyword},
-                              {companyName: keyword},
-                              {jobType: keyword}]
+                        $or: [{title: {$regex:keyword, $options: 'i'}},
+                              {companyName: {$regex:keyword, $options: 'i'}},
+                              {jobType: {$regex:keyword, $options: 'i'}}]
                     },
                     {
                         //The location you type in the second search box can be city or postcode.
                         //Therefore, location need to be queried in the city field or postcode field respectively,
                         //and then take the union of the query results.
-                        $or: [{city: location},
-                              {postcode: location}]
+                        $or: [{city: {$regex:location, $options: 'i'}},
+                              {postcode: {$regex:location, $options: 'i'}}]
                     }
                     ]
         }, function (err, doc) {
@@ -105,16 +104,16 @@ var jobData= {
                         //The keywords you type in the first search box can be job title, company name or job type.
                         //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
                         //and then take the union of the query results.
-                        $or: [{title: keyword},
-                            {companyName: keyword},
-                            {jobType: keyword}]
+                        $or: [{title: {$regex:keyword, $options: 'i'}},
+                            {companyName: {$regex:keyword, $options: 'i'}},
+                            {jobType: {$regex:keyword, $options: 'i'}}]
                     },
                     {
                         //The location you type in the second search box can be city or postcode.
                         //Therefore, location need to be queried in the city field or postcode field respectively,
                         //and then take the union of the query results.
-                        $or: [{city: location},
-                            {postcode: location}]
+                        $or: [{city: {$regex:location, $options: 'i'}},
+                            {postcode: {$regex:location, $options: 'i'}}]
                     },
                     {
                         jobType: {$regex: jType, $options: 'i'}
@@ -142,13 +141,13 @@ var jobData= {
                 inUse: "1",
                 $and: [
                     {
-                        $or: [{title: keyword},
-                            {companyName: keyword},
-                            {jobType: keyword}]
+                        $or: [{title: {$regex: keyword, $options: 'i'}},
+                            {companyName: {$regex: keyword, $options: 'i'}},
+                            {jobType: {$regex: keyword, $options: 'i'}}]
                     },
                     {
-                        $or: [{city: location},
-                            {postcode: location}]
+                        $or: [{city: {$regex: location, $options: 'i'}},
+                            {postcode: {$regex: location, $options: 'i'}}]
                     },
                     {
                         jobType: {$regex: jType, $options: 'i'}
@@ -366,11 +365,11 @@ module.exports=jobData;  //Export this module
 //console.log(role_query);
 //keyword, location, jType, sal1,sal2, callback
 
-jobData.searchJob("amazon","",function(err,docs){
-    if(!err){
-        console.log(docs);
-    }
-});
+// jobData.searchJob("amazon","s5",function(err,docs){
+//     if(!err){
+//         console.log(docs.length);
+//     }
+// });
 
 
 
