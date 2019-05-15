@@ -14,6 +14,8 @@
     <script src="/javascripts/jquery-3.4.0.min.js"></script>
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
+
+    <script src="/javascripts/jobSeekerResultsJS.js"></script>
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
@@ -29,10 +31,10 @@
                         <div class="form-group">
                             <label for="secondCvKeyword">Keywords</label>
                             <input type="text" class="form-control" name="secondCvKeyword" id="secondCvKeyword"
-                                   placeholder="job title, job type, education..">
+                                   placeholder="job title, job type, education.." value=<%=firstKeyword %>>
                             <label for="secondCvLocation">Location</label>
                             <input type="text" class="form-control" name="secondCvLocation" id="secondCvLocation"
-                                   placeholder="Postal code, city">
+                                   placeholder="Postal code, city" value="<%=firstLocation %>">
                         </div>
                         <div class="accordion" id="cvSecondarySearch">
                             <!--salary-->
@@ -189,21 +191,33 @@
 
         <!--searching result area-->
         <div class="col-sm-8" id="jobSeekerResults">
-            '<div class="card mb-2">'
-                '<h5 class="card-header"><a href="/cvDetails?operation=showOthersCv&cvId='+cv._id+'">'+cv.title+'</a></h5>'
-                '<div class="card-body">'
-                    '<p class="font-weight-lighter font-italic">'+cv.city+'</p>'
-                    '<hr>'
-                    '<p class="card-text d-none d-lg-block">'+cv.jobType+'</p>'
-                    '<p class="card-text">$'+cv.salary+'/month</p>'
-                '</div>'
-            '</div>'
-
-            '<div class="jumbotron jumbotron-fluid">'
-                '<div class="container text-center">'
-                    '<h1 class="display-4">No Related Result! </h1>'
-                '</div>'
-            '</div>'
+            <%
+            if(cvs){
+                cvs.forEach(function(cv){
+            %>
+                <div class="card mb-2">
+                    <h5 class="card-header">
+                        <a href="/cvDetails?operation=showOthersCv&cvId=<%=cv._id %>"><%=cv.title %></a>
+                    </h5>
+                    <div class="card-body">
+                        <p class="font-weight-lighter font-italic"><%=cv.city %></p>
+                        <hr>
+                        <p class="card-text d-none d-lg-block"><%=cv.jobType %></p>
+                        <p class="card-text">$<%=cv.salary %>/month</p>
+                    </div>
+                </div>
+            <%
+                })
+            }else{ 
+            %>
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Related Result! </h1>
+                    </div>
+                </div>
+            <%
+            }
+            %>
         </div>
     </div>
 </div>

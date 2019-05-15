@@ -11,17 +11,17 @@ router.get('/', function(req, res, next) {
   var cvId = req.query.cvId;
   console.log('operation:'+operation+',cvId:'+cvId);
 
-  if(operation == 'showMyCv'){
-    cvData.showWholeCv(cvId,function (err, cv) {
-      if(err){
-          console.log("err:"+err);
-          throw err;
-      } else {
-          console.log("cv:"+cv);
-          res.render('cvDetails', { user: req.session.user,'cv':cv});
-      }
-    });
-  } else if(operation == 'showOthersCv'){
+  // if(operation == 'showMyCv'){
+  //   cvData.showWholeCv(cvId,function (err, cv) {
+  //     if(err){
+  //         console.log("err:"+err);
+  //         throw err;
+  //     } else {
+  //         console.log("cv:"+cv);
+  //         res.render('cvDetails', { user: req.session.user,'cv':cv});
+  //     }
+  //   });
+  // } else if(operation == 'showOthersCv'){
 
     cvData.showWholeCv(cvId,function (err, cv) {
       if(err){
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
       }
     });
     
-  }
+  // }
 
   
 
