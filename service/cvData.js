@@ -36,7 +36,7 @@ var cvData= {
 
 
 
-    sendCv: function(id,company,jobName,jobId,callback){
+    sendCv: function(id,company,jobName,jobId,userId,username,callback){
         require('../mongoDB/tools/connection');
         var CvModel = require('../mongoDB/models/cvConnJobs');
         // var User = require('../mongoDB/models/user');
@@ -48,14 +48,21 @@ var cvData= {
             cvId: id,
             companyName:company,
             jobTitle:jobName,
-            jobId:jobId
+            jobId:jobId,
+            userId:userId,
+            username:username
         },function(err,result){
             if (err) throw err;
-            userData.searchUser({cv:id},function(err,doc){
-                    result.username=doc.name+" "+doc.lastName;
-                    result.userId=doc._id;
-                    result.save();
-                });
+            // userData.searchUser({cv:id},function(err,doc){
+            //     console.log(doc);
+            //         result.username=doc.name+" "+doc.lastName;
+            //     console.log(doc.name);
+            //     console.log(result.username);
+            //         result.userId=doc._id;
+            //     console.log(result.userId);
+            //         result.save();
+            //         console.log(result);
+            //     });
 
             // jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
             //
@@ -288,13 +295,13 @@ module.exports=cvData;
 //         console.log(doc);
 //     }
 // })
-
+//
 // cvData.sendCv("5cd9a96e7607bc2578d74ddd","Baidu","Graduate Software Developer","5cd9bf1ea185a613354d7bdb",function(err,doc){
-//     if(!err){
+//    // if(!err){
 //         console.log('1111111');
 //         console.log(doc);
-//         console.log('22222');
-//     }
+//         //console.log('22222');
+//    // }
 // })
 
 // cvData.createCv("s","s","d",function(err,doc){
