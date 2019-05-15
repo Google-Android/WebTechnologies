@@ -76,6 +76,7 @@ router.post('/', upload.single('JobImage'), function(req, res) {
 
 });
 
+//new Date()
 function formatDate(date) {
     var myyear = date.getFullYear();
     var mymonth = date.getMonth() + 1;
@@ -87,7 +88,7 @@ function formatDate(date) {
     if (myweekday < 10) {
         myweekday = "0" + myweekday;
     }
-    return (myyear + "-" + mymonth + "-" + myweekday);//想要什么格式都可以随便自己拼
+    return (myyear + "-" + mymonth + "-" + myweekday);
 }
 
 
