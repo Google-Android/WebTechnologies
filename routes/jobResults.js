@@ -59,15 +59,9 @@ router.get('/', function(req, res, next) {
                 console.log('The number of search results:'+jobResults.length);
                 console.log("user:"+req.session.user);
                 res.send({user:req.session.user,'result':1,"jobResults":jobResults,'keyword':keyword,'location':location,'salary':salary,'industry':industry,"jobType":jobType});
-                // res.render('jobResults',{user:req.session.user,"jobResults":jobResults,'keyword':req.query.keyword,'location':req.query.location});
             }
         });
-
-
     }
-
-
-    // res.render('jobResults',{user:req.session.user,'keyword':req.query.keyword,'location':req.query.location});
 });
 
 
