@@ -17,7 +17,7 @@
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
-<div class="container" style="margin-top:30px">
+<div class="container mt-4" id="cvSearchingResults">
     <div class="row">
         <!--filter-->
         <div class="col-sm-4">
@@ -27,9 +27,12 @@
                     <form action="" id="cvSecondarySearch">
                         <!--secondary search bar-->
                         <div class="form-group">
-                            <label for="cvKeyword">Keywords</label>
-                            <input type="text" class="form-control" name="cvKeyword"
-                                   placeholder="job title, company name, job type" value="Amazon">
+                            <label for="secondCvKeyword">Keywords</label>
+                            <input type="text" class="form-control" name="secondCvKeyword" id="secondCvKeyword"
+                                   placeholder="job title, job type, education..">
+                            <label for="secondCvLocation">Location</label>
+                            <input type="text" class="form-control" name="secondCvLocation" id="secondCvLocation"
+                                   placeholder="Postal code, city">
                         </div>
                         <div class="accordion" id="cvSecondarySearch">
                             <!--salary-->
@@ -46,29 +49,29 @@
 
                                 <div id="collapseSalary" class="collapse" aria-labelledby="cvSalaryCollapse">
                                     <div class="card-body">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvSalary3000More"
-                                                   name="cvSalary">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvSalary3000More"
+                                                   name="cvSalary" value="4">
                                             <label class="custom-control-label" for="cvSalary3000More">£3000+</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input"
                                                    id="cvSalary2000To3000"
-                                                   name="cvSalary">
+                                                   name="cvSalary" value="3">
                                             <label class="custom-control-label"
                                                    for="cvSalary2000To3000">£2000-£3000</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input"
                                                    id="cvSalary1000To2000"
-                                                   name="cvSalary">
+                                                   name="cvSalary" value="2">
                                             <label class="custom-control-label"
-                                                   for="cvSalary">£1000-£2000</label>
+                                                   for="cvSalary1000To2000">£1000-£2000</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvSalary0To1000"
-                                                   name="cvSalary">
-                                            <label class="custom-control-label" for="cvSalary">£0-£1000</label>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvSalary0To1000"
+                                                   name="cvSalary" value="1">
+                                            <label class="custom-control-label" for="cvSalary0To1000">£0-£1000</label>
                                         </div>
                                     </div>
                                 </div>
@@ -80,63 +83,60 @@
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                 data-target="#collapseIndustry" aria-expanded="false"
                                                 aria-controls="collapseIndustry">
-                                            Location
+                                            Industry
                                         </button>
                                     </h2>
                                 </div>
                                 <div id="collapseIndustry" class="collapse" aria-labelledby="industryCollapse">
                                     <div class="card-body">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvIndustryEducation"
-                                                   name="cvIndustryEducation">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryEducation"
+                                                   name="cvIndustry" value="Education">
                                             <label class="custom-control-label"
                                                    for="cvIndustryEducation">Education</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvIndustryIt"
-                                                   name="cvIndustryIt">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryIt"
+                                                   name="cvIndustry" value="IT">
                                             <label class="custom-control-label"
                                                    for="cvIndustryIt">IT</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="cvIndustryAccounting"
-                                                   name="cvIndustryAccounting">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryAccounting"
+                                                   name="cvIndustry" value="Accounting">
                                             <label class="custom-control-label"
                                                    for="cvIndustryAccounting">Accounting</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvIndustryEnergy"
-                                                   name="cvIndustryEnergy">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryEnergy"
+                                                   name="cvIndustry" value="Energy">
                                             <label class="custom-control-label"
                                                    for="cvIndustryEnergy">Energy</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="cvIndustryAgriculture"
-                                                   name="cvIndustryAgriculture">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryAgriculture"
+                                                   name="cvIndustry" value="Agriculture">
                                             <label class="custom-control-label"
                                                    for="cvIndustryAgriculture">Agriculture</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input"
                                                    id="cvIndustryTransportation"
-                                                   name="cvIndustryTransportation">
+                                                   name="cvIndustry" value="Transportation">
                                             <label class="custom-control-label"
                                                    for="cvIndustryTransportation">Transportation</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="cvIndustryRealEstate"
-                                                   name="cvIndustryRealEstate">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryRealEstate"
+                                                   name="cvIndustry" value="Real Estate">
                                             <label class="custom-control-label"
                                                    for="cvIndustryRealEstate">Real Estate</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvOther"
-                                                   name="cvOther">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvIndustryOther"
+                                                   name="cvIndustry" value="Other">
                                             <label class="custom-control-label"
-                                                   for="cvOther">Other</label>
+                                                   for="cvIndustryOther">Other</label>
                                         </div>
                                     </div>
                                 </div>
@@ -155,21 +155,21 @@
                                 <div id="collapseJobType" class="collapse" aria-labelledby="jobTypeCollapse"
                                      data-parent="#cvSecondarySearch">
                                     <div class="card-body">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvJobTypeFullTime"
-                                                   name="cvJobTypeFullTime">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvJobTypeFullTime"
+                                                   name="cvJobType" value="Full-Time">
                                             <label class="custom-control-label"
                                                    for="cvJobTypeFullTime">Full-Time</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvJobTypePartTime"
-                                                   name="cvJobTypePartTime">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvJobTypePartTime"
+                                                   name="cvJobType" value="Part-Time">
                                             <label class="custom-control-label"
                                                    for="cvJobTypePartTime">Part-Time</label>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="cvJobTypeInternship"
-                                                   name="cvJobTypeInternship">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="cvJobTypeInternship"
+                                                   name="cvJobType" value="Internship">
                                             <label class="custom-control-label"
                                                    for="cvJobTypeInternship">Internship</label>
                                         </div>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col text-center">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Refine</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Refine</button>
                             </div>
                         </div>
                     </form>
@@ -188,24 +188,22 @@
         </div>
 
         <!--searching result area-->
-        <div class="col-sm-8">
-            <div class="card mb-2" id="jobSeekerResults">
-                <h5 class="card-header"><a href="#">title</a></h5>
-                <div class="card-body">
-                    <p class="font-weight-lighter font-italic">city</p>
-                    <hr>
-                    <!--job type-->
-                    <p class="card-text d-none d-lg-block">part time</p>
-                    <!--                    salary here-->
-                    <p class="card-text">$3000/month</p>
-                </div>
-            </div>
-            <!--display when there is no searching result-->
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container text-center">
-                    <h1 class="display-4">No Related Result! </h1>
-                </div>
-            </div>
+        <div class="col-sm-8" id="jobSeekerResults">
+            '<div class="card mb-2">'
+                '<h5 class="card-header"><a href="/cvDetails?operation=showOthersCv&cvId='+cv._id+'">'+cv.title+'</a></h5>'
+                '<div class="card-body">'
+                    '<p class="font-weight-lighter font-italic">'+cv.city+'</p>'
+                    '<hr>'
+                    '<p class="card-text d-none d-lg-block">'+cv.jobType+'</p>'
+                    '<p class="card-text">$'+cv.salary+'/month</p>'
+                '</div>'
+            '</div>'
+
+            '<div class="jumbotron jumbotron-fluid">'
+                '<div class="container text-center">'
+                    '<h1 class="display-4">No Related Result! </h1>'
+                '</div>'
+            '</div>'
         </div>
     </div>
 </div>
