@@ -60,15 +60,15 @@ router.post('/', function(req, res) {
     var education = req.body.education;
     var workExperience = req.body.workExperience;
 
-    console.log('1111111111111111');
     var userId = req.session.user._id;
-    console.log('222222222222222');
+
+    console.log('userName:'+req.session.user.name+',achievement:'+achievement+',education:'+education+',workExperience:'+workExperience);
 
     var companyName = req.body.companyName;
     var jobTitle = req.body.jobTitle;
     var jobId = req.body.jobId;
 
-    console.log('userId:'+userId+',userName:'+req.session.user.name+',achievement:'+achievement+',education:'+education+',workExperience:'+workExperience);
+    console.log('userId:'+userId+',companyName:'+companyName+',jobTitle:'+jobTitle+',jobId:'+jobId);
 
     // insert cv info into the database
     var cvId="";
@@ -77,7 +77,6 @@ router.post('/', function(req, res) {
             res.json({'result':0,'user':req.session.user,'jobTitle':jobTitle,'companyName':companyName,'jobId':jobId});
             throw err;
         }
-
 
         if(userObject){
             cvId=userObject.cv;

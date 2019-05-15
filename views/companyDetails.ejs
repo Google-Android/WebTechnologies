@@ -133,14 +133,17 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="reviews" class="container tab-pane active">
-            
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container text-center">
-                    <h1 class="display-4">No Review!</h1>
-                </div>
-            </div>
-
             <%
+            if(reviews){
+                if(reviews.length == 0){
+            %>
+                <div class="jumbotron jumbotron-fluid mt-2">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Review!</h1>
+                    </div>
+                </div>
+            <%
+                } else{
                 reviews.forEach(function(review){
             %>
 <!--            review of company-->
@@ -156,28 +159,37 @@
                 </div>
             </div>
             <%
-                })
+                    })
+                }
+            }
             %>
         </div>
         <!--posted jobs-->
         <div id="jobs" class="container tab-pane fade">
-            <!--fanhua no job provided notification-->
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container text-center">
-                    <h1 class="display-4">No Job Provided!</h1>
+            <%
+            if(jobs){
+                jobs.forEach(function(job){
+            %>
+                <div class="card mt-2 mb-2" id="jobResults">
+                    <h5 class="card-header"><a href="/jobDetails?jobId=<%=job.id %>"><%=job.title %></a></h5>
+                    <div class="card-body">
+                        <p class="card-text d-none d-lg-block"><%=job.description %></p>
+                        <p class="card-text"><%=job.salary %></p>
+                    </div>
                 </div>
-            </div>
-            <!--fanhua job list-->
-            <!--            繁华 循环开始-->
-            <div class="card mt-2 mb-2" id="jobResults">
-                <h5 class="card-header"><a href="#">job title</a></h5>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="">Company name</a></h5>
-                    <p class="card-text d-none d-lg-block">description</p>
-                    <p class="card-text">salary</p>
+            <%
+                })
+            }else{
+            %>
+                <div class="jumbotron jumbotron-fluid mt-2">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Job Provided!</h1>
+                    </div>
                 </div>
-            </div>
-            <!--循环结束-->
+            <%
+            }
+            %>
+            
         </div>
     </div>
 </div>

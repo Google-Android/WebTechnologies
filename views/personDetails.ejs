@@ -16,15 +16,14 @@
     <script src="/javascripts/bootstrap.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
 
-    <script src="/javascripts/companyDetailsJS.js"></script>
+    <script src="/javascripts/personDetailsJS.js"></script>
 
 </head>
 <body class="customize-body">
 <%- include header.ejs -%>
 
 <!--person review Modal -->
-<div class="modal fade" id="reviewPersonModal" tabindex="-1" role="dialog""
-     aria-hidden="true">
+<div class="modal fade" id="reviewPersonModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,7 +35,7 @@
             <!--            review modal-->
             <div class="modal-body">
                 <form id="personReview" encType="multipart/form-data">
-                    <input type="hidden" name="companyName" id="companyName" value="">
+                    <input type="hidden" name="ownerName" id="ownerName" value="<%=owner.name %>">
                     <div class="form-group">
                         <label for="reviewTitle">Title</label>
                         <input type="text" class="form-control" id="reviewTitle" name="reviewTitle" placeholder="Title of review">
@@ -75,23 +74,66 @@
 <div class="container-fluid">
     <div class="jumbotron text-center" style="margin-bottom:0">
 <!--        person name here-->
-        <h1 class="display-4 text-break">Jinping Xi</h1>
+        <%
+            if(owner){
+        %>
+            <h1 class="display-4 text-break"><%=owner.name %></h1>
+        <%
+            }else{
+        %>
+            <h1 class="display-4 text-break"><%=user.name %></h1>
+        <%
+            }
+        %>
+        
         <h2>
             <small class="text-success">Overall Rating:</small>
-                4
+            <%
+            var overallRating = 0;
+            var countReview = 0;
+            var averageScore = 0;
+            if(reviews){
+                reviews.forEach(function(review){
+                    countReview++;
+                    overallRating+=review.score;
+                });
+                <!-- if there exists review for this people -->
+                if(countReview!=0){
+                    averageScore=overallRating/countReview;
+                    averageScore=averageScore.toString();
+                    if (averageScore.length > 2)
+                        averageScore=averageScore.substring(0, 3);
+            %>
+                <%=averageScore %>
+            <%
+            <!-- if there is not any review for this people -->
+                } else {
+            %>
+                0
+            <%
+                }
+            }
+            %>
         </h2>
         <hr class="my-4">
         <%
-        if(user){
+        if(user){//have login already
+            if(owner){
+                if(owner.email == user.email){//view one's own page
+        %>
+                <h5 class="text-info">Cannot review by yourself</h5>
+        <%
+                }else{//view other's page
         %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewPersonModal">
                 REVIEW THIS PERSON
             </button>
         <%
-        } else {
+                }
+            }
+        }else{//not login yet
         %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginRegister">Login/Register</button>
-
             <h5 class="text-info">Only logged in users can review</h5>
         <%
         }
@@ -101,24 +143,35 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <divclass="container">
-
-            <div class="jumbotron jumbotron-fluid mt-2">
-                <div class="container text-center">
-                    <h1 class="display-4">No Review!</h1>
+            <%
+            if(reviews){
+                if(reviews.length == 0){
+            %>
+                <div class="jumbotron jumbotron-fluid mt-2">
+                    <div class="container text-center">
+                        <h1 class="display-4">No Review!</h1>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card mt-2 mb-2">
-                <h5 class="card-header">
-                    title of review
-                    <p class="font-weight-lighter font-italic">company name</p>
-                </h5>
-                <div class="card-body">
-                    <h5 class="card-title"><small>Rating: </small>4</h5>
-                    <p class="card-text">comment goes here</p>
-                    <img src="/image/aaa.jpg" class="img-thumbnail">
+            <%
+                } else{
+                    reviews.forEach(function(review){
+            %>
+                <div class="card mt-2 mb-2">
+                    <h5 class="card-header">
+                            <%=review.title %>
+                        <p class="font-weight-lighter font-italic"><%=review.publisherName %></p>
+                    </h5>
+                    <div class="card-body">
+                        <h5 class="card-title"><small>Rating: </small><%=review.score %></h5>
+                        <p class="card-text"><%=review.comment %></p>
+                        <img src="<%=review.pictureUrl %>" class="img-thumbnail">
+                    </div>
                 </div>
-            </div>
+            <%
+                    })
+                }
+            }
+            %>
         </div>
     </div>
 </div>

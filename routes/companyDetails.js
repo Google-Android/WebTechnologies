@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var reviewData = require('../service/reviewData');
+var jobData = require('../service/jobData');
+
 var fs = require('fs');
 var multer = require('multer');
 
@@ -38,17 +40,27 @@ router.get('/', function(req, res) {
   console.log("companyName:"+req.query.companyName);
 
   var companyName = req.query.companyName;
+
+  var reviewsResult = null;
   reviewData.searchReview(companyName,function(err,reviews){
     if(err) throw err;
 
     if(reviews){// exists reviews for this company
       console.log('reviews size:'+reviews.length);
-      res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviews});
-    } else { // no reviews for this company
-      res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':null});
-    }
-  });
+      reviewsResult=reviews;
+    } 
 
+    jobData.showAllJobsByCompanyName(companyName,function(err,jobs){
+      if(err) throw err;
+
+      if(jobs){
+        console.log('jobs:\n'+jobs);
+        res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviewsResult,'jobs':jobs});
+      } else {
+        res.render('companyDetails', { user:req.session.user,'companyName':companyName,'reviews':reviewsResult,'jobs':null});
+      }
+    });
+  });
 });
 
 /*  */

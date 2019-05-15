@@ -1,5 +1,5 @@
 /**
- * all function here are used for components in company detail page.
+ * all function here are used for components in person detail page.
  */
 $(document).ready(function() {
 
@@ -7,20 +7,20 @@ $(document).ready(function() {
      * add a review of one specific company
      * validate the username and password; if not existed yet, add the new user.
      */
-    $('#companyReview').on('submit', function(event) {
-        alert('get companyReview data done.');
+    $('#personReview').on('submit', function(event) {
+        alert('get personReview data done.');
         event.preventDefault();
 
-        var companyName = $('#companyName').val();
+        var ownerName = $('#ownerName').val();
         var reviewTitle = $('#reviewTitle').val();
         var reviewRating = $('#reviewRating').val();
         var reviewComment = $('#reviewComment').val();
         var reviewImage = document.getElementById("reviewImage");
 
-        alert('companyName:'+companyName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
+        alert('ownerName:'+ownerName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
 
         var d = new FormData();
-        d.append('companyName',companyName);
+        d.append('ownerName',ownerName);
         d.append('reviewTitle',reviewTitle);
         d.append('reviewRating',reviewRating);
         d.append('reviewComment',reviewComment);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/companyDetails',
+            url: '/personDetails',
             data: d,
             contentType: false,
             processData: false,
