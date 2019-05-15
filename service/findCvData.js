@@ -1,8 +1,6 @@
 
 var findCvData= {
 
-
-
     //小cv，信息有限，查不了小cv
     searchCv: function (condition, condition2, callback) {
         var CvModel = require('../mongoDB/models/cvs');
@@ -42,11 +40,11 @@ var findCvData= {
         var tool = require('../mongoDB/tools/dbUtil');
         tool.dbConnection();
 
-        if(jType == "undefined") jType = "";
-        if(jobIndustry == "undefined") jobIndustry = "";
+        //if(jType == "undefined") jType = "";
+        //if(jobIndustry == "undefined") jobIndustry = "";
         //If the user does not select the salary option, the system displays a result that includes all salaries.
         //set sal="0", then look for all jobs whose salary is more than -1,000.    (sal - 1) * 1000= -1000
-        if(sal=="undefined")  sal="0";
+        if(sal=="")  sal="0";
 
 
         //dealWithMultiStrings() method allows user to input multiple strings in the keyword search box, such as "",
@@ -132,7 +130,7 @@ module.exports=findCvData;   // export this module
 //     }
 //
 // });
-
-// findCvData.secondarySearchCv("this","","undefined","1","undefined",function(err,result){
+// location:sheffield,salary:3,industry:undefined,jobType:undefined
+// findCvData.secondarySearchCv("r","sheffield","undefined","3","undefined",function(err,result){
 //     console.log(result);
 // });
