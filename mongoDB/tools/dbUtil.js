@@ -2,16 +2,19 @@
 var tools={
     //用于find CVs and find jobs的一级搜索
 
-    dealWithMultiStrings: function(condition,callback) {
-        var keyArr = condition.split(" ");
+    dealWithMultiStrings: function(condition) {
+        if(condition.trim()!=="") {
+            var keyArr = condition.split(" ");
 
-        var key_query = "";
-        for (var i = 0; i < keyArr.length; i++) {
-            key_query = key_query + keyArr[i] + "|";
+            var key_query = "";
+            for (var i = 0; i < keyArr.length; i++) {
+                key_query = key_query + keyArr[i] + "|";
+            }
+            key_query = key_query.substring(0, key_query.length - 1);
+            condition = new RegExp(key_query, "i");
+            //callback(null, condition);
         }
-        key_query = key_query.substring(0, key_query.length - 1);
-        condition = new RegExp(key_query, "i");
-        callback(null, condition);
+        return condition;
     },
 
 
