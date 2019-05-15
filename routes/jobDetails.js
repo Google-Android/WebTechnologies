@@ -29,8 +29,7 @@ router.get('/', function(req, res) {
             }
 
             if(cv){// find cv
-                console.log('find cv of this user.');
-                console.log('cv achievement: '+cv.achievement);
+                console.log('find cv:\n'+cv);
                 cvObject=cv;
             }
         });
@@ -41,8 +40,8 @@ router.get('/', function(req, res) {
        if(err) throw err;
 
        if(job){
-           console.log('job length:'+job.length);
-           res.render('jobDetails',{user:req.session.user,'job':job[0],'cv':cvObject});
+           console.log('find job:\n'+job);
+           res.render('jobDetails',{user:req.session.user,'job':job,'cv':cvObject});
        } else { // cannot find this job
            console.log('cannot find this job.');
            res.render('jobDetails',{user:req.session.user});
