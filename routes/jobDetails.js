@@ -84,7 +84,7 @@ router.post('/', function(req, res) {
         }
     });
 
-    cvData.sendCv(cvId,companyName,jobTitle,function (err,cvConnCompany) {
+    cvData.sendCv(cvId,companyName,jobTitle,jobId, function (err,cvConnCompany) {
         if(err) {
             res.json({'result':0,'user':req.session.user,'jobTitle':jobTitle,'companyName':companyName,'jobId':jobId});
             throw err;
