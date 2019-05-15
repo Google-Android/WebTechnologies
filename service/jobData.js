@@ -23,6 +23,7 @@ var jobData= {
         //Next,query these four words--"Amazon","Gucci", "full-time" and "IT" respectively in the title field, companyName field and jobType filed.
         //Take the union of query results. (Query results ignore case)
         var keyword=tool.dealWithMultiStrings(keyword);
+        console.log(keyword);
         var location=tool.dealWithMultiStrings(location);
 
 
@@ -208,6 +209,17 @@ var jobData= {
 
     },
 
+    searchSingleJob: function(condition, callback) {
+        require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
+        var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
+        JobModel.findOne(condition,
+            function (err, result) {
+                if (err) throw err;
+                callback(null, result);
+            });
+
+    },
+
 
 
 
@@ -354,11 +366,11 @@ module.exports=jobData;  //Export this module
 //console.log(role_query);
 //keyword, location, jType, sal1,sal2, callback
 
-// jobData.searchJob("amazon full-time","S1 7N sheffield ",function(err,docs){
-//     if(!err){
-//         console.log(docs);
-//     }
-// });
+jobData.searchJob("amazon","",function(err,docs){
+    if(!err){
+        console.log(docs);
+    }
+});
 
 
 
