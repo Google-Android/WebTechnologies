@@ -82,7 +82,7 @@ module.exports=handleData;
 //     console.log(doc);
 // })
 
-// handleData.addCvIntoUser("5cd5572dc4cca61a76737198","asd","sdd","sss",function(err,doc){
+// handleData.addCvIntoUser("5cd5572dc4cca61a76737198","123321","sdd","sss",function(err,doc){
 //     if(!err){
 //         console.log(doc);
 //     }

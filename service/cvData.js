@@ -36,7 +36,7 @@ var cvData= {
 
 
 
-    sendCv: function(id,company,jobName,callback){
+    sendCv: function(id,company,jobName,jobId,callback){
         require('../mongoDB/tools/connection');
         var CvModel = require('../mongoDB/models/cvConnJobs');
         // var User = require('../mongoDB/models/user');
@@ -47,43 +47,46 @@ var cvData= {
         CvModel.create({
             cvId: id,
             companyName:company,
-            jobTitle:jobName
-        // },function(err,doc){
-        //     // doc.username=user;
-        //     // console.log(user);
-        //     // // doc.userId=user._id;
-        //     // // doc.jobId=job._id;
-        //     // doc.save();
-        //     //
-        //     // if (err) throw err;
-        //     // else{
-        //     //     // doc.username=user.name+" "+user.lastName;
-            //     // doc.userId=user._id;
-            //     // doc.jobId=job._id;
-            //     // doc.save();
-            //     callback(null, doc);
-            // }
-        });
-
-
-        userData.searchUser({cv:id},function(err,doc){
-                CvModel.findOne({cvId:id},function(err,result){
+            jobTitle:jobName,
+            jobId:jobId
+        },function(err,result){
+            if (err) throw err;
+            userData.searchUser({cv:id},function(err,doc){
                     result.username=doc.name+" "+doc.lastName;
                     result.userId=doc._id;
                     result.save();
                 });
 
-            //console.log(name);
+            // jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
+            //
+            //         result.jobId=doc._id;
+            //
+            //
+            // });
+            //result.save();
+            callback(null,result);
+
         });
 
-        jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
-            CvModel.findOne({cvId:id},function(err,result){
-                result.jobId=doc._id;
-                result.save();
-                callback(null,result);
-            });
 
-        });
+        // userData.searchUser({cv:id},function(err,doc){
+        //         CvModel.findOne({cvId:id,companyName:company,jobTitle:jobName},function(err,result){
+        //             result.username=doc.name+" "+doc.lastName;
+        //             result.userId=doc._id;
+        //             result.save();
+        //         });
+        //
+        //     //console.log(name);
+        // });
+        //
+        // jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
+        //     CvModel.findOne({cvId:id},function(err,result){
+        //         result.jobId=doc._id;
+        //         result.save();
+        //         callback(null,result);
+        //     });
+        //
+        // });
 
         // var user=function(id) {
         //     return User.findOne({
@@ -286,11 +289,13 @@ module.exports=cvData;
 //     }
 // })
 
-cvData.sendCv("5cd9a886b7207b2566696ac0","Amazon","babysitter",function(err,doc){
-    if(!err){
-        console.log(doc);
-    }
-})
+// cvData.sendCv("5cd9a96e7607bc2578d74ddd","Baidu","Graduate Software Developer","5cd9bf1ea185a613354d7bdb",function(err,doc){
+//     if(!err){
+//         console.log('1111111');
+//         console.log(doc);
+//         console.log('22222');
+//     }
+// })
 
 // cvData.createCv("s","s","d",function(err,doc){
 //     console.log(doc);
