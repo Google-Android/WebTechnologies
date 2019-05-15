@@ -56,12 +56,12 @@
                     <form action="" id="cvSecondarySearch">
                         <!--secondary search bar-->
                         <div class="form-group">
-                            <label for="cvKeyword">Keywords</label>
-                            <input type="text" class="form-control" name="cvKeyword"
-                                   placeholder="job title, job type, education.." value="">
-                            <label for="cvLocation">Location</label>
-                            <input type="text" class="form-control" name="cvLocation"
-                                   placeholder="Postal code, city" value="">
+                            <label for="secondCvKeyword">Keywords</label>
+                            <input type="text" class="form-control" name="secondCvKeyword" id="secondCvKeyword"
+                                   placeholder="job title, job type, education..">
+                            <label for="secondCvLocation">Location</label>
+                            <input type="text" class="form-control" name="secondCvLocation" id="secondCvLocation"
+                                   placeholder="Postal code, city">
                         </div>
                         <div class="accordion" id="cvSecondarySearch">
                             <!--salary-->
@@ -112,7 +112,7 @@
                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                 data-target="#collapseIndustry" aria-expanded="false"
                                                 aria-controls="collapseIndustry">
-                                            Location
+                                            Industry
                                         </button>
                                     </h2>
                                 </div>
@@ -208,7 +208,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col text-center">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Refine</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Refine</button>
                             </div>
                         </div>
                     </form>

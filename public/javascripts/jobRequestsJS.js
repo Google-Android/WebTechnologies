@@ -54,7 +54,7 @@ $(document).ready(function() {
                 alert('ajax success.');
                 if(data.result === 1){
                     alert('insert or update cv successfully.')
-                    window.location.href='/cvDetails?cvId='+data.cvId;
+                    window.location.href='/cvDetails?operation=showMyCv&cvId='+data.cvId;
                 } else if(data.result === 2){
                     alert('Sorry, cannot insert or update cv now.');
                 }

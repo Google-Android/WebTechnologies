@@ -19,10 +19,20 @@
 <div class="container">
     <div class="card mt-2">
         <div class="card-header">
-            <!--            yiping-->
-            <!--            user name here-->
-            <a href="/personDetails?userId=<%=user.id%>"><h1><%=user.name %></h1></a>
-            <p class="font-weight-lighter font-italic"><%=user.email %></p>
+            <!--            cv owner's name here-->
+            <%
+            if(owner){
+            %>
+                <a href="/personDetails?operation=otherPersonDetails&ownerId=<%=owner.id%>"><h1><%=owner.name %></h1></a>
+                <p class="font-weight-lighter font-italic"><%=owner.email %></p>
+            <%
+            } else {
+            %>
+                <a href="/personDetails?operation=myPersonDetails&ownerId=<%=user.id%>"><h1><%=user.name %></h1></a>
+                <p class="font-weight-lighter font-italic"><%=user.email %></p>
+            <%  
+            }
+            %>
         </div>
         <div class="card-body">
             <%
