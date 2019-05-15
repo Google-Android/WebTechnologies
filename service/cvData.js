@@ -35,19 +35,116 @@ var cvData= {
 
 
 
-    sendCv: function(id,company,job,callback){
+
+    sendCv: function(id,company,jobName,callback){
         require('../mongoDB/tools/connection');
         var CvModel = require('../mongoDB/models/cvConnJobs');
+        // var User = require('../mongoDB/models/user');
+        var userData = require('../mongoDB/handleData');
+        var jobData = require('./jobData');
+        // var Job = require('../mongoDB/models/jobs');
+
         CvModel.create({
-                cvId: id,
-                companyName:company,
-                jobTitle: job
-            },
-            function(err,result){
-                if (err) throw err;
-                callback(null, result);
+            cvId: id,
+            companyName:company,
+            jobTitle:jobName
+        // },function(err,doc){
+        //     // doc.username=user;
+        //     // console.log(user);
+        //     // // doc.userId=user._id;
+        //     // // doc.jobId=job._id;
+        //     // doc.save();
+        //     //
+        //     // if (err) throw err;
+        //     // else{
+        //     //     // doc.username=user.name+" "+user.lastName;
+            //     // doc.userId=user._id;
+            //     // doc.jobId=job._id;
+            //     // doc.save();
+            //     callback(null, doc);
+            // }
+        });
+
+
+        userData.searchUser({cv:id},function(err,doc){
+                CvModel.findOne({cvId:id},function(err,result){
+                    result.username=doc.name+" "+doc.lastName;
+                    result.userId=doc._id;
+                    result.save();
+                });
+
+            //console.log(name);
+        });
+
+        jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
+            CvModel.findOne({cvId:id},function(err,result){
+                result.jobId=doc._id;
+                result.save();
+                callback(null,result);
+            });
 
         });
+
+        // var user=function(id) {
+        //     return User.findOne({
+        //         cv: id
+        //     });
+        // }
+        // console.log(user);
+
+        // var job=function(jobName,company){
+        //     Job.findOne({title:jobName,companyName:company},function(err,doc){
+        //         return doc
+        //         }
+        //         )};
+        // console.log(job);
+
+        //
+        // CvModel.create({
+        //         cvId: id,
+        //         companyName:company,
+        //         jobTitle:jobName
+        //
+        //
+        //
+        // },function(err,doc){
+        //     doc.username=user;
+        //     console.log(user);
+        //     // doc.userId=user._id;
+        //     // doc.jobId=job._id;
+        //     doc.save();
+        //     //
+        //     // if (err) throw err;
+        //     // else{
+        //     //     // doc.username=user.name+" "+user.lastName;
+        //     //     // doc.userId=user._id;
+            //     // doc.jobId=job._id;
+            //     // doc.save();
+            //     callback(null, doc);
+            // }
+        // });
+        //
+        //
+        //
+        // CvModel.findOne({cvId:id},function(err,doc){
+        //     doc.username=name;
+        //     // doc.userId=user._id;
+        //     // doc.jobId=job._id;
+        //     doc.save();
+        //         //
+        //         // if (err) throw err;
+        //         // else{
+        //         //     // doc.username=user.name+" "+user.lastName;
+        //         //     // doc.userId=user._id;
+        //         //     // doc.jobId=job._id;
+        //         //     // doc.save();
+        //         //     callback(null, doc);
+        //         // }
+        // });
+
+
+
+
     },
 
 
@@ -189,11 +286,11 @@ module.exports=cvData;
 //     }
 // })
 
-// cvData.sendCv("5cd9a96e7607bc2578d74ddd","kkk","ddddd",function(err,doc){
-//     if(!err){
-//         console.log(doc);
-//     }
-// })
+cvData.sendCv("5cd9a886b7207b2566696ac0","Amazon","babysitter",function(err,doc){
+    if(!err){
+        console.log(doc);
+    }
+})
 
 // cvData.createCv("s","s","d",function(err,doc){
 //     console.log(doc);
