@@ -3,9 +3,9 @@
  */
 $(document).ready(function() {
 
-     /**
+    /**
      * add a review of one specific company
-     * validate the username and password; if not existed yet, add the new user. 
+     * validate the username and password; if not existed yet, add the new user.
      */
     $('#companyReview').on('submit', function(event) {
         alert('get companyReview data done.');
@@ -33,12 +33,11 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {
-                if(data.result===0){
-                    alert("Please login first.");
-                } else if(data.result === 1){
+                alert('ajax successfully.');
+                if(data.result === 1){
                     window.location.reload();
                 } else if(data.result === 2){
-                    alert("Sorry, cannot create a new account now.");
+                    alert("Sorry, cannot add a new review now.");
                 }
             }
         });
