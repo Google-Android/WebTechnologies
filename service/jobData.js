@@ -109,7 +109,8 @@ var jobData= {
             JobModel.find({
                 inUse: "1",  //Only query for published work that has not been deleted.
 
-
+                //The parameter radius is in kilometers.
+                //Radius divided by 112 means convert kilometers into radians
                 location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
 
                 //The job secondary search page has multiple search boxes.
@@ -389,11 +390,11 @@ module.exports=jobData;  //Export this module
 //console.log(role_query);
 //keyword, location, jType, sal1,sal2, callback
 
-jobData.searchJob("","",2,3,4,function(err,docs){
-    if(!err){
-        console.log(docs.length);
-    }
-});
+// jobData.searchJob("","",2,3,4,function(err,docs){
+//     if(!err){
+//         console.log(docs.length);
+//     }
+// });
 
 
 
