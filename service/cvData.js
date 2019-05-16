@@ -1,10 +1,24 @@
-
+/**
+ * All encapsulated CRU methods related with job request.
+ *
+ * @type {{showWholeCv: cvData.showWholeCv, completeRequestInfo: cvData.completeRequestInfo, fillInBlankRequestInfo: cvData.fillInBlankRequestInfo, updateCv: cvData.updateCv, sendCv: cvData.sendCv, showCv: cvData.showCv, mainRequestInfo: cvData.mainRequestInfo, createCv: cvData.createCv}}
+ * @last_modify_date     2019-05-17
+ */
 var cvData= {
-    //require('../mongoDB/models/user');
-    updateCv: function(cvId,accomplishment,edu,experience){
-        require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvs');
 
+    /**
+     * This method is used to update CV containing achievement, education and work experience.
+     *
+     * @param cvId
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     */
+    updateCv: function(cvId,accomplishment,edu,experience){
+        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        var CvModel = require('../mongoDB/models/cvs');       //Import the schema of the collection of cvs.
+
+        //A person can only have one CV whose ID is unique. If users change their CVs, update them on  existing CVs.
         CvModel.findOne({_id:cvId},function(err,doc){
             if (err) throw err;
             else{
@@ -13,36 +27,50 @@ var cvData= {
                 doc.workExperience=experience;
                 doc.save();
             }
-
         });
     },
 
+
+
+    /**
+     * This method is used to insert CV containing achievement, education and work experience into database.
+     *
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     * @param callback
+     */
     createCv: function(accomplishment,edu,experience,callback){
-        require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvs');
+        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        var CvModel = require('../mongoDB/models/cvs');       //Import the schema of the collection of cvs.
 
         CvModel.create({
             achievement:accomplishment,
             education: edu,
             workExperience: experience
-
-        },
-            function (err, result) {
-                if (err) throw err;
-                callback(null, result);
-            });
+        },function (err, result) {
+            if (err) throw err;
+            callback(null, result);
+        });
     },
 
 
-
-
+    /**
+     * When users send CVs to companies they are interested, insert user information, their CV information, job and company information into "cvconnjobs" collection
+     * that is used to map users to jobs.
+     * This method is prepared to implement a functionality that allows companies to see which users have applied for which jobs in their companies.
+     *
+     * @param id
+     * @param company
+     * @param jobName
+     * @param jobId
+     * @param userId
+     * @param username
+     * @param callback
+     */
     sendCv: function(id,company,jobName,jobId,userId,username,callback){
-        require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvConnJobs');
-        // var User = require('../mongoDB/models/user');
-        var userData = require('../mongoDB/handleData');
-        var jobData = require('./jobData');
-        // var Job = require('../mongoDB/models/jobs');
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var CvModel = require('../mongoDB/models/cvConnJobs');   //Import the schema of the collection of cvConnJobs.
 
         CvModel.create({
             cvId: id,
@@ -53,134 +81,57 @@ var cvData= {
             username:username
         },function(err,result){
             if (err) throw err;
-            // userData.searchUser({cv:id},function(err,doc){
-            //     console.log(doc);
-            //         result.username=doc.name+" "+doc.lastName;
-            //     console.log(doc.name);
-            //     console.log(result.username);
-            //         result.userId=doc._id;
-            //     console.log(result.userId);
-            //         result.save();
-            //         console.log(result);
-            //     });
-
-            // jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
-            //
-            //         result.jobId=doc._id;
-            //
-            //
-            // });
-            //result.save();
             callback(null,result);
-
         });
-
-
-        // userData.searchUser({cv:id},function(err,doc){
-        //         CvModel.findOne({cvId:id,companyName:company,jobTitle:jobName},function(err,result){
-        //             result.username=doc.name+" "+doc.lastName;
-        //             result.userId=doc._id;
-        //             result.save();
-        //         });
-        //
-        //     //console.log(name);
-        // });
-        //
-        // jobData.searchSingleJob({companyName:company,title:jobName},function(err,doc){
-        //     CvModel.findOne({cvId:id},function(err,result){
-        //         result.jobId=doc._id;
-        //         result.save();
-        //         callback(null,result);
-        //     });
-        //
-        // });
-
-        // var user=function(id) {
-        //     return User.findOne({
-        //         cv: id
-        //     });
-        // }
-        // console.log(user);
-
-        // var job=function(jobName,company){
-        //     Job.findOne({title:jobName,companyName:company},function(err,doc){
-        //         return doc
-        //         }
-        //         )};
-        // console.log(job);
-
-        //
-        // CvModel.create({
-        //         cvId: id,
-        //         companyName:company,
-        //         jobTitle:jobName
-        //
-        //
-        //
-        // },function(err,doc){
-        //     doc.username=user;
-        //     console.log(user);
-        //     // doc.userId=user._id;
-        //     // doc.jobId=job._id;
-        //     doc.save();
-        //     //
-        //     // if (err) throw err;
-        //     // else{
-        //     //     // doc.username=user.name+" "+user.lastName;
-        //     //     // doc.userId=user._id;
-            //     // doc.jobId=job._id;
-            //     // doc.save();
-            //     callback(null, doc);
-            // }
-        // });
-        //
-        //
-        //
-        // CvModel.findOne({cvId:id},function(err,doc){
-        //     doc.username=name;
-        //     // doc.userId=user._id;
-        //     // doc.jobId=job._id;
-        //     doc.save();
-        //         //
-        //         // if (err) throw err;
-        //         // else{
-        //         //     // doc.username=user.name+" "+user.lastName;
-        //         //     // doc.userId=user._id;
-        //         //     // doc.jobId=job._id;
-        //         //     // doc.save();
-        //         //     callback(null, doc);
-        //         // }
-        // });
-
-
-
 
     },
 
 
-    // 用投影了！！！！！！！！！！！  如果可以查到结果，就显示在页面上，查不到就不显示
-    //cvId 的值，就是user.cv 的值，即使这个字段是默认值"no"，也直接传进来
 
+
+    /**
+     * If users has created their CVs, every time when they send CVs to companies they are interested,
+     * the application form will automatically show the CV information they have written before by calling this method.
+     * Otherwise, the application form is blank.
+     *
+     * @param cvId
+     * @param callback
+     */
     showCv: function(cvId,callback){
-        require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvs');
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var CvModel = require('../mongoDB/models/cvs');          //Import the schema of the collection of cvs.
+
+        //The cvID parameter of this function refers to the value of cv field of users collection.
+        //In the users collection, if users don't create CV, the default value of cv field is "no".
         if(cvId!="no") {
+
+            //cv collection stores the whole job request information including CV part.
+            //Because this method only need CV information, the field information related to CV can be displayed with the projection method.
             CvModel.findOne({_id: cvId}, {achievement: 1, education: 1, workExperience: 1},
                 function (err, result) {
                     if (err) throw err;
                     else {
                         callback(null, result);
                     }
-
-                });
+            });
         }else{
             callback(null,null);
         }
     },
 
+
+    /**
+     * By cvId, get the whole job request information including CV, basic information.
+     *
+     * @param cvId
+     * @param callback
+     */
     showWholeCv: function(cvId,callback){
-        require('../mongoDB/tools/connection');
-        var CvModel = require('../mongoDB/models/cvs');
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var CvModel = require('../mongoDB/models/cvs');          //Import the schema of the collection of cvs.
+
+        //The cvID parameter of this function refers to the value of cv field of users collection.
+        //In the users collection, if users don't create CV, the default value of cv field is "no".
         if(cvId!="no") {
             CvModel.findOne({_id: cvId},
                 function (err, result) {
@@ -195,10 +146,37 @@ var cvData= {
         }
     },
 
-    // 已经有cv信息了
+
+
+
+    /**
+     * Update the job request information.
+     * When users apply jobs, they send CV to company. When users request jobs, they create job request information which includes CV.
+     * It means when users create job request, maybe they have already written CV as the part of job request before.
+     * In this way, they only need to complete the blanks left of job request.
+     * For database, we need to add other fields in the existing job request document of the collection. So, need to update collection.
+     *
+     * @param cvId
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     * @param jobName
+     * @param type
+     * @param jobIndustry
+     * @param sal
+     * @param picUrl
+     * @param adStreet
+     * @param adCity
+     * @param adState
+     * @param zipcode
+     * @param adCoun
+     * @param date
+     * @param callback
+     */
     completeRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/connection');
-        var RequestModel = require('../mongoDB/models/cvs');
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var RequestModel = require('../mongoDB/models/cvs');     //Import the schema of the collection of cvs.
+
         RequestModel.findOne({_id:cvId},function(err,doc){
             if (err) throw err;
             else{
@@ -209,7 +187,7 @@ var cvData= {
                 doc.jobType=type,
                 doc.industry=jobIndustry,
                 doc.salary=sal,
-                doc.profileUrl="../image/"+picUrl,
+                doc.profileUrl="../image/"+picUrl,                    //User can upload picture. database stores the path of the picture.
                 doc.street=adStreet,
                 doc.city=adCity,
                 doc.state=adState,
@@ -225,9 +203,32 @@ var cvData= {
 
 
 
+    /**
+     * Create the job request information.
+     * When users apply jobs, they send CV to company. When users request jobs, they create job request information which includes CV.
+     * completeRequestInfo() method is aimed at this situation that when users create job request, maybe they has already written CV which is part of job request before.
+     * This fillInBlankRequestInfo() method is aimed at this situation that when users create job request, they haven't written CV before.
+     * For database, we need to create a new document of the collection.
+     *
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     * @param jobName
+     * @param type
+     * @param jobIndustry
+     * @param sal
+     * @param picUrl
+     * @param adStreet
+     * @param adCity
+     * @param adState
+     * @param zipcode
+     * @param adCoun
+     * @param date
+     * @param callback
+     */
     fillInBlankRequestInfo: function(accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/connection');
-        var RequestModel = require('../mongoDB/models/cvs');
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var RequestModel = require('../mongoDB/models/cvs');     //Import the schema of the collection of cvs.
 
         RequestModel.create({
             achievement: accomplishment,
@@ -237,7 +238,7 @@ var cvData= {
             jobType: type,
             industry: jobIndustry,
             salary: sal,
-            profileUrl: "../image/"+picUrl,
+            profileUrl: "../image/"+picUrl,                           //User can upload picture. database stores the path of the picture.
             street: adStreet,
             city: adCity,
             state: adState,
@@ -251,24 +252,44 @@ var cvData= {
     },
 
 
-
-    // 总的方法！
+    /**
+     * By calling fillInBlankRequestInfo() and completeRequestInfo(), this method is used for user to fill in or change job request form.
+     * When users apply jobs, they send CV to company. When users request jobs, they create job request information which includes CV.
+     * It means when users create job request, maybe they have already written CV as the part of job request before or not.
+     * Can call this method to create job request whether users wrote CV before or not.
+     *
+     * @param cvId
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     * @param jobName
+     * @param type
+     * @param jobIndustry
+     * @param sal
+     * @param picUrl
+     * @param adStreet
+     * @param adCity
+     * @param adState
+     * @param zipcode
+     * @param adCoun
+     * @param date
+     * @param callback
+     */
     mainRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/connection');
-        var tempCvData =require('./cvData');
-        // tempCvData.showCv(cvId,function(err,result){
-        //     if (err) throw err;
-        //     else {
-        //         //result 是空
+        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        var tempCvData =require('./cvData');                     //Import two other methods of the current js file.
 
-                // if (!result) {
+        //The cvID parameter of this function refers to the value of cv field of users collection.
+        //In the users collection, if users don't create CV, the default value of cv field is "no".
+        //Therefore, call fillInBlankRequestInfo() to create the whole job request information.
         if(cvId=="no"){
             tempCvData.fillInBlankRequestInfo(accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
                 function(err,doc){
-                // if (err) throw err;
-                 callback(null, doc);
+                callback(null, doc);
             });
-         } else {
+
+        //If users has wrote a part of job request, such as CV, call completeRequestInfo() to complete the blanks left of job request.
+        } else {
             tempCvData.completeRequestInfo(cvId, accomplishment, edu, experience, jobName, type, jobIndustry, sal, picUrl, adStreet, adCity, adState, zipcode, adCoun, date,
                 function(err,doc){
                 if (err) throw err;
@@ -279,7 +300,11 @@ var cvData= {
 
 }
 
-module.exports=cvData;
+module.exports=cvData;   //Export this module
+
+
+
+
 
 // cvData.mainRequestInfo("5cda77d7a8a1062f541bd4ff","Sisley","w","e","r","t","y",22,
 //     "i","o","p","a","s","d","ee",

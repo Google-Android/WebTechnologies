@@ -22,19 +22,28 @@ var jobData= {
         //This method can convert "Amazon full-time IT" to "/Amazon|Gucci|full-time|IT/i".
         //Next,query these four words--"Amazon","Gucci", "full-time" and "IT" respectively in the title field, companyName field and jobType filed.
         //Take the union of query results. (Query results ignore case)
+        //If parameter of dealWithMultiStrings is equal to "", this method returns "";
         var keyword=tool.dealWithMultiStrings(keyword);
         var location=tool.dealWithMultiStrings(location);
 
 
         JobModel.find({inUse:"1",  //Only query for published work that has not been deleted.
 
-                // The job search page has two search boxes: the first search box for keywords and the second search box for locations.
+
+                //The job search page has two search boxes: the first search box for keywords and the second search box for locations.
                 //Take the intersection of the two query results.
+                //If users don't type any word in either of box search boxes, for example, keyword search box is empty, the results shows jobs which only meets the
+                //query requirements of the other search box.
+                //If users don't type any word in both of box search boxes, it returns all jobs.
                 $and: [
                     {
                         //The keywords you type in the first search box can be job title, company name or job type.
                         //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
                         //and then take the union of the query results.
+
+                        //The reason why I still use "$regex" and "$options" when variable "keyword" and "location" have been in the form of a regular expression
+                        //is that if keyword=="" or location=="", they still need to be in the form of a regular expression.
+                        //It indicates if I don't use "$regex" and "$options" when keyword=="" or location=="", it returns no results rather than all jobs.
                         $or: [{title: {$regex:keyword, $options: 'i'}},
                               {companyName: {$regex:keyword, $options: 'i'}},
                               {jobType: {$regex:keyword, $options: 'i'}}]
@@ -51,7 +60,7 @@ var jobData= {
             if (err) throw err;
             callback(null, doc);
         //The search results are mainly displayed in order of the time of posting jobs.
-        //If the release works at the same time, alphabetize job titles.
+        //If the jobs are published at the same date, alphabetize job titles.
         }).sort({postDate: -1, title: 1});
 
 
@@ -104,6 +113,9 @@ var jobData= {
                         //The keywords you type in the first search box can be job title, company name or job type.
                         //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
                         //and then take the union of the query results.
+                        //The reason why I still use "$regex" and "$options" when variable "keyword" and "location" have been in the form of a regular expression
+                        //is that if keyword=="" or location=="", they still need to be in the form of a regular expression.
+                        //It indicates if I don't use "$regex" and "$options" when keyword=="" or location=="", it returns no results rather than all jobs.
                         $or: [{title: {$regex:keyword, $options: 'i'}},
                             {companyName: {$regex:keyword, $options: 'i'}},
                             {jobType: {$regex:keyword, $options: 'i'}}]
@@ -131,7 +143,7 @@ var jobData= {
                 callback(null, result);
 
             //The search results are mainly displayed in order of the time of posting jobs.
-            //If the release works at the same time, alphabetize job titles.
+            //If the jobs are published at the same date, alphabetize job titles.
             }).sort({postDate: -1, title: 1});
 
 
@@ -164,8 +176,8 @@ var jobData= {
                 if (err) throw err;
                 callback(null, result);
 
-                //The search results are mainly displayed in order of the time of posting jobs.
-                //If the release works at the same time, alphabetize job titles.
+            //The search results are mainly displayed in order of the time of posting jobs.
+            //If the jobs are published at the same date, alphabetize job titles.
             }).sort({postDate: -1, title: 1});
         }
 
