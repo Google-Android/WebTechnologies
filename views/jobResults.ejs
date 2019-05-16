@@ -16,6 +16,8 @@
     <script src="/javascripts/popper.min.js"></script>
 
     <script src="/javascripts/jobResultsJS.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA3vvAfUE6YA-kCOTxPhXHyBxORiMAtkw&callback=initMap"></script>
 
 </head>
 <body class="customize-body">
@@ -28,11 +30,11 @@
                 <div class="container">
                     <h1 class="display-4">Filter</h1>
                     <form action="" id="secondarySearch">
-                        <!--user's current latitude and longitude-->
+                        <!--user's current latitude and longitude   -->
                         <!--latitude-->
-                        <input id="cityLat" name="cityLat" type="hidden"/>
+                        <input id="cityLat" name="cityLat" type="text"/>
                         <!--longitude-->
-                        <input id="cityLng" name="cityLng" type="hidden"/>
+                        <input id="cityLng" name="cityLng" type="text"/>
                         <!--secondary search bar-->
                         <div class="form-group">
                             <label for="keyword">Keywords</label>

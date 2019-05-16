@@ -77,7 +77,18 @@ $(document).ready(function() {
     });
 
 
+    window.onload=function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
 
+    function showPosition(position) {
+        $('#cityLat').val(position.coords.latitude);
+        $('#cityLng').val(position.coords.longitude);
+    }
 
 
     // var url = window.location.search;
