@@ -15,6 +15,8 @@
     <script src="/javascripts/popper.min.js"></script>
 
     <script src="/javascripts/jobDetailsJS.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA3vvAfUE6YA-kCOTxPhXHyBxORiMAtkw&callback=initMap"></script>
 
 </head>
 <body class="customize-body">
@@ -30,14 +32,14 @@
             </div>
             <div class="modal-body">
                 <form id="consumerCv">
-                    <input type="hidden" name="companyName" value="<%=job.companyName %>">
-                    <input type="hidden" name="jobTitle" value="<%=job.title %>">
-                    <input type="hidden" name="jobId" value="<%=job.id %>">
+                    <input type="hidden" name="companyName" value="<%= job.companyName %>">
+                    <input type="hidden" name="jobTitle" value="<%= job.title %>">
+                    <input type="hidden" name="jobId" value="<%= job.id %>">
                     <div class="form-group">
                         <label for="achievement">Achievement</label>
                         <textarea class="form-control" name="achievement" rows="3">
                             <% if(cv){ %>
-                                <%=cv.achievement%>
+                                <%= cv.achievement %>
                             <% } %>
                         </textarea>
                     </div>
@@ -45,7 +47,7 @@
                         <label for="education">Education</label>
                         <textarea class="form-control" name="education" rows="3">
                             <% if(cv){ %>
-                                <%=cv.education%>
+                                <%= cv.education %>
                             <% } %>
                         </textarea>
                     </div>
@@ -53,7 +55,7 @@
                         <label for="workExperience">Work Experience</label>
                         <textarea class="form-control" name="workExperience" rows="3">
                             <% if(cv){ %>
-                                <%=cv.workExperience%>
+                                <%= cv.workExperience %>
                             <% } %>
                         </textarea>
                     </div>
@@ -71,45 +73,56 @@
     <div class="card mt-2">
         <div class="card-header">
             <!--            company name here-->
-            <a href="/companyDetails?companyName=<%= job.companyName %>"><h1><%=job.companyName %></h1></a>
-            <p class="font-weight-lighter font-italic"><%=job.companyEmail %></p>
+            <a href="/companyDetails?companyName=<%= job.companyName %>"><h1><%= job.companyName %></h1></a>
+            <p class="font-weight-lighter font-italic"><%= job.companyEmail %></p>
         </div>
         <div class="card-body">
             <!--            job title-->
-            <h3 class="card-title"><%=job.title %></h3>
+            <h3 class="card-title"><%= job.title %></h3>
             <!--            salary:$4000/month-->
-            <h6 class="card-text"><%=job.salary %></h6>
+            <h6 class="card-text">£<%= job.salary %> /Month</h6>
             <!--            job type here-->
-            <h6 class="card-text"><%=job.jobType %></h6>
+            <h6 class="card-text"><%= job.jobType %></h6>
             <!--            postal code and city-->
-            <h6 class="card-text"><%=job.postcode %>,<%=job.city %></h6>
+            <h6 class="card-text"><%= job.postcode %>,<%= job.city %></h6>
             <hr>
             <!--            description here-->
             <p class="card-text">
-                <%=job.description %>
+                <%= job.description %>
             </p>
-            <img src="<%=job.picture %>" class="img-thumbnail">
-                <hr>
+            <img src="<%= job.picture %>" class="img-thumbnail">
+            <hr>
             <!--            post time -->
-            <h6 class="card-text"><%=job.postDate %></h6>
+            <h6 class="card-text"><%= job.postDate %></h6>
         </div>
-<!--        hidden for unlogined user and company user-->
+        <!--        hidden for unlogined user and company user-->
 
         <%
         if(user){
-            if(user.personOrComp == 'p'){
+        if(user.personOrComp == 'p'){
         %>
             <div class="card-footer text-muted text-center">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
-            APPLY
-            </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#applyModal">
+                    APPLY
+                </button>
             </div>
         <%
-            }
+        }
         }
         %>
 
     </div>
+    <div class="card mt-2">
+        <div class="card-header">
+            <h3>Similar jobs in 5km</h3>
+        </div>
+        <div class="card-body">
+            <div id="map" style="height:400px;width:100%"></div>
+        </div>
+    </div>
 </div>
+<script>
+
+</script>
 </body>
 </html>

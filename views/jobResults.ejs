@@ -28,14 +28,19 @@
                 <div class="container">
                     <h1 class="display-4">Filter</h1>
                     <form action="" id="secondarySearch">
+                        <!--user's current latitude and longitude-->
+                        <!--latitude-->
+                        <input id="cityLat" name="cityLat" type="hidden"/>
+                        <!--longitude-->
+                        <input id="cityLng" name="cityLng" type="hidden"/>
                         <!--secondary search bar-->
                         <div class="form-group">
                             <label for="keyword">Keywords</label>
                             <input type="text" class="form-control" name="keyword"
-                                   placeholder="job title, company name, job type" value="<%=keyword %>">
+                                   placeholder="job title, company name, job type" value="<%= keyword %>">
                             <label for="keyword">Location</label>
                             <input type="text" class="form-control" name="location"
-                                   placeholder="city,postcode" value="<%=location %>">
+                                   placeholder="city,postcode" value="<%= location %>">
                         </div>
                         <div class="accordion" id="secondarySearch">
                             <!--salary-->
@@ -174,6 +179,38 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--Searching radio-->
+                            <div class="card">
+                                <div class="card-header" id="searchingRadioCollapse">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                                data-target="#collapseSearchingRadio" aria-expanded="true"
+                                                aria-controls="collapseSearchingRadio">
+                                            Searching Radio
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseSearchingRadio" class="collapse">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="searchingRadioTen"
+                                                   name="searchingRadio" value="10">
+                                            <label class="custom-control-label" for="searchingRadioTen"><10km</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="searchingRadioFive"
+                                                   name="searchingRadio" value="5">
+                                            <label class="custom-control-label" for="searchingRadioFive"><5km</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="searchingRadioOne"
+                                                   name="searchingRadio" value="1">
+                                            <label class="custom-control-label"
+                                                   for="searchingRadioOne"><1km</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col text-center">
@@ -192,7 +229,7 @@
             %>
                 <% jobResults.forEach(function(job){ %>
                     <div class="card mb-2" id="jobResults">
-                        <h5 class="card-header"><a href="/jobDetails?jobId=<%=job.id%>"><%= job.title %></a></h5>
+                        <h5 class="card-header"><a href="/jobDetails?jobId=<%= job.id %>"><%= job.title %></a></h5>
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="/companyDetails?companyName=<%= job.companyName %>"><%= job.companyName %></a>
@@ -200,7 +237,7 @@
                             <p class="font-weight-lighter font-italic"><%= job.city %></p>
                             <hr>
                             <p class="card-text d-none d-lg-block"><%= job.description %></p>
-                            <p class="card-text"><%= job.salary %></p>
+                            <p class="card-text">£<%= job.salary %> /Month</p>
                         </div>
                     </div>
                 <% }) %>
