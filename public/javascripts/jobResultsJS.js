@@ -76,8 +76,25 @@ $(document).ready(function() {
         return false;
     });
 
+    /**
+     * get location when the the browser was ready
+     */
+    window.onload=function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
 
-
+    /**
+     * give the position to the hidden input area for calculating the distance.
+     * @param position
+     */
+    function getPosition(position) {
+        $('#cityLat').val(position.coords.latitude);
+        $('#cityLng').val(position.coords.longitude);
+    }
 
 
     // var url = window.location.search;
