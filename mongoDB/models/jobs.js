@@ -1,4 +1,10 @@
-    var mongoose = require ("mongoose");
+/**
+ * The schema of the "jobs" collection which is used to find jobs by job seekers or publish job by companies.
+ *
+ * @type {Mongoose}
+ * @last_modify_date     2019-05-16
+ */
+var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
 var jobSchema=new Schema({
@@ -17,24 +23,22 @@ var jobSchema=new Schema({
     country:String,
     postDate:String,
     location:{
-        //type: "Point",
-        type: [ Number, Number ],
-        index:"2d"
+        type: [Number, Number],  //it represents latitude and longitude of the current location.
+        index:"2d"               //create index in order to search jobs within a specific radius.
     },
-
     inUse:{
         type:String,
-        default:"1"  // "1" represents published job in use. "0" represents this job has been deleted.
+        default:"1"    // "1" represents published job in use. "0" represents this job has been deleted.
     }
 
 
 });
 
+module.exports=mongoose.model("jobs", jobSchema);    // Export this module.
 
-module.exports=mongoose.model("jobs", jobSchema);
 
 
-    //
+//
     // Model=mongoose.model("jobs", jobSchema);
     // Model.updateMany({},{$set:{inUse:"1"}},function(err,doc){
     //     console.log(doc);

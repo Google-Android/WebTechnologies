@@ -1,3 +1,9 @@
+/**
+ * The schema of the "users" collection.
+ * @type {Mongoose}
+ * @last_modify_date     2019-05-16
+ */
+
 var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
@@ -31,4 +37,4 @@ var userSchema=new Schema({
 });
 
 
-module.exports=mongoose.model("users", userSchema);
+module.exports=mongoose.model("users", userSchema);    // Export this module.
