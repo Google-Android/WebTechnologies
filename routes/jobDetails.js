@@ -35,13 +35,32 @@ router.get('/', function(req, res) {
         });
     }
 
+
+
   // get all info of one specific job from database
     jobData.showJobDetails(jobId,function(err, job){
        if(err) throw err;
 
        if(job){
            console.log('find job:\n'+job);
-           res.render('jobDetails',{user:req.session.user,'job':job,'cv':cvObject});
+
+           // find all similar jobs
+           var cityLat = req.session.latitude;
+           var cityLng = req.session.longitude;
+           console.log('cityLat:'+cityLat+',cityLng:'+cityLng);
+
+           jobData.secondarySearchJob(job.title,"",cityLat,cityLng,5,"","","",
+               function(err,similarJobs){
+               if(err){
+                   console.log('err:'+err);
+                   throw err;
+               }
+               if(similarJobs){
+                   console.log('similarJobs:\n'+similarJobs);
+                   res.render('jobDetails',{user:req.session.user,'job':job,'cv':cvObject,'similarJobs':similarJobs});
+               }
+           });
+
        } else { // cannot find this job
            console.log('cannot find this job.');
            res.render('jobDetails',{user:req.session.user});

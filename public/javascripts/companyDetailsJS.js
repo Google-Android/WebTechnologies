@@ -3,11 +3,22 @@
  */
 $(document).ready(function() {
 
+    // the initial value of crontabStatus is zero.
+    // when crontabStatus equals one, it means the crontab need to be run.
+    // when crontabStatus equals two, it means the crontab need to be stopped.
+    // var crontabStatus = 0;
+
     /**
      * add a review of one specific company
      * validate the username and password; if not existed yet, add the new user.
      */
     $('#companyReview').on('submit', function(event) {
+        crontab();
+    });
+
+
+
+    function crontab(){
         alert('get companyReview data done.');
         event.preventDefault();
 
@@ -30,6 +41,7 @@ $(document).ready(function() {
             type: 'POST',
             url: '/companyDetails',
             data: d,
+            timeout:12000,
             contentType: false,
             processData: false,
             success: function(data) {
@@ -39,8 +51,14 @@ $(document).ready(function() {
                 } else if(data.result === 2){
                     alert("Sorry, cannot add a new review now.");
                 }
+            },
+            error: function(){ 
+                alert('Error loading document');
+                crontab();
             }
         });
         return false;
-    });
+    }
+
+
 });

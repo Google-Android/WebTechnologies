@@ -34,7 +34,14 @@ router.post('/', function(req, res) {
     var searchType = req.body.searchType==null?"":req.body.searchType;
     var keyword = req.body.keyword==null?"":req.body.keyword;
     var location = req.body.location==null?"":req.body.location;
-    console.log('searchType:'+searchType+",keyword:"+keyword+",location:"+location);
+
+    var cityLat = req.body.cityLat==null?"":req.body.cityLat;
+    var cityLng = req.body.cityLng==null?"":req.body.cityLng;
+
+    req.session.latitude=cityLat;
+    req.session.longitude=cityLng;
+
+    console.log('searchType:'+searchType+",keyword:"+keyword+",location:"+location+',cityLat:'+cityLat+',cityLng:'+cityLng);
 
     var url = "/jobResults?searchType="+searchType+"&keyword="+keyword+"&location="+location;
     res.json({'url':url});

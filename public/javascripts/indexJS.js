@@ -3,7 +3,6 @@
  */
 $(document).ready(function() {
 
-
     /**
      * get the parameter of searching jobs and turn to the result page.
      */
@@ -38,3 +37,27 @@ $(document).ready(function() {
 
 
 });
+
+
+/**
+ * get location when the the browser was ready
+ */
+window.onload=function getLocation() {
+    alert('get location....');
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getPosition);
+    } else {
+        alert('Please allow us to use your location.');
+    }
+}
+
+
+/**
+ * give the position to the hidden input area for calculating the distance.
+ * @param position
+ */
+function getPosition(position) {
+    $('#cityLat').val(position.coords.latitude);
+    alert(position.coords.latitude+'---'+position.coords.longitude);
+    $('#cityLng').val(position.coords.longitude);
+}

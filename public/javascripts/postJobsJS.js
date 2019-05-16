@@ -25,6 +25,8 @@ $(document).ready(function () {
         var administrative_area_level_1 = $('#administrative_area_level_1').val();
         var postal_code = $('#postal_code').val();
         var country = $('#country').val();
+        var cityLat = $('#cityLat').val();
+        var cityLng = $('#cityLng').val();
 
         var d = new FormData();
 
@@ -41,8 +43,9 @@ $(document).ready(function () {
         d.append('administrative_area_level_1',administrative_area_level_1);
         d.append('postal_code',postal_code);
         d.append('country',country);
+        d.append('cityLat',cityLat);
+        d.append('cityLng',cityLng);
 
-        alert('ajax begin.....');
         $.ajax({
             type: 'POST',
             url: '/postJobs',
@@ -67,7 +70,7 @@ $(document).ready(function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
-
+    
 
 });
 

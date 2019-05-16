@@ -2,10 +2,13 @@ var express = require('express');
 var router = express.Router();
 var reviewData = require('../service/reviewData');
 var jobData = require('../service/jobData');
+var fs = require('fs');// use fs to create or access folder
+var multer = require('multer');// use multer to upload file
 
-var fs = require('fs');
-var multer = require('multer');
-
+/**
+ * access the folder or create the folder when the folder does not exist.
+ * @param folder
+ */
 var createFolder = function(folder){
     try{
         fs.accessSync(folder);
@@ -14,6 +17,7 @@ var createFolder = function(folder){
     }
 };
 
+// set the path of uploading file.
 var uploadFolder = './public/image/';
 
 createFolder(uploadFolder);
@@ -68,7 +72,7 @@ router.post('/', upload.single('reviewImage') ,function(req, res) {
   console.log("***companyDetails***post***");
   console.dir("file:"+req.file.originalname);
 
-  if(req.session.user){ // have login already
+  // if(req.session.user){ // have login already
     var username = req.session.user.name;
     var companyName = req.body.companyName;
 
@@ -89,9 +93,9 @@ router.post('/', upload.single('reviewImage') ,function(req, res) {
         }
     });
 
-  } else { // need to login first
-    res.json({result:0});
-  }
+  // } else { // need to login first
+  //   res.json({result:0});
+  // }
 });
 
 

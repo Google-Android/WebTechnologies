@@ -51,6 +51,7 @@ $(document).ready(function() {
  * add similar job markers into the map
  */
 var map, infoWindow;
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         //set university as the center of map when initialize
@@ -78,60 +79,64 @@ function initMap() {
             handleLocationError(true, infoWindow, map.getCenter());
         });
 
-        //set location
-        var jobOne = {lat: 53.3830004, lng: -1.477871499999992};
-        //set content of pop out information panel
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            '</div>'+
-            '</div>';
 
-        //set information panel
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString,
-            maxWidth: 200
-        });
 
-        //set marker on the map
-        var markerOne = new google.maps.Marker({
-            position: jobOne,
-            map: map,
-            title: 'Job One'
-        });
-        //set action when click
-        markerOne.addListener('click', function() {
-            infowindow.open(map, markerOne);
-        });
 
-        var jobTwo = {lat: 53.3848933, lng: -1.4817054000000098};
-        var contentStringTwo = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
+        alert('gonna to show similar jobs.');
+        // show the similar jobs in map.
+        var similarJobCount = $('#similarJobCount').val();
+        alert('similarJobCount:'+similarJobCount);
 
-        var infowindowTwo = new google.maps.InfoWindow({
-            content: contentStringTwo,
-            maxWidth: 200
-        });
+        for (var i=0;i<similarJobCount;i++) {
+            alert('i:'+(i+1));
+            var jobId = $('#jobId'+(i+1)).val();
+            alert('jobId:'+jobId);
+            var jobTitle = $('#jobTitle'+(i+1)).val();
+            alert('jobTitle:'+jobTitle);
+            var companyName = $('#companyName'+(i+1)).val();
+            alert('companyName:'+companyName);
+            var latValue = $('#lat'+(i+1)).val();
+            alert('latValue:'+latValue);
+            var lngValue = $('#lng'+(i+1)).val();
+            alert('lngValue:'+lngValue);
 
-        var markerTwo = new google.maps.Marker({
-            position: jobTwo,
-            map: map,
-            title: 'Job Two'
-        });
-        markerTwo.addListener('click', function() {
-            infowindowTwo.open(map, markerTwo);
-        });
+            alert('jobId:'+jobId+",jobTitle:"+jobTitle+",companyName:"+companyName+",latValue:"+latValue+",lngValue:"+lngValue);
+
+
+
+
+            //set location
+            var jobPositionJob = {lat: parseFloat(latValue), lng: parseFloat(lngValue)};
+            //set content of pop out information panel
+            var contentStringJob = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">' +
+                '<a href="/jobDetails?jobId='+jobId+'">'+jobTitle+'</a>' +
+                '</h1>'+
+                '<div id="bodyContent">'+
+                '<p>'+companyName+'</p>'+
+                '</div>'+
+                '</div>';
+            //set information panel
+            var infowindowJob = new google.maps.InfoWindow({
+                content: contentStringJob,
+                maxWidth: 200
+            });
+            //set marker on the map
+            var markerJob = new google.maps.Marker({
+                position: jobPositionJob,
+                map: map,
+                title: jobTitle
+
+            });
+            //set action when click
+            markerJob.addListener('click', function() {
+                infowindowJob.open(map, markerJob);
+            });
+        }
+
+
     } else {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());

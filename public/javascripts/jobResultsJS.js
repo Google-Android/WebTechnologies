@@ -8,26 +8,21 @@ $(document).ready(function() {
      *
      */
     $('#secondarySearch').on('submit', function(event) {
-        // alert('get secondarySearch data done.');
+        alert('get secondarySearch data done.');
         event.preventDefault();
 
         var d={};
-
-        // // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
-        // var wholeForm = $('#secondarySearch').serializeArray();
-        //
-        // $.each(wholeForm, function() {
-        //     d[this.name] = this.value;
-        // });
 
         var keyword = $("input[name='keyword']").val();
         var location = $("input[name='location']").val();
         var salary = $("input[name='salary']:checked").val();
         var industry = $("input[name='industry']:checked").val();
         var jobType = $("input[name='jobType']:checked").val();
+        var searchingRadio = $("input[name='searchingRadio']:checked").val();
 
-        alert('keyword:'+keyword+',location:'+location+',salary:'+salary+",industry:"+industry+",jobType:"+jobType);
 
+        alert('keyword:'+keyword+',location:'+location+',salary:'+salary+",industry:"+industry+",jobType:"+jobType
+            +",searchingRadio:"+searchingRadio);
 
         d['searchType']='2';
 
@@ -35,7 +30,8 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'GET',
-            url: '/jobResults?keyword='+keyword+'&location='+location+'&salary='+salary+'&industry='+industry+'&jobType='+jobType,
+            url: '/jobResults?keyword='+keyword+'&location='+location+'&salary='+salary+'&industry='+industry
+                +'&jobType='+jobType+'&searchingRadio='+searchingRadio,
             // url: '/jobResults',
             data: d,
             success: function(data) {
@@ -76,25 +72,25 @@ $(document).ready(function() {
         return false;
     });
 
-    /**
-     * get location when the the browser was ready
-     */
-    window.onload=function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    /**
-     * give the position to the hidden input area for calculating the distance.
-     * @param position
-     */
-    function getPosition(position) {
-        $('#cityLat').val(position.coords.latitude);
-        $('#cityLng').val(position.coords.longitude);
-    }
+    // /**
+    //  * get location when the the browser was ready
+    //  */
+    // window.onload=function getLocation() {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(getPosition);
+    //     } else {
+    //         alert('Please allow us to use your location.');
+    //     }
+    // }
+    //
+    // /**
+    //  * give the position to the hidden input area for calculating the distance.
+    //  * @param position
+    //  */
+    // function getPosition(position) {
+    //     $('#cityLat').val(position.coords.latitude);
+    //     $('#cityLng').val(position.coords.longitude);
+    // }
 
 
     // var url = window.location.search;

@@ -40,9 +40,16 @@ router.get('/', function(req, res, next) {
         var industry = req.query.industry==null?"":req.query.industry;
         var jobType = req.query.jobType==null?"":req.query.jobType;
 
-        console.log('keyword:'+keyword+", location:"+location+",salary:"+salary+",industry:"+industry+",jobType:"+jobType);
+        var searchingRadio = req.query.searchingRadio==null?"":req.query.searchingRadio;
 
-        jobData.secondarySearchJob(keyword,location,jobType,salary,industry,function(err,jobResults){
+        var cityLat = req.session.latitude==null?"":req.session.latitude;
+        var cityLng = req.session.longitude==null?"":req.session.longitude;
+
+
+        console.log('keyword:'+keyword+", location:"+location+",salary:"+salary+",industry:"+industry+",jobType:"
+            +jobType+',cityLat:'+cityLat+',cityLng:'+cityLng+',searchingRadio:'+searchingRadio);
+
+        jobData.secondarySearchJob(keyword,location,cityLat,cityLng,searchingRadio,jobType,salary,industry,function(err,jobResults){
             if(err) {
                 res.json({'result':0});
                 throw err;

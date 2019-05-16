@@ -45,7 +45,9 @@ router.get('/', function(req, res, next) {
 /* validation of the login email and password */
 router.post('/', upload.single('JobImage'), function(req, res) {
   console.log("***postJobs***post***");
-
+  console.log('cityLat:'+req.body.cityLat);
+  console.log('cityLng:'+req.body.cityLng);
+  
   var companyName = req.body.companyName;
   var companyEmail = req.body.companyEmail;
   var title = req.body.title;
@@ -59,10 +61,16 @@ router.post('/', upload.single('JobImage'), function(req, res) {
   var postalCode = req.body.postal_code;
   var country = req.body.country;
 
-  console.log('title:'+title+",requestJobType:"+jobType+",requestJobIndustry:"+industry+",postSalary:"+salary
-        +',description:'+description+",street:"+street+",city:"+city+",state:"+state+",postalCode:"+postalCode+",country:"+country);
+  var cityLat = req.body.cityLat;
+  var cityLng = req.body.cityLng;
 
-  jobData.postJob(title,companyName,companyEmail,industry,jobType,salary,currentTime+'-'+req.file.originalname,description,formatDate(new Date()),street,city,state,postalCode,country,function (err,job) {
+
+    console.log('title:'+title+",requestJobType:"+jobType+",requestJobIndustry:"+industry+",postSalary:"+salary
+        +',description:'+description+",street:"+street+",city:"+city+",state:"+state+",postalCode:"+postalCode
+        +",country:"+country+",cityLat:"+cityLat+",cityLng:"+cityLng);
+
+  jobData.postJob(title,companyName,companyEmail,industry,jobType,salary,currentTime+'-'+req.file.originalname,
+      description,formatDate(new Date()),street,city,state,postalCode,country,cityLat,cityLng,function (err,job) {
       if(err){
           res.json({'result':2});
           console.log("err:"+err);
