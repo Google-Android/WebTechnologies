@@ -9,11 +9,11 @@ var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
 var reviewSchema=new Schema({
-    publisherName:String,
-    objectName:String,
-    score:Number,
+    publisherName:String,     //The name of the person who posted the comment
+    objectName:String,        //The name of the person being reviewed
+    score:Number,             //Rating
     comment:String,
-    pictureUrl:String,        //After the user uploads the image, the path is stored in the project
+    pictureUrl:String,        //After the user uploads the image, the picture path is stored in the project
     title:String              //The review title
 });
 
