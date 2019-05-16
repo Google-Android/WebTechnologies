@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geolocation</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        /*#map {*/
+        /*    height: 100%;*/
+        /*}*/
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card mt-2">
+        <div id="map"style="height:400px;height: 500px"></div>
+    </div>
+</div>
+<div class="container">
+    <table width="100%">
+
+        <tr>
+            <td width="50%">
+                <h2>Location 1</h2>
+                <input id="lat1" type="text" placeholder="Latitude" onchange="calculateDistance()" />
+                <input id="long1" type="text" placeholder="Longitude" onchange="calculateDistance()" />
+                <h2>Location 2</h2>
+                <input id="lat2" type="text" placeholder="Latitude" onchange="calculateDistance()" />
+                <input id="long2" type="text" placeholder="Longitude" onchange="calculateDistance()" />
+                <br>
+                <br>
+                <button class="btn btn-primary" onclick="calculateDistance()">Calculate</button>
+            </td>
+            <td>
+                <div id=answer>
+                    <h4>Distance: <span id="distance"></span></h4>
+                </div>
+            </td>
+        </tr>
+</div>
+
+<div id="result">
+</div>
+<script>
+    // Note: This example requires that you consent to location sharing when
+    // prompted by your browser. If you see the error "The Geolocation service
+    // failed.", it means you probably did not give permission for the browser to
+    // locate you.
+    var map, infoWindow;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            //set university as the center of map when initialize
+            center: {lat: 53.380707, lng: -1.483981999999969},
+            zoom: 12
+        });
+
+
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                console.log(pos);
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('You are here.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+
+            //set location
+            var jobOne = {lat: 53.3830004, lng: -1.477871499999992};
+            //set content of pop out information panel
+            var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                '<div id="bodyContent">'+
+                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                '(last visited June 22, 2009).</p>'+
+                '</div>'+
+                '</div>';
+
+            //set information panel
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 200
+            });
+
+            //set marker on the map
+            var markerOne = new google.maps.Marker({
+                position: jobOne,
+                map: map,
+                title: 'Job One'
+            });
+            //set action when click
+            markerOne.addListener('click', function() {
+                infowindow.open(map, markerOne);
+            });
+
+            var jobTwo = {lat: 53.3848933, lng: -1.4817054000000098};
+            var contentStringTwo = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+                '<div id="bodyContent">'+
+                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+                'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+                '(last visited June 22, 2009).</p>'+
+                '</div>'+
+                '</div>';
+
+            var infowindowTwo = new google.maps.InfoWindow({
+                content: contentStringTwo,
+                maxWidth: 200
+            });
+
+            var markerTwo = new google.maps.Marker({
+                position: jobTwo,
+                map: map,
+                title: 'Job Two'
+            });
+            markerTwo.addListener('click', function() {
+                infowindowTwo.open(map, markerTwo);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+
+    /**
+     * @author Shunbao Li
+     * Calculate distance between two points by using Harvensine Formula rather than Google map API to reduce the number of requests.
+     * @param lat1 latitude of first point
+     * @param lon1 longitude of first point
+     * @param lat2 latitude of second point
+     * @param lon2 longitude of second point
+     * @returns {number} distance between first point and second point in kilometer
+     */
+    function distance(lat1, lon1, lat2, lon2) {
+        var p = 0.017453292519943295;    // Math.PI / 180
+        var c = Math.cos;
+        var a = 0.5 - c((lat2 - lat1) * p)/2 +
+            c(lat1 * p) * c(lat2 * p) *
+            (1 - c((lon2 - lon1) * p))/2;
+        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+    }
+
+    /**
+     * 用来测试的,后期删掉
+     */
+    function calculateDistance() {
+        var lat1 = document.getElementById('lat1').value;
+        var lon1 = document.getElementById('long1').value;
+        var lat2 = document.getElementById('lat2').value;
+        var lon2 = document.getElementById('long2').value;
+        var x = distance(lat1, lon1, lat2, lon2);
+
+        document.getElementById('distance').innerHTML = x + " km ";
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA3vvAfUE6YA-kCOTxPhXHyBxORiMAtkw&callback=initMap">
+</script>
+
+</body>
+</html>
