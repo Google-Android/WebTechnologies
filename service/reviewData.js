@@ -1,37 +1,61 @@
+/**
+ * methods related with creating and showing reviews.
+ * @type {{searchReview: reviewData.searchReview, createReview: reviewData.createReview}}
+ * @last_modify_date     2019-05-17
+ */
 
 var reviewData= {
-
+    /**
+     * It is used to insert data into the collection of reviews.
+     *
+     * @param publisher
+     * @param object
+     * @param rating
+     * @param review
+     * @param picUrl
+     * @param reviewTitle
+     * @param callback
+     */
     createReview: function (publisher, object,rating,review,picUrl,reviewTitle,callback) {
-        require('../mongoDB/tools/connection');
-        var Review = require('../mongoDB/models/review');
+        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        var Review = require('../mongoDB/models/reviews');    //Import the schema of the collection of reviews.
         Review.create({
             publisherName:publisher,
             objectName:object,
             score:rating,
             comment:review,
-            pictureUrl:"../image/"+picUrl,
-            title:reviewTitle,
+            pictureUrl:"../image/"+picUrl,          //User can upload picture. database stores the path of the picture.
+            title:reviewTitle
         }, function (err, doc) {
             if (err) throw err;
             callback(null, doc);
         });
     },
+
+
+
+
+    /**
+     * It is used to view specified review.
+     *
+     * @param object
+     * @param callback
+     */
     searchReview: function(object,callback){
-        require('../mongoDB/tools/connection');
-        var Review = require('../mongoDB/models/review');
+        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        var Review = require('../mongoDB/models/reviews');    //Import the schema of the collection of reviews.
         Review.find({
             objectName: object
-        },
-            function(err, doc){
+        },function(err, doc){
             if (err) throw err;
             callback(null, doc);
-        })
+        });
     }
 
 }
 
 
-module.exports=reviewData;   // export this module
+module.exports=reviewData;   // Export this module
 
 
 
