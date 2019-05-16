@@ -18,6 +18,7 @@ var jobData= {
         var JobModel = require('../mongoDB/models/jobs');  //Import the schema of the collection of jobs.
         tool.dbConnection();   //Connect to the database.
 
+
         //dealWithMultiStrings() method allows users to input multiple strings in the search box, such as "Amazon Gucci full-time IT",
         //This method can convert "Amazon full-time IT" to "/Amazon|Gucci|full-time|IT/i".
         //Next,query these four words--"Amazon","Gucci", "full-time" and "IT" respectively in the title field, companyName field and jobType filed.
@@ -27,35 +28,37 @@ var jobData= {
         var location=tool.dealWithMultiStrings(location);
 
 
-        JobModel.find({inUse:"1",  //Only query for published work that has not been deleted.
+        JobModel.find({
+
+            inUse:"1",  //Only query for published work that has not been deleted.
 
 
-                //The job search page has two search boxes: the first search box for keywords and the second search box for locations.
-                //Take the intersection of the two query results.
-                //If users don't type any word in either of box search boxes, for example, keyword search box is empty, the results shows jobs which only meets the
-                //query requirements of the other search box.
-                //If users don't type any word in both of box search boxes, it returns all jobs.
-                $and: [
-                    {
-                        //The keywords you type in the first search box can be job title, company name or job type.
-                        //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
-                        //and then take the union of the query results.
+            //The job search page has two search boxes: the first search box for keywords and the second search box for locations.
+            //Take the intersection of the two query results.
+            //If users don't type any word in either of box search boxes, for example, keyword search box is empty, the results shows jobs which only meets the
+            //query requirements of the other search box.
+            //If users don't type any word in both of box search boxes, it returns all jobs.
+            $and: [
+                {
+                    //The keywords you type in the first search box can be job title, company name or job type.
+                    //Therefore, keywords need to be queried in the title field, companyName field and jobType field respectively,
+                    //and then take the union of the query results.
 
-                        //The reason why I still use "$regex" and "$options" when variable "keyword" and "location" have been in the form of a regular expression
-                        //is that if keyword=="" or location=="", they still need to be in the form of a regular expression.
-                        //It indicates if I don't use "$regex" and "$options" when keyword=="" or location=="", it returns no results rather than all jobs.
-                        $or: [{title: {$regex:keyword, $options: 'i'}},
-                              {companyName: {$regex:keyword, $options: 'i'}},
-                              {jobType: {$regex:keyword, $options: 'i'}}]
-                    },
-                    {
-                        //The location you type in the second search box can be city or postcode.
-                        //Therefore, location need to be queried in the city field or postcode field respectively,
-                        //and then take the union of the query results.
-                        $or: [{city: {$regex:location, $options: 'i'}},
-                              {postcode: {$regex:location, $options: 'i'}}]
-                    }
-                    ]
+                    //The reason why I still use "$regex" and "$options" when variable "keyword" and "location" have been in the form of a regular expression
+                    //is that if keyword=="" or location=="", they still need to be in the form of a regular expression.
+                    //It indicates if I don't use "$regex" and "$options" when keyword=="" or location=="", it returns no results rather than all jobs.
+                    $or: [{title: {$regex:keyword, $options: 'i'}},
+                        {companyName: {$regex:keyword, $options: 'i'}},
+                        {jobType: {$regex:keyword, $options: 'i'}}]
+                },
+                {
+                    //The location you type in the second search box can be city or postcode.
+                    //Therefore, location need to be queried in the city field or postcode field respectively,
+                    //and then take the union of the query results.
+                    $or: [{city: {$regex:location, $options: 'i'}},
+                        {postcode: {$regex:location, $options: 'i'}}]
+                }
+                ]
         }, function (err, doc) {
             if (err) throw err;
             callback(null, doc);
@@ -78,7 +81,7 @@ var jobData= {
      * @param jobIndustry
      * @param callback
      */
-    secondarySearchJob: function(keyword, location, jType, sal, jobIndustry,callback) {
+    secondarySearchJob: function(keyword, location, latitude, longitude, radius, jType, sal, jobIndustry,callback) {
         var JobModel = require('../mongoDB/models/jobs');   //Import the schema of the collection of jobs.
         var tool = require('../mongoDB/tools/dbUtil');
         tool.dbConnection();     //Connect to the database.
@@ -105,6 +108,9 @@ var jobData= {
         if ((sal == "4") || (sal == "0")) {
             JobModel.find({
                 inUse: "1",  //Only query for published work that has not been deleted.
+
+
+                location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
 
                 //The job secondary search page has multiple search boxes.
                 //Take the intersection of the multiple query results.
@@ -150,7 +156,11 @@ var jobData= {
         //Query salary which has an upper limit and a lower limit. To be specific, 1000>salary>0, 2000>salary>1000, 3000>salary>2000
         } else {
             JobModel.find({
+
                 inUse: "1",
+
+                location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
+
                 $and: [
                     {
                         $or: [{title: {$regex: keyword, $options: 'i'}},
@@ -217,8 +227,9 @@ var jobData= {
                 if (err) throw err;
                 callback(null, result);
         });
-
     },
+
+
 
     searchSingleJob: function(condition, callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
@@ -253,7 +264,7 @@ var jobData= {
      * @param adCountry
      * @param callback
      */
-    postJob: function(jobName,company,email,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCountry,callback) {
+    postJob: function(jobName,company,email,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCountry,latitude,longitude,callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
         JobModel.create({
@@ -271,6 +282,7 @@ var jobData= {
                 street: adStreet,
                 state: adState,
                 country: adCountry,
+                location:  [latitude, longitude],
                 inUse:"1"     //By default, published jobs are set in use, which means this job can be viewed or be searched on subsequent operations.
             },
             function (err, result) {
@@ -323,7 +335,7 @@ module.exports=jobData;  //Export this module
 
 
 // jobData.postJob("dd","d","f",'e',"22",333,"s.jpg","London","11.jpg",
-//     "f","12-01","d","d","d",function(err,docs){
+//     "f","12-01","d","d","d",2,3,function(err,docs){
 //     if(!err){
 //         console.log(docs);
 //     }
@@ -377,11 +389,11 @@ module.exports=jobData;  //Export this module
 //console.log(role_query);
 //keyword, location, jType, sal1,sal2, callback
 
-// jobData.searchJob("amazon","s5",function(err,docs){
-//     if(!err){
-//         console.log(docs.length);
-//     }
-// });
+jobData.searchJob("","",2,3,4,function(err,docs){
+    if(!err){
+        console.log(docs.length);
+    }
+});
 
 
 

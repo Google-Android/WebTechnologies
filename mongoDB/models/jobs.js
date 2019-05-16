@@ -16,14 +16,23 @@ var jobSchema=new Schema({
     postcode:String,
     country:String,
     postDate:String,
-    longitude:Number,
-    latitude:Number,
-    inUse:String   // "1" represents published job in use. "0" represents this job has been deleted.
+    location:{
+        //type: "Point",
+        type: [ Number, Number ],
+        index:"2d"
+    },
+
+    inUse:{
+        type:String,
+        default:"1"  // "1" represents published job in use. "0" represents this job has been deleted.
+    }
+
 
 });
 
 
 module.exports=mongoose.model("jobs", jobSchema);
+
 
     //
     // Model=mongoose.model("jobs", jobSchema);
