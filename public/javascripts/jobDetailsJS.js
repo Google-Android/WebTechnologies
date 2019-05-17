@@ -103,9 +103,9 @@ function initMap() {
             var contentStringJob = '<div id="content">'+
                 '<div id="siteNotice">'+
                 '</div>'+
-                '<h1 id="firstHeading" class="firstHeading">' +
+                '<h5 id="firstHeading" class="firstHeading">' +
                 '<a href="/jobDetails?jobId='+jobId+'">'+jobTitle+'</a>' +
-                '</h1>'+
+                '</h5>'+
                 '<div id="bodyContent">'+
                 '<p>'+companyName+'</p>'+
                 '</div>'+
