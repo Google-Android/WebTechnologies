@@ -7,7 +7,7 @@ $(document).ready(function() {
      * get the parameter of searching jobs and turn to the result page.
      */
     $('#jobSearch').on('submit', function(event) {
-        alert('jobSearch');
+        // alert('jobSearch');
         event.preventDefault();
 
         // var keyword = $('#keyword').val();
@@ -19,15 +19,14 @@ $(document).ready(function() {
             d[this.name] = this.value;
         });
 
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
         
         $.ajax({
             type: 'POST',
             url: '/',
             data: d,
             success: function(data) {
-                alert('ajax success.');
-                alert('url:'+data.url);
+                // alert('ajax success.');
                 window.location.href=data.url;
             }
         });
@@ -43,7 +42,6 @@ $(document).ready(function() {
  * get location when the the browser was ready
  */
 window.onload=function getLocation() {
-    alert('get location....');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(getPosition);
     } else {
@@ -58,6 +56,5 @@ window.onload=function getLocation() {
  */
 function getPosition(position) {
     $('#cityLat').val(position.coords.latitude);
-    alert(position.coords.latitude+'---'+position.coords.longitude);
     $('#cityLng').val(position.coords.longitude);
 }

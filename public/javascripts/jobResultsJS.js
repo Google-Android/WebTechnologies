@@ -5,10 +5,16 @@ $(document).ready(function() {
 
 
     /**
-     *
+     * search jobs according to several params
+     * @param keyword
+     * @param location
+     * @param salary
+     * @param industry
+     * @param jobType
+     * @param searchingRadio
      */
     $('#secondarySearch').on('submit', function(event) {
-        alert('get secondarySearch data done.');
+        // alert('get secondarySearch data done.');
         event.preventDefault();
 
         var d={};
@@ -21,12 +27,12 @@ $(document).ready(function() {
         var searchingRadio = $("input[name='searchingRadio']:checked").val();
 
 
-        alert('keyword:'+keyword+',location:'+location+',salary:'+salary+",industry:"+industry+",jobType:"+jobType
-            +",searchingRadio:"+searchingRadio);
+        // alert('keyword:'+keyword+',location:'+location+',salary:'+salary+",industry:"+industry+",jobType:"+jobType
+        //     +",searchingRadio:"+searchingRadio);
 
         d['searchType']='2';
 
-        alert(JSON.stringify(d));
+        // alert(JSON.stringify(d));
 
         $.ajax({
             type: 'GET',
@@ -39,7 +45,7 @@ $(document).ready(function() {
                 if(data.result===0){
                     alert("Sorry, cannot search for jobs now.");
                 } else if(data.result === 1){
-                    alert("find jobs:"+data.jobResults.length);
+                    // alert("find jobs:"+data.jobResults.length);
                     var jobResults = data.jobResults;
 
                     for(var i=0; i<jobResults.length; i++){
@@ -58,7 +64,7 @@ $(document).ready(function() {
                     }
                 } else if(data.result === 2){
                     // cannot find any jobs within the condition
-                    alert("cannot find jobs!");
+                    // alert("cannot find jobs!");
                     html += '<div class="jumbotron jumbotron-fluid">';
                     html += '<div class="container text-center">';
                     html += '<h1 class="display-4">No Related Result! </h1>';

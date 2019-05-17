@@ -8,7 +8,7 @@ $(document).ready(function () {
      */
     $('#postJob').on('submit', function (event) {
 
-        alert('get postJob data done.');
+        // alert('get postJob data done.');
 
         event.preventDefault();
 

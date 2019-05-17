@@ -1,5 +1,5 @@
 /**
- * all function here are used for components in companyUserDetails page.
+ * all function here are used for components in consumerUserDetails page.
  */
 $(document).ready(function() {
 
@@ -7,7 +7,7 @@ $(document).ready(function() {
      * get the cv information of the user and send cv to the company
      */
     $('#consumerCvManagement').on('submit', function(event) {
-        alert('consumerCvManagement');
+        // alert('consumerCvManagement');
         event.preventDefault();
 
         var d={};
@@ -20,19 +20,18 @@ $(document).ready(function() {
         });
 
         d['operation'] = 'updateCv';
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
 
         $.ajax({
             type: 'POST',
             url: '/consumerUserDetails',
             data: d,
             success: function(data) {
-                alert('ajax success.');
+                // alert('ajax success.');
                 if(data.result === 0){
                     alert('can not change cv now.');
                 } else if(data.result === 1){
                     window.location.reload();
-                    // window.location.href='/jobDetails?jobId='+data.jobId;
                 }
             }
         });
@@ -40,6 +39,7 @@ $(document).ready(function() {
     });
 
 });
+
 
 /**
  * show notification when the two passwords entered by consumers are not consistent in account management.

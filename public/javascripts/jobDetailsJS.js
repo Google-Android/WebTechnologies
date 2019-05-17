@@ -8,7 +8,7 @@ $(document).ready(function() {
      * get the cv information of the user and send cv to the company
      */
     $('#consumerCv').on('submit', function(event) {
-        alert('consumerCv');
+        // alert('consumerCv');
         event.preventDefault();
 
         var d={};
@@ -20,14 +20,14 @@ $(document).ready(function() {
             d[this.name] = this.value;
         });
 
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
 
         $.ajax({
             type: 'POST',
             url: '/jobDetails',
             data: d,
             success: function(data) {
-                alert('ajax success.');
+                // alert('ajax success.');
                 if(data.result === 0){
                     alert('cannot send cv now.');
                     window.location.href='/jobDetails?jobId='+data.jobId;
@@ -82,28 +82,20 @@ function initMap() {
 
 
 
-        alert('gonna to show similar jobs.');
+        // alert('gonna to show similar jobs.');
         // show the similar jobs in map.
         var similarJobCount = $('#similarJobCount').val();
-        alert('similarJobCount:'+similarJobCount);
+        // alert('similarJobCount:'+similarJobCount);
 
         for (var i=0;i<similarJobCount;i++) {
-            alert('i:'+(i+1));
+            // alert('i:'+(i+1));
             var jobId = $('#jobId'+(i+1)).val();
-            alert('jobId:'+jobId);
             var jobTitle = $('#jobTitle'+(i+1)).val();
-            alert('jobTitle:'+jobTitle);
             var companyName = $('#companyName'+(i+1)).val();
-            alert('companyName:'+companyName);
             var latValue = $('#lat'+(i+1)).val();
-            alert('latValue:'+latValue);
             var lngValue = $('#lng'+(i+1)).val();
-            alert('lngValue:'+lngValue);
 
-            alert('jobId:'+jobId+",jobTitle:"+jobTitle+",companyName:"+companyName+",latValue:"+latValue+",lngValue:"+lngValue);
-
-
-
+            // alert('jobId:'+jobId+",jobTitle:"+jobTitle+",companyName:"+companyName+",latValue:"+latValue+",lngValue:"+lngValue);
 
             //set location
             var jobPositionJob = {lat: parseFloat(latValue), lng: parseFloat(lngValue)};
