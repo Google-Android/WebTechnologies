@@ -3,7 +3,6 @@
  *
  * @type {{addCvIntoUser: handleData.addCvIntoUser, insertUser: handleData.insertUser, searchUser: handleData.searchUser, changePassword: handleData.changePassword}}
  * @last_modify_date     2019-05-17
- *
  */
  var handleData= {
 
