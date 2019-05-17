@@ -197,6 +197,42 @@ var jobData= {
     },
 
 
+    /**
+     * it is used to search similar jobs within specific distance
+     * @param keyword
+     * @param latitude
+     * @param longitude
+     * @param callback
+     */
+    searchSimilarJob:function(keyword,latitude,longitude,callback){
+        var JobModel = require('../mongoDB/models/jobs');   //Import the schema of the collection of jobs.
+        var tool = require('../mongoDB/tools/dbUtil');
+        tool.dbConnection();     //Connect to the database.
+        var radius=5000;
+        var keyword = tool.dealWithMultiStrings(keyword);
+        JobModel.find({
+                inUse: "1", //Only query for published work that has not been deleted.
+
+                //The parameter radius is in kilometers.
+                //Radius divided by 112 means convert kilometers into radians
+                location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
+
+
+                title: {$regex:keyword, $options: 'i'}
+                }, function (err, result) {
+                    if (err) throw err;
+                    callback(null, result);
+
+         //The search results are mainly displayed in order of the time of posting jobs.
+         //If the jobs are published at the same date, alphabetize job titles.
+        }).sort({postDate: -1, title: 1});
+
+    },
+
+
+
+
+
 
 
     /**
@@ -296,6 +332,7 @@ var jobData= {
 
 
 
+
     /**
      * When company deletes this job, inUse field of jobs collection is set "0".
      * It means job information doesn't be deleted actually, even though company chooses to delete this published job.
@@ -318,6 +355,8 @@ var jobData= {
 };
 
 module.exports=jobData;  //Export this module
+
+
 
 
 
@@ -399,7 +438,9 @@ module.exports=jobData;  //Export this module
 // });
 
 
-
+// jobData.searchSimilarJob("java","53","-1",function(err,doc){
+//     console.log(doc)
+// })
 // var a="amazon";
 // var b="s1";
 
