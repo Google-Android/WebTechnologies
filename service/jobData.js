@@ -209,6 +209,8 @@ var jobData= {
         var tool = require('../mongoDB/tools/dbUtil');
         tool.dbConnection();     //Connect to the database.
         var radius=5000;
+        if(latitude==""||latitude=="undefined")  latitude=53.380707;
+        if(longitude==""|| longitude=="undefined") longitude= -1.483981999999969;
         var keyword = tool.dealWithMultiStrings(keyword);
         JobModel.find({
                 inUse: "1", //Only query for published work that has not been deleted.
