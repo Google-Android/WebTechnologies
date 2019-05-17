@@ -3,7 +3,6 @@
  *
  * @type {{secondarySearchCv: findCvData.secondarySearchCv, searchCv: findCvData.searchCv}}
  * @last_modify_date     2019-05-17
- *
  */
 var findCvData= {
 

@@ -3,6 +3,7 @@
  *
  * @type {{showWholeCv: cvData.showWholeCv, completeRequestInfo: cvData.completeRequestInfo, fillInBlankRequestInfo: cvData.fillInBlankRequestInfo, updateCv: cvData.updateCv, sendCv: cvData.sendCv, showCv: cvData.showCv, mainRequestInfo: cvData.mainRequestInfo, createCv: cvData.createCv}}
  * @last_modify_date     2019-05-17
+ *
  */
 var cvData= {
 

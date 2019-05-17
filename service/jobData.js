@@ -3,6 +3,7 @@
  *
  * @type {{secondarySearchJob: jobData.secondarySearchJob, showAllJobsByCompanyName: jobData.showAllJobsByCompanyName, postJob: jobData.postJob, searchJob: jobData.searchJob, deleteJob: jobData.deleteJob, showJobDetails: jobData.showJobDetails}}
  * @last_modify_date     2019-05-17
+ *
  */
 
 var jobData= {

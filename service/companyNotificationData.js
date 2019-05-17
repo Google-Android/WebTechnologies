@@ -3,6 +3,7 @@
  *
  * @type {{showUserJobCv: companyNotificationData.showUserJobCv}}
  * @last_modify_date     2019-05-17
+ *
  */
 var companyNotificationData= {
 
