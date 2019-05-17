@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
 
         console.log('user:'+user);
 
-        if(user){
+        if(!user){
             console.log('this user have not registered before. user:'+user);// user:null
             var userInfo;
 
