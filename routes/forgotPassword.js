@@ -1,5 +1,5 @@
 /**
- * This middleware is used to validate the login information.
+ * This middleware is used to validate the email and then reset password
  * @type {createApplication}
  */
 var express = require('express');
@@ -7,21 +7,33 @@ var router = express.Router();
 var handleData = require('../mongoDB/handleData');
 var md5Ecryption = require('../service/pwdEncryption');
 
-/* GET index page after login. */
+
+/**
+ * get to forgotPassword page
+ */
 router.get('/', function(req, res, next) {
   console.log('***forgotPassword***get***');
   res.render('forgotPassword', {user: req.session.user});
 });
 
 
-/* validation of the login email and password */
+/**
+ * @param operation: checkEmail or resetPwd
+ * @param email
+ * @param secretAnswer
+ * @param password
+ * @return securityQuestion
+ * @return securityAnswer
+ * @return result status
+ */
 router.post('/', function(req, res) {
   console.log("***forgotPassword***post***");
 
-  var operation = req.body.operation;
+  var operation = req.body.operation==null?"":req.body.operation;
+  var email = req.body.email==null?"":req.body.email;
+  console.log('operation:'+operation+",email:"+email);
+
   if(operation == 'checkEmail'){
-    var email = req.body.email;
-    console.log('email:'+email);
 
     // check whether this email has been registered before.
     handleData.searchUser({'email':email},function (err, user) {
@@ -36,10 +48,11 @@ router.post('/', function(req, res) {
            res.json({'result':1,'securityQuestion':user.question,'securityAnswer':user.answer});
        }
     });
+
   } else if(operation == 'resetPwd'){
-    var email = req.body.email;
+
     var secretAnswer = req.body.secretAnswer;
-    console.log('email:'+email+",securityAnswer:"+secretAnswer);
+    console.log("securityAnswer:"+secretAnswer);
 
     // check whether the security answer is right.
     handleData.searchUser({'email':email},function (err, user) {
@@ -54,6 +67,7 @@ router.post('/', function(req, res) {
           console.log('user answer:'+user.answer+", current answer:"+secretAnswer);
           if(user.answer == secretAnswer){ // right security answer
             var password = req.body.resetPassword;
+            console.log('password:'+password);
 
             //update password
             handleData.changePassword(email,md5Ecryption.encryptPwd(email,password),function (err, user) {
@@ -67,10 +81,17 @@ router.post('/', function(req, res) {
                     res.json({'result':1});
                 }
             });
+          }else{
+              console.log('wrong security answer.');
+              res.json({'result':2});
           }
+
         }
+
     });
+
   }
+
 });
 
 

@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var multer = require('multer');
+// var multer = require('multer');
 
 
 var indexRouter = require('./routes/index');
@@ -18,11 +18,9 @@ var personDetailsRouter = require('./routes/personDetails');
 var postJobsRouter = require('./routes/postJobs');
 var jobRequestsRouter = require('./routes/jobRequests');
 var jobDetailsRouter = require('./routes/jobDetails');
-var requestDetailsRouter = require('./routes/requestDetails');
 var findCvsRouter = require('./routes/findCvs');
 var consumerUserDetailsRouter = require('./routes/consumerUserDetails');
 var cvDetailsRouter = require('./routes/cvDetails');
-var userCvRouter = require('./routes/userCv');
 var forgotPasswordRouter = require('./routes/forgotPassword');
 
 var app = express();
@@ -66,11 +64,9 @@ app.use('/personDetails',personDetailsRouter);
 app.use('/postJobs',postJobsRouter);
 app.use('/jobRequests',jobRequestsRouter);
 app.use('/jobDetails',jobDetailsRouter);
-app.use('/requestDetails',requestDetailsRouter);
 app.use('/findCvs',findCvsRouter);
 app.use('/consumerUserDetails',consumerUserDetailsRouter);
 app.use('/cvDetails',cvDetailsRouter);
-app.use('/userCv',userCvRouter);
 app.use('/forgotPassword',forgotPasswordRouter);
 
 

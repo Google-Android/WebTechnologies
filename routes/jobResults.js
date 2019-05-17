@@ -52,8 +52,8 @@ router.get('/', function(req, res, next) {
         jobData.secondarySearchJob(keyword,location,cityLat,cityLng,searchingRadio,jobType,salary,industry,function(err,jobResults){
             if(err) {
                 res.json({'result':0});
+                console.log("err--in secondarySearchJob function:\n"+err);
                 throw err;
-                console.log("err:"+err);
             }
 
             if(!jobResults){// cannot find any jobs within the condition
