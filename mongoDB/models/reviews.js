@@ -8,6 +8,9 @@
 var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
+
+require('../tools/dbUtil').dbConnection();
+
 var reviewSchema=new Schema({
     publisherName:String,     //The name of the person who posted the comment
     objectName:String,        //The name of the person being reviewed

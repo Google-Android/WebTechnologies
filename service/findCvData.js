@@ -18,7 +18,7 @@ var findCvData= {
     searchCv: function (keyword, location, callback) {
         var CvModel = require('../mongoDB/models/cvs');  //Import the schema of the collection of cvs.
         var tool = require('../mongoDB/tools/dbUtil');
-        tool.dbConnection();                                   //Connect to the database.
+        // tool.dbConnection();                                   //Connect to the database.
 
 
         //dealWithMultiStrings() method allows users to input multiple strings in the search box, such as "MySQL Java mongoDB IT",
@@ -86,7 +86,7 @@ var findCvData= {
     secondarySearchCv: function (keyword, location, jType, sal, jobIndustry, callback) {
         var CvModel = require('../mongoDB/models/cvs');  //Import the schema of the collection of cvs.
         var tool = require('../mongoDB/tools/dbUtil');
-        tool.dbConnection();                                   //Connect to the database.
+        // tool.dbConnection();                                   //Connect to the database.
 
 
         //If the user does not select the salary option, the system displays a result that includes all salaries.

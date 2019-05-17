@@ -13,7 +13,7 @@
      * @param callback
      */
     searchUser: function(condition, callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();
+        // require('../mongoDB/tools/dbUtil').dbConnection();
         var User = require('./models/user');
         User.findOne(condition, function (err, result) {
             if (err) throw err;
@@ -29,7 +29,7 @@
      * @param callback
      */
     insertUser: function (condition, callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();
+        // require('../mongoDB/tools/dbUtil').dbConnection();
         var User = require('./models/user');
         User.create(condition, function (err, result) {
             if (err) throw err;
@@ -45,7 +45,7 @@
      * @param callback
      */
     changePassword: function(userEmail,newPwd,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();
+        // require('../mongoDB/tools/dbUtil').dbConnection();
         var User = require('./models/user');
         User.findOne({email:userEmail},function(err,doc){
 

@@ -7,6 +7,10 @@
 var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
+
+var tool = require('../tools/dbUtil');
+tool.dbConnection();
+
 var jobSchema=new Schema({
     title: String,
     companyName: String,

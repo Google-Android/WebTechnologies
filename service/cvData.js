@@ -15,7 +15,7 @@ var cvData= {
      * @param experience
      */
     updateCv: function(cvId,accomplishment,edu,experience){
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var CvModel = require('../mongoDB/models/cvs');       //Import the schema of the collection of cvs.
 
         //A person can only have one CV whose ID is unique. If users change their CVs, update them on  existing CVs.
@@ -41,7 +41,7 @@ var cvData= {
      * @param callback
      */
     createCv: function(accomplishment,edu,experience,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var CvModel = require('../mongoDB/models/cvs');       //Import the schema of the collection of cvs.
 
         CvModel.create({
@@ -69,7 +69,7 @@ var cvData= {
      * @param callback
      */
     sendCv: function(id,company,jobName,jobId,userId,username,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var CvModel = require('../mongoDB/models/cvConnJobs');   //Import the schema of the collection of cvConnJobs.
 
         CvModel.create({
@@ -98,7 +98,7 @@ var cvData= {
      * @param callback
      */
     showCv: function(cvId,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var CvModel = require('../mongoDB/models/cvs');          //Import the schema of the collection of cvs.
 
         //The cvID parameter of this function refers to the value of cv field of users collection.
@@ -127,7 +127,7 @@ var cvData= {
      * @param callback
      */
     showWholeCv: function(cvId,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var CvModel = require('../mongoDB/models/cvs');          //Import the schema of the collection of cvs.
 
         //The cvID parameter of this function refers to the value of cv field of users collection.
@@ -174,7 +174,7 @@ var cvData= {
      * @param callback
      */
     completeRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var RequestModel = require('../mongoDB/models/cvs');     //Import the schema of the collection of cvs.
 
         RequestModel.findOne({_id:cvId},function(err,doc){
@@ -227,7 +227,7 @@ var cvData= {
      * @param callback
      */
     fillInBlankRequestInfo: function(accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var RequestModel = require('../mongoDB/models/cvs');     //Import the schema of the collection of cvs.
 
         RequestModel.create({
@@ -276,7 +276,7 @@ var cvData= {
      * @param callback
      */
     mainRequestInfo: function(cvId,accomplishment,edu,experience,jobName,type,jobIndustry,sal,picUrl,adStreet,adCity,adState,zipcode,adCoun,date,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();       //Connect to the database.
         var tempCvData =require('./cvData');                     //Import two other methods of the current js file.
 
         //The cvID parameter of this function refers to the value of cv field of users collection.

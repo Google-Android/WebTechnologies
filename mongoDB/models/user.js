@@ -8,6 +8,9 @@
 var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
+
+require('../tools/dbUtil').dbConnection();
+
 var userSchema=new Schema({
     email: {
         type: String,         //consumer or company's email as the account name, which is unique.

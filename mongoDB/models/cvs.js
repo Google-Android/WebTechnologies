@@ -9,6 +9,8 @@ var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
 
+require('../tools/dbUtil').dbConnection();
+
 var cvSchema=new Schema({
     achievement: String,        //one entry of CV information
     education:String,           //one entry of CV information

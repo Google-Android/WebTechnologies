@@ -17,7 +17,7 @@ var reviewData= {
      * @param callback
      */
     createReview: function (publisher, object,rating,review,picUrl,reviewTitle,callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var Review = require('../mongoDB/models/reviews');    //Import the schema of the collection of reviews.
         Review.create({
             publisherName:publisher,
@@ -42,7 +42,7 @@ var reviewData= {
      * @param callback
      */
     searchReview: function(object,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var Review = require('../mongoDB/models/reviews');    //Import the schema of the collection of reviews.
         Review.find({
             objectName: object

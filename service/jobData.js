@@ -16,7 +16,7 @@ var jobData= {
     searchJob: function (keyword, location, callback) {
         var tool = require('../mongoDB/tools/dbUtil');
         var JobModel = require('../mongoDB/models/jobs');  //Import the schema of the collection of jobs.
-        tool.dbConnection();   //Connect to the database.
+       // tool.dbConnection();   //Connect to the database.
 
 
         //dealWithMultiStrings() method allows users to input multiple strings in the search box, such as "Amazon Gucci full-time IT",
@@ -84,7 +84,7 @@ var jobData= {
     secondarySearchJob: function(keyword, location, latitude, longitude, radius, jType, sal, jobIndustry,callback) {
         var JobModel = require('../mongoDB/models/jobs');   //Import the schema of the collection of jobs.
         var tool = require('../mongoDB/tools/dbUtil');
-        tool.dbConnection();     //Connect to the database.
+        //tool.dbConnection();     //Connect to the database.
 
 
         //If user does not select the job type or job industry in the web page, this parameter passed in is "undefined".
@@ -207,7 +207,7 @@ var jobData= {
     searchSimilarJob:function(keyword,latitude,longitude,callback){
         var JobModel = require('../mongoDB/models/jobs');   //Import the schema of the collection of jobs.
         var tool = require('../mongoDB/tools/dbUtil');
-        tool.dbConnection();     //Connect to the database.
+//        tool.dbConnection();     //Connect to the database.
         var radius=5000;
         if(latitude==""||latitude=="undefined")  latitude=53.380707;
         if(longitude==""|| longitude=="undefined") longitude= -1.483981999999969;
@@ -243,7 +243,7 @@ var jobData= {
      * @param callback
      */
     showAllJobsByCompanyName: function(company, callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();  //Connect to the database.
+        //require('../mongoDB/tools/dbUtil').dbConnection();  //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');   //Import the schema of the collection of jobs.
         JobModel.find({companyName: company, inUse:"1"},   //Only query for published work that has not been deleted.
             function (err, result) {
@@ -261,7 +261,7 @@ var jobData= {
      * @param callback
      */
     showJobDetails: function(jobId, callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
+        //require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
         JobModel.findOne({_id: jobId},
             function (err, result) {
@@ -273,7 +273,7 @@ var jobData= {
 
 
     searchSingleJob: function(condition, callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
+       // require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
         JobModel.findOne(condition,
             function (err, result) {
@@ -306,7 +306,7 @@ var jobData= {
      * @param callback
      */
     postJob: function(jobName,company,email,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCountry,latitude,longitude,callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
+        //require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
 
         var keyArr =zipcode.split(" ");
@@ -349,7 +349,7 @@ var jobData= {
      * @param callback
      */
     deleteJob: function(jobId,callback){
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        //require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');     //Import the schema of the collection of jobs.
         JobModel.findOne({_id:jobId},function(err,doc){
             if (err) throw err;

@@ -15,7 +15,7 @@ var companyNotificationData= {
      * @param callback
      */
     showUserJobCv: function (company,callback) {
-        require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
+        // require('../mongoDB/tools/dbUtil').dbConnection();    //Connect to the database.
         var NotificationModel = require('../mongoDB/models/cvConnJobs');   //Import the schema of the collection of cvconnjobs.
         NotificationModel.find({companyName:company},function(err,doc){
             if (err) throw err;

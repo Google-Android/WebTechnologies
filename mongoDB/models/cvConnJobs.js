@@ -9,6 +9,8 @@ var mongoose = require ("mongoose");
 
 var Schema=mongoose.Schema;
 
+require('../tools/dbUtil').dbConnection();
+
 var cvConnJobSchema=new Schema({
     userId:String,        //job seeker's ID
     username:String,      //job seeker's name
