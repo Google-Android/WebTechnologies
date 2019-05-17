@@ -21,10 +21,8 @@ $(document).ready(function () {
             data: loginInfo,
             success: function (data) {
                 if (data.errInfo == 0) {
-                    alert('账户不存在');
                     $('#accountDoesNotExist').show();
                 } else if (data.errInfo == 1) {
-                    alert('用户名密码不对');
                     $('#invalidUsernamePasswordNotification').show();
                 } else {
                     window.location.reload();

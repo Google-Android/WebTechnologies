@@ -34,16 +34,20 @@ router.post('/', function(req, res, next) {
   handleData.searchUser({"email": loginEmail}, function(err, user){
       if(err) throw err;
 
-      if(!user){
-          console.log('cannot find this user.'+user);// if the user is not in db, user would be null.
-          res.send({errInfo:0});// error 1: can not find in email db.
-      } else if(loginPassword != md5Encryption.encryptPwd(loginEmail,loginPassword)){
-          console.log('wrong password.')
-          res.send({errInfo:1});
-      } else {
-          console.log('login successfully.')
-          req.session.user=user;
-          res.render('index',{user:user});// successful login
+      if(user){
+          if(user.length == 0){
+              console.log('cannot find this user.'+user);// if the user is not in db, user would be null.
+              res.send({errInfo:0});// error 1: can not find in email db.
+          } else {
+              if(user.pwd != md5Encryption.encryptPwd(loginEmail,loginPassword)){
+                  console.log('wrong password.pwd:'+user.pwd+',current:'+md5Encryption.encryptPwd(loginEmail,loginPassword));
+                  res.send({errInfo:1});
+              } else {
+                  console.log('login successfully.')
+                  req.session.user=user;
+                  res.render('index',{user:user});// successful login
+              }
+          }
       }
   });
 
