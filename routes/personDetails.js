@@ -1,69 +1,69 @@
+/**
+ *  this middleware is used for personDetails page
+ * @type {createApplication}
+ */
 var express = require('express');
 var router = express.Router();
 var reviewData = require('../service/reviewData');
 var handleData = require('../mongoDB/handleData');
-var fs = require('fs');
-var multer = require('multer');
+var uploadService = require('../service/uploadService');
 
-var createFolder = function(folder){
-    try{
-        fs.accessSync(folder);
-    }catch(e){
-        fs.mkdirSync(folder);
-    }
-};
-
-var uploadFolder = './public/image/';
-
-createFolder(uploadFolder);
-
+//get current timestamp and then add it to the file name.
 var currentTime = Date.now();
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null,uploadFolder);
-    },
-    filename: function(req,file,cb){
-        cb(null,currentTime+'-'+file.originalname);
-    }
-});
-
-// set the upload path
-var upload = multer({storage:storage});
 
 
-/* GET index page after login. */
-router.get('/', function(req, res, next) {
-  console.log('***personDetails***get***');
+/**
+ * get the owner and reviews to this owner
+ * @param ownerId
+ * @return owner
+ * @return reviews
+ */
+router.get('/', function(req, res) {
+    console.log('***personDetails***get***');
 
-  // var operation = req.query.operation==null?"":req.query.operation;
-  var ownerId = req.query.ownerId==null?"":req.query.ownerId;
-  console.log('ownerId:'+ownerId);
+    var ownerId = req.query.ownerId==null?"":req.query.ownerId;
+    console.log('ownerId:'+ownerId);
 
-  // if(operation == 'otherPersonDetails'){
+    // search user by the ownerId
     handleData.searchUser({_id:ownerId}, function(err,owner){
-      if(err){
-        console.log('err:'+err);
-        throw err;
-      }
-      if(owner){
-        console.log('owner:'+owner);
-        reviewData.searchReview(owner.name, function(err, reviews){
-          if(err){
+
+        if(err){
             console.log('err:'+err);
             throw err;
-          }
-          if(reviews){
-            console.log('reviews:\n'+reviews);
-            res.render('personDetails', {'user':req.session.user,'owner':owner,'reviews':reviews});
-          }
-        });
-      }
+        }
+
+        if(owner){
+            console.log('owner:'+owner);
+
+            // get all reviews to this owner
+            reviewData.searchReview(owner.name, function(err, reviews){
+              if(err){
+                console.log('err:'+err);
+                throw err;
+              }
+              if(reviews){
+                console.log('reviews:\n'+reviews);
+                res.render('personDetails', {'user':req.session.user,'owner':owner,'reviews':reviews});
+              }
+            });
+        }
+
     });
+
 });
 
 
-/*  */
-router.post('/', upload.single('reviewImage') ,function(req, res) {
+/**
+ * create a new review to one person user
+ * @param username
+ * @param ownerName
+ * @param reviewTitle
+ * @param reviewRate
+ * @param reviewComment
+ * @return review
+ * @return result status to ajax
+ */
+router.post('/', uploadService.uploadFile(currentTime).single('reviewImage') ,function(req, res) {
   console.log("***personDetails***post***");
   console.dir("file:"+req.file.originalname);
 
@@ -72,9 +72,11 @@ router.post('/', upload.single('reviewImage') ,function(req, res) {
   var reviewTitle = req.body.reviewTitle;
   var reviewRate = req.body.reviewRating;
   var reviewComment = req.body.reviewComment;
-  console.log("username:"+username+",ownerName:"+ownerName+",reviewTitle:"+reviewTitle+",reviewRate:"+reviewRate+",reviewComment:"+reviewComment);
+  console.log(username+","+ownerName+","+reviewTitle+","+reviewRate+","+reviewComment);
 
-  reviewData.createReview(username,ownerName,reviewRate,reviewComment,currentTime+'-'+req.file.originalname,reviewTitle,function(err,review){
+  // add a new review in database
+  reviewData.createReview(username,ownerName,reviewRate,reviewComment,currentTime+'-'+req.file.originalname,
+      reviewTitle,function(err,review){
       if(err){
           res.json({result:2});
           console.log("err:"+err);

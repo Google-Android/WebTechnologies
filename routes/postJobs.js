@@ -4,100 +4,78 @@
  */
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
-var multer = require('multer');
-
 var jobData = require('../service/jobData');
+var commonTool = require('../service/commonTool');
+var uploadService = require('../service/uploadService');
 
-var createFolder = function(folder){
-    try{
-        fs.accessSync(folder);
-    }catch(e){
-        fs.mkdirSync(folder);
-    }
-};
-
-var uploadFolder = './public/image/';
-
-createFolder(uploadFolder);
-
+// get the current timestamp and add it to the file name
 var currentTime = Date.now();
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null,uploadFolder);
-    },
-    filename: function(req,file,cb){
-        cb(null,currentTime+'-'+file.originalname);
-    }
-});
-
-// set the upload path
-var upload = multer({storage:storage});
 
 
-/* GET index page after login. */
+/**
+ * get postJobs page
+ */
 router.get('/', function(req, res, next) {
   console.log('***postJobs***get***');
   res.render('postJobs', {user:req.session.user});
 });
 
 
-/* validation of the login email and password */
-router.post('/', upload.single('JobImage'), function(req, res) {
-  console.log("***postJobs***post***");
-  console.log('cityLat:'+req.body.cityLat);
-  console.log('cityLng:'+req.body.cityLng);
-  
-  var companyName = req.body.companyName;
-  var companyEmail = req.body.companyEmail;
-  var title = req.body.title;
-  var jobType = req.body.requestJobType;
-  var industry = req.body.requestJobIndustry;
-  var salary = req.body.salary;
-  var description = req.body.description;
-  var street = req.body.route;
-  var city = req.body.postal_town;
-  var state = req.body.administrative_area_level_1;
-  var postalCode = req.body.postal_code;
-  var country = req.body.country;
+/**
+ * post a new job
+ * @param companyName
+ * @param companyEmail
+ * @param title
+ * @param jobType
+ * @param industry
+ * @param salary
+ * @param description
+ * @param street
+ * @param city
+ * @param state
+ * @param postalCode
+ * @param country
+ * @param cityLat
+ * @param cityLng
+ * @return jobId
+ * @return result status to ajax
+ */
+router.post('/', uploadService.uploadFile(currentTime).single('JobImage'), function(req, res) {
+    console.log("***postJobs***post***");
 
-  var cityLat = req.body.cityLat;
-  var cityLng = req.body.cityLng;
+    var companyName = req.body.companyName==null?"":req.body.companyName;
+    var companyEmail = req.body.companyEmail==null?"":req.body.companyEmail;
+    var title = req.body.title==null?"":req.body.title;
+    var jobType = req.body.requestJobType==null?"":req.body.requestJobType;
+    var industry = req.body.requestJobIndustry==null?"":req.body.requestJobIndustry;
+    var salary = req.body.salary==null?"":req.body.salary;
+    var description = req.body.description==null?"":req.body.description;
+    var street = req.body.route==null?"":req.body.route;
+    var city = req.body.postal_town==null?"":req.body.postal_town;
+    var state = req.body.administrative_area_level_1==null?"":req.body.administrative_area_level_1;
+    var postalCode = req.body.postal_code==null?"":req.body.postal_code;
+    var country = req.body.country==null?"":req.body.country;
+    var cityLat = req.body.cityLat==null?"":req.body.cityLat;
+    var cityLng = req.body.cityLng==null?"":req.body.cityLng;
 
+    console.log(companyName+','+companyEmail+','+title+","+jobType+","+industry+","+salary +','+description+","
+        +street+","+city+","+state +","+postalCode +","+country+","+cityLat+","+cityLng);
 
-    console.log('title:'+title+",requestJobType:"+jobType+",requestJobIndustry:"+industry+",postSalary:"+salary
-        +',description:'+description+",street:"+street+",city:"+city+",state:"+state+",postalCode:"+postalCode
-        +",country:"+country+",cityLat:"+cityLat+",cityLng:"+cityLng);
-
-  jobData.postJob(title,companyName,companyEmail,industry,jobType,salary,currentTime+'-'+req.file.originalname,
-      description,formatDate(new Date()),street,city,state,postalCode,country,cityLat,cityLng,function (err,job) {
-      if(err){
-          res.json({'result':2});
-          console.log("err:"+err);
-          throw err;
-      } else {
-          console.log("job:"+job);
-          res.json({'result':1,'jobId':job.id});
-      }
-  });
+    // add a new job in database
+    jobData.postJob(title,companyName,companyEmail,industry,jobType,salary,currentTime+'-'+req.file.originalname,
+        description,commonTool.formatDate(new Date()),street,city,state,postalCode,country,cityLat,cityLng,function (err,job) {
+        if(err){
+            res.json({'result':2});
+            console.log("err:"+err);
+            throw err;
+        } else {
+            console.log("job:"+job);
+            res.json({'result':1,'jobId':job.id});
+        }
+    });
 
 
 });
-
-//new Date()
-function formatDate(date) {
-    var myyear = date.getFullYear();
-    var mymonth = date.getMonth() + 1;
-    var myweekday = date.getDate();
-
-    if (mymonth < 10) {
-        mymonth = "0" + mymonth;
-    }
-    if (myweekday < 10) {
-        myweekday = "0" + myweekday;
-    }
-    return (myyear + "-" + mymonth + "-" + myweekday);
-}
 
 
 module.exports = router;

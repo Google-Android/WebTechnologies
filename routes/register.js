@@ -8,7 +8,9 @@ var handleData = require('../mongoDB/handleData');
 var md5Ecryption = require('../service/pwdEncryption');
 
 
-/* GET register page after login. */
+/**
+ * get to register page
+ */
 router.get('/', function(req, res) {
     console.log('***register***get***');
 });
@@ -25,9 +27,9 @@ router.post('/', function(req, res) {
 
     var condition;
     if(req.body.userCategory==='p'){
-        condition ={"email":req.body.consumerEmail};
+        condition ={"email":req.body.consumerEmail==null?"":req.body.consumerEmail};
     } else if(req.body.userCategory === 'c'){
-        condition ={"email":req.body.companyEmail};
+        condition ={"email":req.body.companyEmail==null?"":req.body.companyEmail};
     }
 
     handleData.searchUser(condition,function (err,user) {
@@ -41,7 +43,6 @@ router.post('/', function(req, res) {
             if(req.body.userCategory === 'p'){ // customer user
                 userInfo = {
                     "email":req.body.consumerEmail,
-                    // "pwd":req.body.consumerPassword,
                     "pwd":md5Ecryption.encryptPwd(req.body.consumerEmail,req.body.consumerPassword),
                     "personOrComp":req.body.userCategory,
                     "name":req.body.consumerFirstName,
@@ -52,7 +53,6 @@ router.post('/', function(req, res) {
             } else if(req.body.userCategory === 'c'){ // company user
                 userInfo = {
                     "email":req.body.companyEmail,
-                    // "pwd":req.body.companyPassword,
                     "pwd":md5Ecryption.encryptPwd(req.body.companyEmail,req.body.companyPassword),
                     "personOrComp":req.body.userCategory,
                     "name":req.body.companyName,

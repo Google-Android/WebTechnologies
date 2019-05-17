@@ -5,25 +5,34 @@
 var express = require('express');
 var router = express.Router();
 var md5Encryption = require('../service/pwdEncryption');
+var handleData = require('../mongoDB/handleData');
 
-
-/* GET index page after login. */
+/**
+ * get to index page.
+ */
 router.get('/', function(req, res, next) {
   console.log('***login***get***');
   res.render('index', { title: 'Express' });
 });
 
 
-/* validation of the login email and password */
+/**
+ * validate the email and password.
+ * if valid, then put the user into session.
+ * @param loginEmail
+ * @param loginPassword
+ * @return user
+ */
 router.post('/', function(req, res, next) {
   console.log("***login***post***");
 
-  var loginEmail = req.body.loginEmail;
-  var loginPassword =req.body.loginPassword;
+  var loginEmail = req.body.loginEmail==null?"":req.body.loginEmail;
+  var loginPassword =req.body.loginPassword==null?"":req.body.loginPassword;
+  console.log(loginEmail+','+loginPassword);
 
-  var handleData = require('../mongoDB/handleData');
   var condition = {"email": loginEmail, "pwd": md5Encryption.encryptPwd(loginEmail,loginPassword)};
 
+  // validate the email and password
   handleData.searchUser(condition, function(err, user){
     if(err) throw err;
 
