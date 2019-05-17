@@ -94,7 +94,9 @@ var jobData= {
         //If the user does not select the salary option, the system displays a result that includes all salaries.
         //set sal="0", then look for all jobs whose salary is more than -1,000.    (sal - 1) * 1000= -1000
         if (sal == "undefined") sal = "0";
-
+        if(radius=="undefined") radius=40075;
+        if(latitude==""||latitude=="undefined")  latitude=53.380707;
+        if(longitude==""|| longitude=="undefined") longitude= -1.483981999999969;
 
         //dealWithMultiStrings() method allows users to input multiple strings in the search box, such as "Amazon Gucci full-time IT",
         //This method can convert "Amazon full-time IT" to "/Amazon|Gucci|full-time|IT/i".
@@ -160,7 +162,7 @@ var jobData= {
 
                 inUse: "1",
 
-                location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
+                // location:{"$near":[latitude,longitude],$maxDistance:radius/111.2},
 
                 $and: [
                     {
@@ -390,7 +392,7 @@ module.exports=jobData;  //Export this module
 //console.log(role_query);
 //keyword, location, jType, sal1,sal2, callback
 
-// jobData.searchJob("","",2,3,4,function(err,docs){
+// jobData.searchJob("","",function(err,docs){
 //     if(!err){
 //         console.log(docs.length);
 //     }
@@ -400,8 +402,11 @@ module.exports=jobData;  //Export this module
 
 // var a="amazon";
 // var b="s1";
+
+// jobData.
 //
-// jobData.secondarySearchJob("amazon","","undefined","undefined","undefined",function(err,doc){
+//
+// jobData.secondarySearchJob("","","","","","","","",function(err,doc){
 //     if(!err){
 //         console.log(doc);
 //     }
