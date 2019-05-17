@@ -7,12 +7,11 @@
 // use multer to upload file
 var multer = require('multer');
 
+var uploadPath = './public/image/';
 
 var uploadService={
 
     uploadFile:function (currentTime) {
-
-        uploadPath = './public/image/';
 
         // try{
         //     // fs.accessSync('./public/image/');
