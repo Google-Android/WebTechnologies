@@ -8,7 +8,7 @@ $(document).ready(function() {
      * validate the username and password; if not existed yet, add the new user.
      */
     $('#personReview').on('submit', function(event) {
-        alert('get personReview data done.');
+        // alert('get personReview data done.');
         event.preventDefault();
 
         var ownerName = $('#ownerName').val();
@@ -17,7 +17,7 @@ $(document).ready(function() {
         var reviewComment = $('#reviewComment').val();
         var reviewImage = document.getElementById("reviewImage");
 
-        alert('ownerName:'+ownerName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
+        // alert('ownerName:'+ownerName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
 
         var d = new FormData();
         d.append('ownerName',ownerName);
@@ -33,7 +33,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {
-                alert('ajax successfully.');
+                // alert('ajax successfully.');
                 if(data.result === 1){
                     window.location.reload();
                 } else if(data.result === 2){

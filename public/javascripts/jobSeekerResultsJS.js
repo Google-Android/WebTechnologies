@@ -1,5 +1,5 @@
 /**
- * all function here are used for components in findCvs page.
+ * all function here are used for components in jobSeekerResults page.
  */
 $(document).ready(function() {
 
@@ -8,7 +8,7 @@ $(document).ready(function() {
      * find cvs according to the condition, e.g. keyword, location, salary and job types.
      */
     $('#cvSecondarySearch').on('submit', function(event) {
-        alert('cvSecondarySearch');
+        // alert('cvSecondarySearch');
         event.preventDefault();
 
         var d={};
@@ -19,14 +19,14 @@ $(document).ready(function() {
             d[this.name] = this.value;
         });
 
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
         
         $.ajax({
             type: 'POST',
             url: '/jobSeekerResults',
             data: d,
             success: function(data) {
-                alert('ajax success.');
+                // alert('ajax success.');
     
                 var html = '';
                 if(data.result == 1){// find cvs

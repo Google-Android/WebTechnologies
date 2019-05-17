@@ -8,7 +8,7 @@ $(document).ready(function() {
      * check the answer of the security question and then reset password.
      */
     $('#resetPassword').on('submit', function(event) {
-        alert('resetPassword');
+        // alert('resetPassword');
         event.preventDefault();
 
         var d={};
@@ -21,14 +21,14 @@ $(document).ready(function() {
 
         d['operation'] = 'resetPwd';
 
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
 
         $.ajax({
             type: 'POST',
             url: '/forgotPassword',
             data: d,
             success: function(data) {
-                alert('ajax success.');
+                // alert('ajax success.');
                 if(data.result === 0){
                     alert('Sorry, cannot reset password now.')
                 } else if(data.result === 1){
@@ -66,7 +66,6 @@ var passwordCheck = function () {
  * @returns {boolean}
  */
 function checkAll() {
-    alert('checkAll function');
     // var check = passwordCheck() && checkpwd() && checkpwdc() && checkcb();
     var check = passwordCheck();
     return check;
@@ -74,7 +73,9 @@ function checkAll() {
 }
 
 
-
+/**
+ * check whether the email has been registered.
+ */
 function checkEmail() {
     var email = $('#email').val();
 
@@ -103,7 +104,6 @@ function checkEmail() {
                 $('#next').hide();
 
             } else if(data.result === 2){ // this email have not been registered before.
-                alert('invalid email.');
                 $('#emailExistingCheck').show();
             }
         }

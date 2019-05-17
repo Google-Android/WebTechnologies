@@ -1,12 +1,7 @@
 /**
- * all function here are used for components in company detail page.
+ * all function here are used for components in companyDetails page.
  */
 $(document).ready(function() {
-
-    // the initial value of crontabStatus is zero.
-    // when crontabStatus equals one, it means the crontab need to be run.
-    // when crontabStatus equals two, it means the crontab need to be stopped.
-    // var crontabStatus = 0;
 
     /**
      * add a review of one specific company
@@ -17,9 +12,12 @@ $(document).ready(function() {
     });
 
 
-
+    /**
+     * if the method has not been implemented successfully, it would be called again.
+     * @return {boolean}
+     */
     function crontab(){
-        alert('get companyReview data done.');
+        // alert('get companyReview data done.');
         event.preventDefault();
 
         var companyName = $('#companyName').val();
@@ -28,7 +26,7 @@ $(document).ready(function() {
         var reviewComment = $('#reviewComment').val();
         var reviewImage = document.getElementById("reviewImage");
 
-        alert('companyName:'+companyName+",reviewTitle:"+reviewTitle+",reviewRating:"+reviewRating+",reviewComment:"+reviewComment)
+        // alert(companyName+","+reviewTitle+","+reviewRating+","+reviewComment);
 
         var d = new FormData();
         d.append('companyName',companyName);
@@ -45,7 +43,7 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {
-                alert('ajax successfully.');
+                // alert('ajax successfully.');
                 if(data.result === 1){
                     window.location.reload();
                 } else if(data.result === 2){
@@ -53,7 +51,6 @@ $(document).ready(function() {
                 }
             },
             error: function(){ 
-                alert('Error loading document');
                 crontab();
             }
         });

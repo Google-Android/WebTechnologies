@@ -30,19 +30,21 @@ router.post('/', function(req, res, next) {
   var loginPassword =req.body.loginPassword==null?"":req.body.loginPassword;
   console.log(loginEmail+','+loginPassword);
 
-  var condition = {"email": loginEmail, "pwd": md5Encryption.encryptPwd(loginEmail,loginPassword)};
-
   // validate the email and password
-  handleData.searchUser(condition, function(err, user){
-    if(err) throw err;
+  handleData.searchUser({"email": loginEmail}, function(err, user){
+      if(err) throw err;
 
-    if(!user){
-      console.log(user);// if the user is not in db, user would be null.
-      return res.send({errInfo:1});// error 1: can not find in db.
-    }
-
-    req.session.user=user;
-    res.render('index',{user:user});// successful login
+      if(!user){
+          console.log('cannot find this user.'+user);// if the user is not in db, user would be null.
+          res.send({errInfo:0});// error 1: can not find in email db.
+      } else if(loginPassword != md5Encryption.encryptPwd(loginEmail,loginPassword)){
+          console.log('wrong password.')
+          res.send({errInfo:1});
+      } else {
+          console.log('login successfully.')
+          req.session.user=user;
+          res.render('index',{user:user});// successful login
+      }
   });
 
 });

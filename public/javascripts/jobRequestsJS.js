@@ -8,7 +8,7 @@ $(document).ready(function() {
      * store information about the job request and turn to cv page.
      */
     $('#jobRequest').on('submit', function(event) {
-        alert('jobRequest');
+        // alert('jobRequest');
         event.preventDefault();
 
         var achievement = $('#achievement').val();
@@ -41,7 +41,7 @@ $(document).ready(function() {
         d.append('postal_code',postal_code);
         d.append('country',country);
 
-        alert("data:"+JSON.stringify(d));
+        // alert("data:"+JSON.stringify(d));
         
         $.ajax({
             //no need to change to get method.
@@ -51,9 +51,8 @@ $(document).ready(function() {
             contentType: false,
             processData: false,
             success: function(data) {
-                alert('ajax success.');
+                // alert('ajax success.');
                 if(data.result === 1){
-                    alert('insert or update cv successfully.')
                     window.location.href='/cvDetails?operation=showMyCv&cvId='+data.cvId;
                 } else if(data.result === 2){
                     alert('Sorry, cannot insert or update cv now.');

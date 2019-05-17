@@ -20,16 +20,14 @@ $(document).ready(function () {
             url: '/login',
             data: loginInfo,
             success: function (data) {
-                // alert('ajax successfully.')
-                // alert("error:"+data.errInfo);
-                //do something with the data via front-end framework
-                if (data.errInfo == 1) {
+                if (data.errInfo == 0) {
+                    alert('账户不存在');
+                    $('#accountDoesNotExist').show();
+                } else if (data.errInfo == 1) {
+                    alert('用户名密码不对');
                     $('#invalidUsernamePasswordNotification').show();
                 } else {
                     window.location.reload();
-                    // window.location.href='/';
-                    // $('#loginRegister').modal('hide');
-
                 }
             }
         });
@@ -47,7 +45,6 @@ $(document).ready(function () {
 
         var d = {};
 
-        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
         var wholeForm = $('#consumerRegister').serializeArray();
 
         $.each(wholeForm, function () {
@@ -84,7 +81,6 @@ $(document).ready(function () {
 
         var d = {};
 
-        // [{name: "a1", value: "xx"},{name: "a2", value: "xx"}],
         var wholeForm = $('#companyRegister').serializeArray();
 
         $.each(wholeForm, function () {
