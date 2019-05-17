@@ -118,16 +118,16 @@
         similarJobs.forEach(function (similarJob) {
             similarJobCount++;
     %>
-        <input type="text" id="jobId<%=similarJobCount %>" name="jobId<%=similarJobCount %>" value="<%=similarJob.id %>">
-        <input type="text" id="jobTitle<%=similarJobCount %>" name="jobTitle<%=similarJobCount %>" value="<%=similarJob.title %>">
-        <input type="text" id="companyName<%=similarJobCount %>" name="companyName<%=similarJobCount %>" value="<%=similarJob.companyName %>">
-        <input type="text" id="lat<%=similarJobCount %>" name="lat<%=similarJobCount %>" value="<%=similarJob.location[0] %>">
-        <input type="text" id="lng<%=similarJobCount %>" name="lng<%=similarJobCount %>" value="<%=similarJob.location[1] %>">
+        <input type="hidden" id="jobId<%=similarJobCount %>" name="jobId<%=similarJobCount %>" value="<%=similarJob.id %>">
+        <input type="hidden" id="jobTitle<%=similarJobCount %>" name="jobTitle<%=similarJobCount %>" value="<%=similarJob.title %>">
+        <input type="hidden" id="companyName<%=similarJobCount %>" name="companyName<%=similarJobCount %>" value="<%=similarJob.companyName %>">
+        <input type="hidden" id="lat<%=similarJobCount %>" name="lat<%=similarJobCount %>" value="<%=similarJob.location[0] %>">
+        <input type="hidden" id="lng<%=similarJobCount %>" name="lng<%=similarJobCount %>" value="<%=similarJob.location[1] %>">
     <%
         })
     }
     %>
-    <input name="similarJobCount" id="similarJobCount" value="<%=similarJobCount %>" type="text">
+    <input type="hidden" name="similarJobCount" id="similarJobCount" value="<%=similarJobCount %>" type="text">
     <div class="card mt-2">
         <div class="card-header">
             <h3>Similar jobs in 5km</h3>

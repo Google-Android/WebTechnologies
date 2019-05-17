@@ -55,8 +55,7 @@ router.get('/', function(req, res) {
            console.log('cityLat:'+cityLat+',cityLng:'+cityLng);
 
            // find the similar job within 5 radius
-           jobData.secondarySearchJob(job.title,"",cityLat,cityLng,5,"","","",
-               function(err,similarJobs){
+           jobData.searchSimilarJob(job.title,cityLat,cityLng,function (err,similarJobs) {
                if(err){
                    console.log('err:'+err);
                    throw err;
