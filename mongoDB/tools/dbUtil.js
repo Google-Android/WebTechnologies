@@ -41,7 +41,7 @@ var tools={
         var mongoose= require ("mongoose");
 
         //Database is named website. Account name is yiping and password is fanhuamemeda.
-        mongoose.connect("mongodb+srv://yiping:fanhuamemeda@cluster0-1xoyl.mongodb.net/website?retryWrites=true", { useNewUrlParser: true });
+        mongoose.connect("mongodb+srv://yiping:fanhuamemeda@cluster0-1xoyl.mongodb.net/webnew?retryWrites=true", { useNewUrlParser: true });
 
         mongoose.connection.once ("open", function(){
             console.log( "connected");

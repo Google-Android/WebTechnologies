@@ -1,6 +1,6 @@
 var mongoose= require ("mongoose");
 
-mongoose.connect("mongodb+srv://yiping:fanhuamemeda@cluster0-1xoyl.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://yiping:fanhuamemeda@cluster0-1xoyl.mongodb.net/webnew?retryWrites=true", { useNewUrlParser: true });
 
 mongoose.connection.once ("open", function(){
     console.log( "connected");
