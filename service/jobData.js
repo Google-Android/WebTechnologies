@@ -306,6 +306,13 @@ var jobData= {
     postJob: function(jobName,company,email,jobIndustry,type,sal,picUrl,details,date,adStreet,adCity,adState,zipcode,adCountry,latitude,longitude,callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();   //Connect to the database.
         var JobModel = require('../mongoDB/models/jobs');    //Import the schema of the collection of jobs.
+
+        var keyArr =zipcode.split(" ");
+        var key_query = "";
+        for (var i = 0; i < keyArr.length; i++) {
+            key_query = key_query + keyArr[i];
+        }
+
         JobModel.create({
                 title: jobName,
                 companyName: company,
@@ -313,7 +320,7 @@ var jobData= {
                 industry: jobIndustry,
                 jobType: type,
                 city: adCity,
-                postcode: zipcode,
+                postcode: key_query,
                 salary: sal,
                 picture: "../image/" + picUrl,
                 description: details,
