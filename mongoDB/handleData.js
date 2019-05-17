@@ -1,22 +1,35 @@
-// require('./tools/connection');                //connect to database;
- //User Schema used to define the document field type
+/**
+ * CRUD methods related with user information.
+ *
+ * @type {{addCvIntoUser: handleData.addCvIntoUser, insertUser: handleData.insertUser, searchUser: handleData.searchUser, changePassword: handleData.changePassword}}
+ * @last_modify_date     2019-05-17
+ *
+ */
+ var handleData= {
 
-
-var handleData= {
-
-    searchUser: function (condition, callback) {
-        require('./tools/connection');
+    /**
+     * it will be called for register and login
+     * @param condition
+     * @param callback
+     */
+    searchUser: function(condition, callback) {
+        require('../mongoDB/tools/dbUtil').dbConnection;
         var User = require('./models/user');
-        //it will be called for register and login
         User.findOne(condition, function (err, result) {
             if (err) throw err;
             callback(null, result);
         });
+
     },
 
-    //it will be called for register
+
+    /**
+     * It will be called for register
+     * @param condition
+     * @param callback
+     */
     insertUser: function (condition, callback) {
-        require('./tools/connection');
+        require('../mongoDB/tools/dbUtil').dbConnection;
         var User = require('./models/user');
         User.create(condition, function (err, result) {
             if (err) throw err;
@@ -24,8 +37,15 @@ var handleData= {
         });
     },
 
+
+    /**
+     * The method is used to change password.
+     * @param userEmail
+     * @param newPwd
+     * @param callback
+     */
     changePassword: function(userEmail,newPwd,callback){
-        require('./tools/connection');
+        require('../mongoDB/tools/dbUtil').dbConnection;
         var User = require('./models/user');
         User.findOne({email:userEmail},function(err,doc){
 
@@ -38,20 +58,34 @@ var handleData= {
         });
     },
 
+
+    /**
+     * This method is used to add the value of cv field of users collection.
+     *
+     * @param userId
+     * @param accomplishment
+     * @param edu
+     * @param experience
+     * @param callback
+     */
     addCvIntoUser: function (userId, accomplishment, edu, experience, callback) {
         var userData = require('./handleData');
         var tempCv = require("../service/cvData");
         userData.searchUser({_id: userId}, function (err, doc) {
             if (err) throw err;
             else {
+
+                //When user register sthe account, the default value of cv ID is "no".
+                //If the value of cv ID is "no", create a new CV.
                 if (doc.cv === "no") {
 
-                    //新增cv
                     tempCv.createCv(accomplishment, edu, experience, function (error, result) {
                             doc.cv = result._id;
                             doc.save();
                         }
                     );
+
+                //If users have already created CV, now update CV when calling this method.
                 } else {
 
                     tempCv.updateCv(doc.cv, accomplishment, edu, experience);
@@ -63,14 +97,10 @@ var handleData= {
         })
     }
 
-
-
-
 }
 
 
-module.exports=handleData;
-// export this module
+module.exports=handleData;     // Export this module
 
 //
 // handleData.changePassword("baidu@baidu.com","qqq",function(err,doc){
