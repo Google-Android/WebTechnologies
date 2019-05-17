@@ -108,18 +108,18 @@ module.exports=handleData;     // Export this module
 //     console.log(doc);
 // });
 
-handleData.searchUser({email:"yzhao73@sheffield.ac.uk"},function(err,doc){
-    console.log("sss");
-    if(!doc) {
-        console.log(doc);
-    }else{
-        console.log("www");
-    }
-});
-
-handleData.insertUser({email:"ss",pwd:"sss",personOrComp:"p"},function(){
-
-});
+// handleData.searchUser({email:"yzhao73@sheffield.ac.uk"},function(err,doc){
+//     console.log("sss");
+//     if(!doc) {
+//         console.log(doc);
+//     }else{
+//         console.log("www");
+//     }
+// });
+//
+// handleData.insertUser({email:"ss",pwd:"sss",personOrComp:"p"},function(){
+//
+// });
 
 // handleData.addCvIntoUser("5cd5572dc4cca61a76737198","123321","sdd","sss",function(err,doc){
 //     if(!err){
