@@ -15,7 +15,7 @@
     searchUser: function(condition, callback) {
         require('../mongoDB/tools/dbUtil').dbConnection();
         var User = require('./models/user');
-        User.find(condition, function (err, result) {
+        User.findOne(condition, function (err, result) {
             if (err) throw err;
             callback(null, result);
         });
