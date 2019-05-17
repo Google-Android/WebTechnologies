@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
     if(cvs){
       if(cvs.length == 0){
         console.log('cannot find cv according to the conditions.');
-        res.render('jobSeekerResults', {user:req.session.user,'firstKeyword':cvKeyword,'firstLocation':cvLocation});
+        res.render('jobSeekerResults', {user:req.session.user,'cvs':null,'firstKeyword':cvKeyword,'firstLocation':cvLocation});
       } else {
         console.log('find cv length:'+cvs.length);
         res.render('jobSeekerResults', {user:req.session.user,'cvs':cvs,'firstKeyword':cvKeyword,'firstLocation':cvLocation});
