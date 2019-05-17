@@ -48,6 +48,9 @@ router.post('/', function(req, res, next) {
                   res.render('index',{user:user});// successful login
               }
           }
+      } else {
+          console.log('cannot find this user.'+user);// if the user is not in db, user would be null.
+          res.send({errInfo:0});// error 1: can not find in email db.
       }
   });
 
